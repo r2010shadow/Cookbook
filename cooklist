@@ -142,7 +142,7 @@ dmesg  | more
 pmap -d [pid]				# show offset and device number
 
 
-最大文件打开数
+# Max open files
 ulimit -SHn 65535
 for pid in "ps axu | grep nginx| grep -v grep | awk '{print $2}'"
 do
