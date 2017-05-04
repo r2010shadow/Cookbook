@@ -110,9 +110,11 @@ watch -n 1 -d free		   #watch iostat vmstat
 sar -r 1 3				   #show AVG 
 
 # Disk
-df -ih				   #inodes
-for i in /*; do echo $i; find $i | wc -l; done    #count \ inodes
+df -ih				   #hdd inodes status 
+for i in /var/spool/postfix/maildrop/*; do echo $i; find $i | wc -l; done   #crontab made huge inodes files 
 ls | xargs -n 10 rm -rf                           #long time clean
+## crontab lines add " > /dev/null 2>&1 " make no noise
+
 find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n   #
 
 sar -d 1 3
