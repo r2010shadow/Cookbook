@@ -78,8 +78,11 @@ pstree -pc [Pro name]
 lsof -c  [Pro name]        #Show Pro open files
 lsof -g [gid]			   #Show group id open files
 lsof -g [pid]			   #show PID open files
+
+lsof -i :[port number]     #show which app use this port
 lsof -i tcp:[port number]  #port Pro info
 lsof -i udp@127.0.0.1:123
+
 pgrep -lo [Pro]			   #Find PID
 pgrep -f [Pro]			   #Find Pro All PID
 
