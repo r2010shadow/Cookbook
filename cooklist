@@ -30,6 +30,8 @@ netstat -antlp
 #runtime status 
 systemctl status
 
+
+
 # history size
 cat /etc/profile | grep "^HISTSIZE"
 
@@ -38,6 +40,7 @@ Bigger
 
 #Files
 du -s * | sort -nr | sed 1q | awk {'print $2'}
+du -sh * | sort -n
 ls -l|sort -nr +4 -5
 
 #Folder
@@ -103,11 +106,12 @@ sar -d
 
 
 
-# Mem
+# memory
 free -m
 free -bs 1				   
 watch -n 1 -d free		   #watch iostat vmstat 
 sar -r 1 3				   #show AVG 
+ps -aux | sort -k4nr | head -10	   #top 10
 
 # Disk
 df -ih				   #hdd inodes status 
