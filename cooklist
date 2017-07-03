@@ -42,6 +42,9 @@ Bigger
 du -s * | sort -nr | sed 1q | awk {'print $2'}
 du -sh * | sort -n
 ls -l|sort -nr +4 -5
+##
+ls -sh
+du -sh
 
 #Folder
 find -type f -exec stat -c "%s %n" {} \; | sort -nr | sed 3q | awk '{print $2}'
