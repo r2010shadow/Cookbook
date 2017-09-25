@@ -51,6 +51,8 @@ ls -l|sort -nr +4 -5
 ##
 ls -sh
 du -sh
+### find group floders file contents
+grep -R --include="*.php" "/opt/zbox" /home/app
 
 #Folder
 find -type f -exec stat -c "%s %n" {} \; | sort -nr | sed 3q | awk '{print $2}'
