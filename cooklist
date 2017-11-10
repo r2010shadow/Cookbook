@@ -8,12 +8,15 @@ cat /proc/cpuinfo | grep "cpu cores" | uniq
 cat /proc/cpuinfo | grep "processor" | wc -l
 # Ethernet controller
 lspci | grep Ether
+
 # Disk Type
 df -Th
 mount | grep "^/dev"  
 lsblk -f 
 blkid /dev/sda1
 file -sL /dev/sda1
+grep ^ /sys/block/*/queue/rotational   #return 1 is HDD else SSD
+
 #OS
 cat /etc/issue 
 #kernel
@@ -145,7 +148,7 @@ iostat -dxk 1 5
 iostat -x /dev/sda1 1 3
 vmstat -d  | grep sda
 
-
+fdisk 
 
 
 # Net
