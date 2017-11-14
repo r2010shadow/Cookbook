@@ -38,7 +38,10 @@ systemctl status
 #FQDN
 hostname -f
 
-
+#net
+ethtool [ethX]     #mode speed 
+nmcli connection show     #show connect stats
+ip -s link show [ethX]     # Rx Tx
 
 # history 
 ## OS starting time
