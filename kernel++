@@ -1,3 +1,5 @@
+
+
 #CPU
 echo 4194303 > /proc/sys/kernel/pid_max   
 echo “8192” > cat /sys/block/sda/queue/read_ahead_kb                        # pre-read
@@ -19,7 +21,7 @@ echo noop > /sys/block/sda/queue/scheduler        #SSD
 
 
 
-##script
+##Scripts
 @-cpufreq
 #!/bin/bash
 #set cpu scaling governor by your self
@@ -55,5 +57,11 @@ esac
 chmod +x cpufreq.sh
 sudo ./cpufreq.sh pf
 
-
+##more
+#scaling_governor
+1. performance：CPU维持最高时脉运行。
+2. ondemand：程序运行时，直接调高时脉运行。（但不一定是调到最高，而是依程式需求）。没有运行时，调低时脉。
+3. conservative：同上，但调整的方式，是一阶一阶地调整，而非直接调整。
+4. powersave：CPU维持最低时脉运行
+5. userspace：是由使用者自己定义，需要安装其他软件管理
 
