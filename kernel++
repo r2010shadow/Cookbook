@@ -59,9 +59,9 @@ sudo ./cpufreq.sh pf
 
 ##more
 #scaling_governor
-1. performance：CPU维持最高时脉运行。
-2. ondemand：程序运行时，直接调高时脉运行。（但不一定是调到最高，而是依程式需求）。没有运行时，调低时脉。
-3. conservative：同上，但调整的方式，是一阶一阶地调整，而非直接调整。
-4. powersave：CPU维持最低时脉运行
-5. userspace：是由使用者自己定义，需要安装其他软件管理
-
+內核模塊	              調節器名稱	  功能
+cpufreq_ondemand	    ondemand	按需調節，內核提供的功能，不是很強大，但有效實現了動態頻率調節
+cpufreq_powersave	    powersave	省電模式，通常以最低頻率運行，
+cpufreq_userspace	    userspace	用戶模式，一些調頻工具軟體需要在此模式下才能運行
+cpufreq_conservative	conservative「保守」模式，類似於ondemand，但調整相對較緩
+N/A	                    performance	不降頻
