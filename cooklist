@@ -2,6 +2,9 @@ efficiency
 time [CMD] # show do this cmd cost times
 
 whatis
+# Serial Number,ModelName
+dmidecode
+
 # CPU physical/cpu cores/total
 lscpu
 cat /proc/cpuinfo |grep "physical id" | sort | uniq | wc -l    
@@ -221,6 +224,7 @@ git push origin
 
 ## zabbix
 ./zabbix_get -s 127.0.0.1 -p 10050 -k "system.cpu.load[all,avg15]"  # check zabbix work status
+
 
 
 
