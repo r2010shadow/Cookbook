@@ -207,10 +207,11 @@ fsck -N /dev/sda1
 ps -ef|grep [ProcessName]|grep -v grep|cut -c 9-15|xargs kill -9
 
 
-#VI
+#vi
 yy p			#copy one line
 :%s/vivian/sky/g	#change all vivian to sky
 :3,23>    # batch tab
+ctrl+v G x  #delele rows
 
 
 
