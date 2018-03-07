@@ -1,0 +1,40 @@
+
+@ Maven 3 in Action
+
+#install
+wget -c -t 0 -O /opt/apache-maven-3.5.2.tar.gz https://apache.osuosl.org/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+tar xvf /opt/apache-maven-3.5.2.tar.gz 
+
+cat >> /etc/profile <<EOF
+# maven
+MAVEN_HOME=/opt/apache-maven-3.5.2
+PATH=${PATH}:${MAVEN_HOME}/bin
+EOF
+
+source /etc/profile
+mvn -v
+
+# start first mession
+mvn help:system
+## download maven-help-plugin to user local repository.
+/root/.m2/repository/org/apache/maven/plugins/maven-help-plugin
+
+# http proxy
+
+# Best Deploy
+MAVEN_OPTS  
+  -Xms128m -Xmx512m
+settings.xml
+  cp /opt/apache-maven-3.5.2/conf/settings.xml /root/.m2/
+updata
+  cd /opt && ln -s apache-maven-3.5.2 apache-maven
+  vi /etc/profile 
+  # maven
+  MAVEN_HOME=/opt/apache-maven
+  PATH=${PATH}:${MAVEN_HOME}/bin
+  # when update
+  rm apache-maven && ln -s apache-maven-3.X
+
+
+
+
