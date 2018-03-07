@@ -1,5 +1,5 @@
-![java](https://www.ibm.com/developerworks/community/blogs/ibmandgoogle/resource/BLOGS_UPLOADED_IMAGES/java-logo-2.png)
 
+## How to Install JAVA 8 (JDK/JRE 8u131) on CentOS/RHEL 7/6 and Fedora 25
 
 For 64Bit
 # cd /opt/
