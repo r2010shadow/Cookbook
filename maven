@@ -139,6 +139,18 @@ EOF
 
 mvn clean test
 
+##-
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.juvenxu.mvnbook.helloworld.HelloWorldTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+##-
+
 ├── pom.xml
 ├── src
 │   ├── main
@@ -182,3 +194,20 @@ mvn clean test
                     └── helloworld
                         └── HelloWorldTest.class
 
+
+# package && run
+mvn clean package
+##-
+[INFO] Building jar: /root/hello-world/target/hello-world-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+##-
+
+# other project use && copy this jar
+mvn clean install
+
+
+
+
+
+...
