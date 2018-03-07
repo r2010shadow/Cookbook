@@ -6,7 +6,7 @@ wget -c -t 0 -O /opt/apache-maven-3.5.2.tar.gz https://apache.osuosl.org/maven/m
 tar xvf /opt/apache-maven-3.5.2.tar.gz 
 
 cat >> /etc/profile <<EOF
-# maven
+# maven profiles
 MAVEN_HOME=/opt/apache-maven-3.5.2
 PATH=${PATH}:${MAVEN_HOME}/bin
 EOF
@@ -26,7 +26,7 @@ MAVEN_OPTS
   -Xms128m -Xmx512m
 settings.xml
   cp /opt/apache-maven-3.5.2/conf/settings.xml /root/.m2/
-updata
+Updata
   cd /opt && ln -s apache-maven-3.5.2 apache-maven
   vi /etc/profile 
   # maven
@@ -34,7 +34,142 @@ updata
   PATH=${PATH}:${MAVEN_HOME}/bin
   # when update
   rm apache-maven && ln -s apache-maven-3.X
+Center repository
+  http://repo1.maven.org/
+
+# helloworld 
+##  src/main/java is maven main code menu 
+## pom.xml  #/root/hello-world/
+<?xml version = "1.0" encoding = "UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.juvenxu.mvnbook</groupId>
+   <artifactId>hello-world</artifactId>
+   <version>1.0-SNAPSHOT</version>
+</project>
+
+mkdir -p /root/hello-world/src/main/java/com/$USER/mvnbook/helloworld
+## HelloWorld.java
+package com.juvenxu.mvnbook.helloworld;
+
+public class HelloWorld
+{
+	public String sayHello()
+	{
+		return "Hello Maven";
+	}
+
+	public static void main(String[] args)
+	{
+		System.out.print(new HelloWorld().sayHello());
+	}
+}
+
+mvn clean compile   #/root/hello-world/
+# clean target  && compile *.java
+.
+├── pom.xml
+├── src
+│   └── main
+│       └── java
+│           └── com
+│               └── juvenxu
+│                   └── mvnbook
+│                       └── helloworld
+│                           └── HelloWorld.java
+└── target
+    ├── classes
+    │   └── com
+    │       └── juvenxu
+    │           └── mvnbook
+    │               └── helloworld
+    │                   └── HelloWorld.class
+    └── maven-status
+        └── maven-compiler-plugin
+            └── compile
+                └── default-compile
+                    ├── createdFiles.lst
+                    └── inputFiles.lst
 
 
+## Edit Test Code
+## Add JUnit dependency
+## pom.xml  #/root/hello-world/
+<?xml version = "1.0" encoding = "UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.juvenxu.mvnbook</groupId>
+   <artifactId>hello-world</artifactId>
+   <version>1.0-SNAPSHOT</version>
+</project>
 
+mkdir -p src/test/java/com/juvenxu/mvnbook/helloworld
+cat >  src/test/java/com/juvenxu/mvnbook/helloworld/HelloWorldTest.java <<EOF
+package com.juvenxu.mvnbook.helloworld;
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+public class HelloWorldTest
+{
+   @ Test
+   public void testSayHello()
+   {
+      HelloWorld helloWorld = new HelloWorld();
+      String result = helloWorld.sayHello();
+      assertEquals("Hello Maven", result);
+   }
+}
+EOF
+
+mvn clean test
+
+├── pom.xml
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── com
+│   │           └── juvenxu
+│   │               └── mvnbook
+│   │                   └── helloworld
+│   │                       └── HelloWorld.java
+│   └── test
+│       └── java
+│           └── com
+│               └── juvenxu
+│                   └── mvnbook
+│                       └── helloworld
+│                           └── HelloWorldTest.java
+└── target
+    ├── classes
+    │   └── com
+    │       └── juvenxu
+    │           └── mvnbook
+    │               └── helloworld
+    │                   └── HelloWorld.class
+    ├── maven-status
+    │   └── maven-compiler-plugin
+    │       ├── compile
+    │       │   └── default-compile
+    │       │       ├── createdFiles.lst
+    │       │       └── inputFiles.lst
+    │       └── testCompile
+    │           └── default-testCompile
+    │               ├── createdFiles.lst
+    │               └── inputFiles.lst
+    ├── surefire-reports
+    │   ├── com.juvenxu.mvnbook.helloworld.HelloWorldTest.txt
+    │   └── TEST-com.juvenxu.mvnbook.helloworld.HelloWorldTest.xml
+    └── test-classes
+        └── com
+            └── juvenxu
+                └── mvnbook
+                    └── helloworld
+                        └── HelloWorldTest.class
 
