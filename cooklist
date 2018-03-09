@@ -13,6 +13,9 @@ cat /proc/cpuinfo | grep "processor" | wc -l
 # Ethernet controller
 lspci | grep Ether
 
+# Memory Type
+dmidecode -t memory
+
 # Disk Type
 df -Th
 mount | grep "^/dev"  
