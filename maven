@@ -278,5 +278,46 @@ mvn clean package
     │               └── inputFiles.lst
     ├── original-hello-world-1.0-SNAPSHOT.jar
 
+jar xvf target/hello-world-1.0-SNAPSHOT.jar
+cat target/META-INF/MANIFEST.MF
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Built-By: root
+Created-By: Apache Maven 3.5.2
+Build-Jdk: 1.8.0_131
+Main-Class: com.juvenxu.mvnbook.helloworld.HelloWorld
+
+java -jar target/hello-world-1.0-SNAPSHOT.jar
+#-
+Hello Maven
+#-
+
+
+
+#Maven Quick Start
+mkdir hello-world && cd hello-world
+mvn archetype:generate
+.
+└── hello-world
+    ├── pom.xml
+    └── src
+        ├── main
+        │   └── java
+        │       └── com
+        │           └── will
+        │               └── mvnbook
+        │                   └── helloworld
+        │                       └── App.java
+        └── test
+            └── java
+                └── com
+                    └── will
+                        └── mvnbook
+                            └── helloworld
+                                └── AppTest.java
+
+
+
+
 
 ...
