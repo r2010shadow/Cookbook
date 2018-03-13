@@ -1,0 +1,15 @@
+
+# Jenkins:The Definitive Guide
+
+# install for centos
+wget -O /etc/yum.repos.d/jenkins.repo http://jenkins-ci.org/redhat/jenkins.repo
+rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+
+yum install java-1.6.0-openjdk
+yum install jenkins
+
+# start @ 8080
+service jenkins start
+
+cat /var/log/jenkins/jenkins.log  | grep Pl -A 2 | grep -v Pl
+
