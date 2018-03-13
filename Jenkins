@@ -13,3 +13,10 @@ service jenkins start
 
 cat /var/log/jenkins/jenkins.log  | grep Pl -A 2 | grep -v Pl
 
+# plugin
+publish over ssh
+Maven Integration
+
+
+#jenkins server
+ssh-keygen -t rsa
