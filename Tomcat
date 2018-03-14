@@ -1,0 +1,49 @@
+
+# install tomcat8 @centos7
+
+groupadd tomcat
+useradd -g tomcat -d /data/tomcat -s /bin/nologin tomcat
+
+wget http://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.29/bin/apache-tomcat-8.5.29.tar.gz
+tar -zxvf apache-tomcat-*.tar.gz
+mv apache-tomcat-8.5.20/* tomcat
+chown -R tomcat.tomcat tomcat
+
+# start
+sh /data/tomcat/bin/startup.sh
+
+# stop
+sh /data/tomcat/bin/shutdown.sh
+
+#systemd
+cat > /etc/systemd/system/tomcat.service << EOF
+[Unit]
+Description=Apache Tomcat 8.x Web Application Container
+Wants=network.target
+After=network.target
+
+[Service]
+Type=forking
+
+Environment=JAVA_HOME=/opt/jdk1.8.0_131/jre
+Environment=CATALINA_PID=/data/tomcat/temp/tomcat.pid
+Environment=CATALINA_HOME=/data/tomcat
+Environment='CATALINA_OPTS=-Xms512M -Xmx1G -Djava.net.preferIPv4Stack=true'
+Environment='JAVA_OPTS=-Djava.awt.headless=true'
+
+ExecStart=/data/tomcat/bin/startup.sh
+ExecStop=/data/tomcat/bin/shutdown.sh
+SuccessExitStatus=143
+
+User=tomcat
+Group=tomcat
+UMask=0007
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+
+https://www.itzgeek.com/how-tos/linux/centos-how-tos/install-apache-tomcat-8-on-centos-7-rhel-7.html
