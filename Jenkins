@@ -13,13 +13,63 @@ service jenkins start
 
 cat /var/log/jenkins/jenkins.log  | grep Pl -A 2 | grep -v Pl
 
+
+
+
+## gitlab+maven+tomcat ##
+
 # plugin
 publish over ssh
 Maven Integration
+GitLab
+GitLab Hook 
+Build Authorization Token Root
 
+## Publish over SSH
+Passphrase #server password
+Remote Directory #/data/tomcat/webapps
 
 #jenkins server
 ssh-keygen -t rsa
+openssl rand -hex 12
+> gitlab   SSH Keys
 
-# change port
+# change 8089 port
 cat /etc/sysconfig/jenkins | grep PORT
+
+# Project webs
+source code
+  http://10.10.8.8:5180/[user]/xx.git
+Credentials #girlab user & password
+
+# Trigger
+#Token  @jenkins   openssl rand -hex 12 
+#Build when a change is pushed to GitLab.   
+> gitlab  Project->Settings->Integrations Webhooks & test
+  http://10.10.9.107:8089/buildByToken/build?job=webs&token=531423f843c2c3226daf5908
+
+# Create
+Invoke top-level Maven targets
+maven #Goals clean package
+
+# After Create
+Send build artifacts over SSH
+SSH SERVER 
+  #Transfers Set 
+    #Source files   **/*.jar
+    #Remove prefix  target
+
+# output
+ll /var/lib/jenkins/workspace/webs
+ll /data/tomcat/webapps
+
+#More
+http://blog.csdn.net/shichen2010/article/details/78331836
+
+
+
+
+
+
+
+
