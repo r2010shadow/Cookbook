@@ -46,4 +46,21 @@ WantedBy=multi-user.target
 EOF
 
 
+# web manage
+/data/tomcat/conf/tomcat-users.xml
+Place the following two lines just above the last line.
+<role rolename="admin-gui,manager-gui"/>
+<user username="admin" password="tomcat" roles="manager-gui,admin-gui"/>
+
+
+
+/data/tomcat/webapps/manager/META-INF/context.xml
+/data/tomcat/webapps/host-manager/META-INF/context.xml
+Change both files fellow this line
+allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|.*" />
+systemctl restart tomcat
+
+
+
+
 https://www.itzgeek.com/how-tos/linux/centos-how-tos/install-apache-tomcat-8-on-centos-7-rhel-7.html
