@@ -58,6 +58,11 @@ SSH SERVER
   #Transfers Set 
     #Source files   **/*.jar
     #Remove prefix  target
+    
+>git push
+without password
+  git config --global credential.helper store
+
 
 # output
 ll /var/lib/jenkins/workspace/webs
@@ -65,7 +70,8 @@ ll /data/tomcat/webapps
 
 #More
 http://blog.csdn.net/shichen2010/article/details/78331836
-
+https://www.centos.bz/2017/08/gitlab-jenkins-build-project/
+http://skyseraph.com/2016/07/18/Tools/Jenkins%20Gitlab%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E6%89%93%E5%8C%85%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/
 
 
 
