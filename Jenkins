@@ -20,3 +20,6 @@ Maven Integration
 
 #jenkins server
 ssh-keygen -t rsa
+
+# change port
+cat /etc/sysconfig/jenkins | grep PORT
