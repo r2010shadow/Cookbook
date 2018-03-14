@@ -61,6 +61,25 @@ allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|.*" />
 systemctl restart tomcat
 
 
-
-
+#more
 https://www.itzgeek.com/how-tos/linux/centos-how-tos/install-apache-tomcat-8-on-centos-7-rhel-7.html
+
+
+
+# run war package
+show case#
+git clone https://github.com/efsavage/hello-world-war.git
+cd hello-world-war && mvn package
+cp hello-world-war-1.0.0.war /data/tomcat/webapps
+
+vim /data/tomcat/conf/server.xml
+ <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+        <Context path="/" docBase="hello-world-war-1.0.1.war" debug="0" privileged="true" reloadable="true"/>
+        
+service tomcat restart
+
+http://10.10.9.107:8080/hello-world-war-1.0.0
+
+
+
