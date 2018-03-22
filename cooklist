@@ -261,6 +261,11 @@ git remote add origin http://gitlab.user.com/user/hello-world.git
 git push -u origin --all
 git push -u origin --tags
 
+#gitlab change root password
+cd YOUR_GITLAB_PATH && sudo gitlab-rails console production
+u=User.where(id:1).first
+u.password = 'YOUR_PASSWORD' u.password_confirmation = 'YOUR_PASSWORD'
+u.save!
 
 
 ## zabbix
