@@ -1,0 +1,35 @@
+
+
+# howto use sendmail
+
+# check
+rpm -qa | grep sendmail*
+
+# install
+yum install mailx sendmail sendmail-cf  -y
+
+# edit
+vim /etc/mail/sendmail.mc
+DAEMON_OPTIONS(`Port=smtp,Addr=127.0.0.1, Name=MTA‘)dnl  -> 0.0.0.0
+
+m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf
+service sendmail restart 
+
+vim /etc/mail/sendmail.cf
+Fw/etc/mail/local-host-names -> Fw-o /etc/mail/local-host-names
+Ft/etc/mail/trusted-users    -> Ft-o /etc/mail/trusted-users
+
+vim /etc/mail/submit.cf
+Ft/etc/mail/trusted-users    -> Ft-o /etc/mail/trusted-users 
+service sendmail restart 
+
+systemctl status sendmail.service
+
+# test
+echo Hello > show.txt
+mail -s "test" xxx@gmail.com < show.txt
+
+
+###
+Readmore:http://www.bubuko.com/infodetail-2347881.html
+
