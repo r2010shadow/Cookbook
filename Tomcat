@@ -84,6 +84,11 @@ http://10.10.9.107:8080/hello-world-war-1.0.0
 
 
 # docker
+mkdir -p /data/tomcat/webapps
+cat > /etc/timezone << EOF
+Asia/Shanghai
+EOF
+
 docker run -d --name tomcat -p 8080:8080 \
 -v /data/tomcat/webapps:/usr/local/tomcat/webapps \
 -v /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro \
