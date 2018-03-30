@@ -83,3 +83,10 @@ http://10.10.9.107:8080/hello-world-war-1.0.0
 
 
 
+# docker
+docker run -d --name tomcat -p 8080:8080 \
+-v /data/tomcat/webapps:/usr/local/tomcat/webapps \
+-v /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro \
+-v /etc/timezone:/etc/timezone:ro \
+tomcat:7-jre7
+
