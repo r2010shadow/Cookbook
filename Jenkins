@@ -79,6 +79,23 @@ system manage ->
 # docker
 https://jenkins.io/solutions/docker/
 
+mkdir /data/jenkins -p
+chown -R 1000  /data/jenkins
+
+docker run -d --name jenkins \
+-p 8080:8080 \
+-p 50000:50000 \
+-v /data/jenkins:/var/jenkins_home \
+-e JAVA_OPTS=-Duser.timezone=Asia/Shanghai \
+--restart=always \
+jenkins
+
+
+
+
+
+
+
 # api
 
 
