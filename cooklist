@@ -89,6 +89,12 @@ find ./ -mtime -1 -type f -exec ls -l {} \; | awk '{print $9}'
 find ./ -mtime -1 -type f -exec rm {} \; 
 
 
+#Swap   #gitlab need swap
+dd if=/dev/zero of=/home/swapflie bs=1M count=8192
+/sbin/mkswap /home/swapflie
+/sbin/swapon /home/swapflie
+free -h
+
 #Create Swapfile to EX swap 
 dd if=/dev/zero of=/data/swapfile bs=1024 count=65535
 mkswap /data/swapfile -f
