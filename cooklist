@@ -274,6 +274,15 @@ u.password = 'YOUR_PASSWORD' u.password_confirmation = 'YOUR_PASSWORD'
 u.save!
 
 
+#git reset revert #https://kiwenlau.com/2018/01/24/git-rollback-tutorial/
+git log
+git revert HEAD
+
+
+
+
+
+
 ## zabbix
 ./zabbix_get -s 127.0.0.1 -p 10050 -k "system.cpu.load[all,avg15]"  # check zabbix work status
 
