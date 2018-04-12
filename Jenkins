@@ -83,9 +83,11 @@ mkdir /data/jenkins -p
 chown -R 1000  /data/jenkins
 
 docker run -d --name jenkins \
--p 8080:8080 \
+-p 80:8080 \
 -p 50000:50000 \
 -v /data/jenkins:/var/jenkins_home \
+-v /etc/localtime:/etc/localtime:ro \
+-v /etc/timezone:/etc/timezone:ro \
 -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai \
 --restart=always \
 jenkins
