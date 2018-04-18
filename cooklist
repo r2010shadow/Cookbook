@@ -95,6 +95,11 @@ dd if=/dev/zero of=/home/swapflie bs=1M count=8192
 /sbin/swapon /home/swapflie
 free -h
 
+cat >>/etc/fstab   << EOF
+/home/swapflie  swap swap defaults 0 0
+EOF
+
+
 #Create Swapfile to EX swap 
 dd if=/dev/zero of=/data/swapfile bs=1024 count=65535
 mkswap /data/swapfile -f
