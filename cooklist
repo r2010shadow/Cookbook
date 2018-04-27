@@ -90,13 +90,13 @@ find ./ -mtime -1 -type f -exec rm {} \;
 
 
 #Swap   #gitlab need swap
-dd if=/dev/zero of=/home/swapflie bs=1M count=8192
-/sbin/mkswap /home/swapflie
-/sbin/swapon /home/swapflie
+dd if=/dev/zero of=/home/swapfile bs=1M count=8192
+/sbin/mkswap /home/swapfile
+/sbin/swapon /home/swapfile
 free -h
 
 cat >>/etc/fstab   << EOF
-/home/swapflie  swap swap defaults 0 0
+/home/swapfile  swap swap defaults 0 0
 EOF
 
 
