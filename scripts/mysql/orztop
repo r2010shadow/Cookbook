@@ -1,7 +1,10 @@
 # orztop是一款实时show full processlist的工具
 
+# pre
+yum -y install perl-DBD-MySQL -y
+yum install perl-CPAN perl-TermReadKey -y
 
-在本地进行运行范例如下：
+# 在本地进行运行范例如下：
 
    ./orztop -h=127.0.0.1 -P=3009 -u=aurora -p=xxxx -t=1
 
