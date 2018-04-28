@@ -15,6 +15,12 @@ lspci | grep Ether
 
 # Memory Type
 dmidecode -t memory
+dmidecode | grep -A16 "Memory Device$" | grep Memory | wc -l
+
+echo 1 > /proc/sys/vm/drop_caches #To free pagecache
+echo 2 > /proc/sys/vm/drop_caches #To free dentries and inodes
+echo 3 > /proc/sys/vm/drop_caches #To free pagecache, dentries and inodes
+
 
 # Disk Type
 df -Th
