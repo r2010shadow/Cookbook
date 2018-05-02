@@ -74,6 +74,8 @@ Bigger
 du -s * | sort -nr | sed 1q | awk {'print $2'}
 du -sh * | sort -n
 ls -l|sort -nr +4 -5
+find . -type f -size +800M  -print0 | xargs -0 du -h | sort -nr
+
 ##
 ls -sh
 du -sh
