@@ -96,6 +96,38 @@ utf8_general_cs 区分大小写
 
 
 
+###DDL  pt-online-schema-change
+https://www.percona.com/doc/percona-toolkit/2.1/pt-online-schema-change.html
+
+yum install perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker perl-Digest-MD5 -y
+perl Makefile.PL
+make && make install
+
+create database test;
+CREATE TABLE `pt` (
+ `id` int(11) NOT NULL DEFAULT '0',
+ `disktype` enum('sas','shannon','memdisk') NOT NULL,
+ `blocksize` enum('4K','64K','256K','1M') NOT NULL,
+ `testmode` enum('seqwr','seqrewr','seqrd','rndrd','rndwr','rndrw') NOT NULL,
+ `thread` enum('1','2','4','8','16','32') NOT NULL,
+ `bandwidth` float(10,2) unsigned NOT NULL,
+ `resptime` float(10,2) unsigned NOT NULL DEFAULT '0.00',
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+#修改字段
+pt-online-schema-change --user=root --password=welcome --alter "CHANGE resptime responsetime float(10,2) unsigned not NULL default '0'" D=mytest,t='pt' --execute --print --statistics --no-check-alter
+
+#增加列
+pt-online-schema-change --user=root --password=welcome --alter "add p1 float(10,2) not NULL default '0'" D=test,t='pt' --execute --print --statistics --no-check-alter
+
+#删除列
+pt-online-schema-change --user=root --password=welcome --alter "drop p1" D=mytest,t='pt' --execute --print --statistics --no-check-alter
+
+
+
+
+
 
 
 
