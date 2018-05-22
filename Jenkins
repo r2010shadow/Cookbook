@@ -113,5 +113,12 @@ https://blog.csdn.net/wh211212/article/details/76825305
 
 
 
+#plugin
+#Role-based Authorization Strategy  不同组的创建的job只对改组内的成员可见
+## readmore http://blog.51cto.com/zengestudy/1782494
+## error with "没有Overall/Read权限"
+
+
+
 
 
