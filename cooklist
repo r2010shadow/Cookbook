@@ -96,6 +96,8 @@ find -type f -exec stat -c "%s %n" {} \; | sort -nr | sed 3q | awk '{print $2}'
 
 
 Last-Time
+find -type f -printf '%a+ %p\n' | sort | head -n 1
+find -type f -printf '%a+ %p\n' | sort | tail -n 1
 
 #Last edit
 find ./ -mtime -1 -type f -exec ls -l {} \; | awk '{print $9}'
