@@ -76,6 +76,12 @@ du -sh * | sort -n
 ls -l|sort -nr +4 -5
 find . -type f -size +800M  -print0 | xargs -0 du -h | sort -nr
 
+#The Older Files
+find -type f -printf '%T+ %p\n' | sort | head -n 1
+
+#The News Files
+find -type f -printf '%T+ %p\n' | sort | tail -n 5
+
 ##
 ls -sh
 du -sh
