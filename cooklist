@@ -314,5 +314,9 @@ git revert HEAD
 ./zabbix_get -s 127.0.0.1 -p 10050 -k "system.cpu.load[all,avg15]"  # check zabbix work status
 
 
+## rpcbind
+#-# ipv6 disable caused rpcbind start failed: Address family not supported by protocol
+sudo sed -i 's/^ListenStream=\[/#ListenStream=\[/' /etc/systemd/system/sockets.target.wants/rpcbind.socket && cat /etc/systemd/system/sockets.target.wants/rpcbind.socket
+systemctl daemon-reload && systemctl restart rpcbind.service && systemctl status rpcbind.service
 
 
