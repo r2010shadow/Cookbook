@@ -227,6 +227,9 @@ do
 cat /proc/${pid}/limits | grep 'Max open files'
 done
 
+# system reboot
+who -b
+last reboot
 
 
 
