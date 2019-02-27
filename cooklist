@@ -324,3 +324,18 @@ systemctl daemon-reload && systemctl restart rpcbind.service && systemctl status
 # show http_code No.
 curl -I -m 10 -o /dev/null -s  -w %{http_code} http://baidu.com   #return status
 
+
+## shell
+# if
+if ［ 1 -ne 1 ］;then
+...
+fi
+
+-eq           //equal
+-ne           //no equal
+-gt           //greater than
+-lt           //lesser than
+-ge           //greater and equal
+-le           //lesser and equal
+
+
