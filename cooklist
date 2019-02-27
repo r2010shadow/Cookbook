@@ -320,3 +320,7 @@ sudo sed -i 's/^ListenStream=\[/#ListenStream=\[/' /etc/systemd/system/sockets.t
 systemctl daemon-reload && systemctl restart rpcbind.service && systemctl status rpcbind.service
 
 
+## http
+# show http_code No.
+curl -I -m 10 -o /dev/null -s  -w %{http_code} http://baidu.com   #return status
+
