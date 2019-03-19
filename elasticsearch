@@ -59,3 +59,4 @@ https://www.kancloud.cn/devops-centos/centos-linux-devops/397454
 #run
 ./bin/kibana
 
+#- Elasticsearch: 权威指南  https://www.elastic.co/guide/cn/elasticsearch/guide/current/_add_failover.html
