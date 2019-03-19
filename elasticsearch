@@ -66,3 +66,35 @@ https://www.kancloud.cn/devops-centos/centos-linux-devops/397454
 ./bin/kibana
 
 #- Elasticsearch: 权威指南  https://www.elastic.co/guide/cn/elasticsearch/guide/current/_add_failover.html
+
+
+
+## Try
+#case 1
+PUT /website/blog/123
+{
+  "title": "My first blog entry",
+  "text":  "Just trying this out...",
+  "date":  "2014/01/01"
+}
+
+curl -i -XGET http://10.10.9.109:9200/website/blog/123?pretty
+HTTP/1.1 200 OK
+content-type: application/json; charset=UTF-8
+content-length: 264
+
+{
+  "_index" : "website",
+  "_type" : "blog",
+  "_id" : "123",
+  "_version" : 1,
+  "_seq_no" : 0,
+  "_primary_term" : 1,
+  "found" : true,
+  "_source" : {
+    "title" : "My first blog entry",
+    "text" : "Just trying this out...",
+    "date" : "2014/01/01"
+  }
+}
+#
