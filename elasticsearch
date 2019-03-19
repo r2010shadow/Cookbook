@@ -44,9 +44,15 @@ su elasticsearch
 ./bin/elasticsearch -d
 ##
 
+## check
+# nodes
+curl -XGET '10.10.9.109:9200/_cat/nodes?v'
+# node indices
+curl -XGET '10.10.9.109:9200/_cat/indices?v'
+
+
 #- pre other 
 https://www.kancloud.cn/devops-centos/centos-linux-devops/397454
-
 #-
 
 
