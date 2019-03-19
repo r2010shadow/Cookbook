@@ -1,0 +1,27 @@
+#elasticsearch
+#ver 6.6.2
+#centos 7
+#cluster
+
+## pre
+cat > /etc/security/limits.conf <<EOF
+elasticsearch soft memlock unlimited
+elasticsearch hard memlock unlimited
+* soft nofile 65536
+* hard nofile 65536
+EOF
+cat >> /etc/sysctl.conf <<EOF
+vm.max_map_count=262144
+EOF
+sysctl -p
+
+## start
+
+
+
+
+
+#- pre other 
+https://www.kancloud.cn/devops-centos/centos-linux-devops/397454
+
+#-
