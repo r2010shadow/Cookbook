@@ -38,7 +38,6 @@ path.data: /data/es-data
 network.host:10.10.9.109     @node1 -2
 http.port: 9200
 discovery.zen.ping.unicast.hosts: ["10.10.9.109","10.10.9.107","10.10.9.119"]
-discovery.zen.minimum_master_nodes: 2
 #-#
 su elasticsearch
 ./bin/elasticsearch -d
