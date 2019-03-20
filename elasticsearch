@@ -55,6 +55,8 @@ curl -XGET '10.10.9.109:9200/_cat/indices?v'
 https://www.kancloud.cn/devops-centos/centos-linux-devops/397454
 #-
 
+#- Elasticsearch: 权威指南  https://www.elastic.co/guide/cn/elasticsearch/guide/current/_add_failover.html
+                           https://fuxiaopang.gitbooks.io/learnelasticsearch/data/partial_update.html
 
 
 #logstash
@@ -67,8 +69,10 @@ https://www.kancloud.cn/devops-centos/centos-linux-devops/397454
 #kibana
 #run
 ./bin/kibana
+#- handbook https://www.elastic.co/guide/cn/kibana/current/index.html
+            https://www.elastic.co/guide/en/kibana/6.6/index.html
 
-#- Elasticsearch: 权威指南  https://www.elastic.co/guide/cn/elasticsearch/guide/current/_add_failover.html
+
 
 
 
