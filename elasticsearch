@@ -61,6 +61,9 @@ https://www.kancloud.cn/devops-centos/centos-linux-devops/397454
 #run
 ./logstash -e 'input {stdin {}} output {elasticsearch{hosts=>["10.10.9.109:9200"] index => "logstash-test-%{+YYYY.MM.dd}"}}'
 
+#- logstash：最佳实践 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/index.html
+
+
 #kibana
 #run
 ./bin/kibana
