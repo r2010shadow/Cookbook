@@ -73,6 +73,19 @@ https://www.kancloud.cn/devops-centos/centos-linux-devops/397454
             https://www.elastic.co/guide/en/kibana/6.6/index.html
 
 
+#kafka
+## zookeeper UI
+# maven deploy
+wget http://mirror.bit.edu.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+tar -xf apache-maven-3.3.9-bin.tar.gz -C /opt/
+cd /opt/ && mv apache-maven-3.3.9 maven
+cat >> /etc/profile << EOF
+# maven
+export M2_HOME=/opt/maven/
+PATH=${PATH}:${M2_HOME}/bin
+EOF
+source /etc/profile && mvn -v
+
 
 
 
