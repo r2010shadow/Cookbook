@@ -1,6 +1,7 @@
 logstash
 
 #get
+wget https://artifacts.elastic.co/downloads/logstash/logstash-6.6.2.zip
 
 #set
 grep ^[[:alnum:]] logstash.yml
@@ -13,5 +14,17 @@ path.logs: /data/log/logstash
 
 
 #run
+bin/logstash -e 'input{stdin{}}output{stdout{codec=>rubydebug}}'
+hello wolrd
 
 #test
+## test conf
+./bin/logstash --path.settings /home/app/logstash-6.6.2/ -f /home/app/logstash-6.6.2/config/syslog.conf --config.test_and_exit
+
+## test elk
+./logstash -e 'input {stdin {}} output {elasticsearch{hosts=>["10.10.9.109:9200"] index => "logstash-test-%{+YYYY.MM.dd}"}}'
+
+
+#more
+https://www.elastic.co/guide/en/logstash/current/index.html
+最佳实践 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/index.html
