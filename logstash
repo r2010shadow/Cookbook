@@ -1,0 +1,17 @@
+logstash
+
+#get
+
+#set
+grep ^[[:alnum:]] logstash.yml
+node.name: logstash-test-0404
+path.data: /data/logstash
+http.host: "10.10.9.109"
+path.logs: /data/log/logstash
+
+
+
+
+#run
+
+#test
