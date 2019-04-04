@@ -1,4 +1,4 @@
-logstash
+logstash -6.6.2
 
 #get
 wget https://artifacts.elastic.co/downloads/logstash/logstash-6.6.2.zip
@@ -28,3 +28,23 @@ hello wolrd
 #more
 https://www.elastic.co/guide/en/logstash/current/index.html
 最佳实践 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/index.html
+
+
+#kafka
+cat config/logstash-es.conf
+input {
+    kafka {
+      bootstrap_servers => "10.10.9.109:9092"
+      topics=> ["test"]
+      consumer_threads => 5
+      decorate_events => true
+    }
+}
+
+
+output {
+  elasticsearch {
+    hosts => ["10.10.9.109:9200"]
+    index => "elk-%{+YYYY.MM.dd}"
+  }
+}
