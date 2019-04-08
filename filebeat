@@ -1,0 +1,55 @@
+
+#get
+https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.6.2-linux-x86_64.tar.gz
+
+#set
+
+#with kafka
+filebeat.inputs:
+- type: log
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    - /data/logs/nginx/access.log
+
+#-------------------------- kafka output ------------------------------
+output.kafka:
+ enabled: true
+ hosts: ["10.10.9.109:9092"]
+ topic: elk
+ partition.round_robin:
+   reachable_only: false
+
+ required_acks: 1
+ compression: gzip
+ max_message_bytes: 100000000
+
+
+#run
+
+#!/usr/bin/env bash
+
+home=/home/app/filebeat-6.6.2
+#confs=
+
+case $1 in
+start)
+nohup /home/app/filebeat-6.6.2/filebeat -e -c /home/app/filebeat-6.6.2/filebeat.yml &
+[ $? -eq 0 ] && echo "OK:Runing.." || echo "Error:Run failed."
+;;
+stop)
+kill -9 `ps -ef | grep filebeat | grep -v grep | awk -c '{print $1}'`
+[ $? -eq 0 ] && echo "OK:Stop." || echo "Error:Stop failed."
+;;
+*)
+echo -e "\033[32mUsage: $0 [start|stop]\033[0m"
+exit 1
+;;
+esac
+
+
+
+
+#test
+
