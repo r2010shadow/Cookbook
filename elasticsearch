@@ -72,6 +72,8 @@ https://www.kancloud.cn/devops-centos/centos-linux-devops/397454
 
 
 #kibana
+#get
+https://artifacts.elastic.co/downloads/kibana/kibana-6.6.2-linux-x86_64.tar.gz
 #run
 ./bin/kibana
 #- handbook https://www.elastic.co/guide/cn/kibana/current/index.html
