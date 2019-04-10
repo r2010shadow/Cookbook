@@ -13,19 +13,6 @@ filebeat.inputs:
   paths:
     - /data/logs/nginx/access.log
 
-#================================ Logging =====================================
-
-# Sets log level. The default log level is info.
-# Available log levels are: error, warning, info, debug
-logging.level: info
-logging.to_files: true
-logging.to_syslog: false
-logging.files:
-  path: /var/log/
-  name: filebeat.log
-  rotateeverybytes: 52428800
-  keepfiles: 2
-
 #-------------------------- kafka output ------------------------------
 output.kafka:
  enabled: true
@@ -38,9 +25,22 @@ output.kafka:
  compression: gzip
  max_message_bytes: 100000000
 
+#================================ Logging =====================================
 
+# Sets log level. The default log level is info.
+# Available log levels are: error, warning, info, debug
+logging.level: info
+logging.to_files: true
+logging.to_syslog: false
+logging.files:
+  path: /var/log/
+  name: filebeat.log
+  rotateeverybytes: 52428800
+  keepfiles: 2
+  
+  
+  
 #run
-
 #!/usr/bin/env bash
 
 home=/home/app/filebeat-6.6.2
@@ -65,4 +65,17 @@ esac
 
 
 #test
+
+
+
+# syslog
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/messages
+
+output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["10.10.9.109:9200"]
 
