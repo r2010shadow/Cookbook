@@ -4,18 +4,63 @@ logstash -6.6.2
 wget https://artifacts.elastic.co/downloads/logstash/logstash-6.6.2.zip
 
 #set
+logstash.yml
+
 grep ^[[:alnum:]] logstash.yml
 node.name: logstash-test-0404
 path.data: /data/logstash
 http.host: "10.10.9.109"
 path.logs: /data/log/logstash
 
+## kafka-logstash-es
+cat logstash-es.conf
+input {
+    kafka {
+      bootstrap_servers => "10.10.9.109:9092"
+      topics=> ["elk"]
+      consumer_threads => 5
+      decorate_events => true
+    }
+}
+
+
+output {
+  elasticsearch {
+    hosts => ["10.10.9.109:9200"]
+    index => "elk-6.70-%{+YYYY.MM.dd}"
+  }
+}
 
 
 
 #run
 bin/logstash -e 'input{stdin{}}output{stdout{codec=>rubydebug}}'
 hello wolrd
+
+## lrun
+#!/usr/bin/env bash
+
+home=/home/app/logstash-6.6.2
+confs=logstash-es.conf
+
+case $1 in
+start)
+$home/bin/logstash -f $home/config/$confs &
+[ $? -eq 0 ] && echo "OK:Runing.." || echo "Error:Run failed."
+;;
+stop)
+kill -9 `ps -ef | grep logstash | grep -v grep | awk -c '{print $2}'`
+[ $? -eq 0 ] && echo "OK:Stop." || echo "Error:Stop failed."
+;;
+*)
+echo -e "\033[32mUsage: $0 [start|stop]\033[0m"
+exit 1
+;;
+esac
+
+
+
+
 
 #test
 ## test conf
@@ -30,21 +75,4 @@ https://www.elastic.co/guide/en/logstash/current/index.html
 最佳实践 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/index.html
 
 
-#kafka
-cat config/logstash-es.conf
-input {
-    kafka {
-      bootstrap_servers => "10.10.9.109:9092"
-      topics=> ["test"]
-      consumer_threads => 5
-      decorate_events => true
-    }
-}
 
-
-output {
-  elasticsearch {
-    hosts => ["10.10.9.109:9200"]
-    index => "elk-%{+YYYY.MM.dd}"
-  }
-}
