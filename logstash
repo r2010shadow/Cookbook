@@ -76,3 +76,21 @@ https://www.elastic.co/guide/en/logstash/current/index.html
 
 
 
+# logstash--es   syslog
+systemctl start rsyslog
+
+cat /home/app/logstash-6.6.2/config/syslog.conf
+input {
+  syslog {
+    type => "system-syslog"
+    port => 10514
+  }
+}
+output {
+  elasticsearch {
+    hosts => ["10.10.9.109:9200"]  # 定义es服务器的ip
+    index => "system-syslog-%{+YYYY.MM}" # 定义索引
+  }
+}
+
+
