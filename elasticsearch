@@ -1,8 +1,8 @@
-#elasticsearch
-#ver 6.6.2
-#centos 7
-#cluster
-
+#get
+https://download.elastic.co/elastic/sense/sense-latest.tar.gz
+ 
+ 
+#set
 ## pre
 cat > /etc/security/limits.conf <<EOF
 elasticsearch soft memlock unlimited
@@ -24,7 +24,6 @@ EOF
 source /etc/profile && java -version
 ##
 
-## start
 useradd elasticsearch
 tar xzvf el*.tar.gz
 chown -R elasticsearch.elasticsearch elasticsearch-6.6.2
@@ -39,15 +38,21 @@ network.host:10.10.9.109     @node1 -2
 http.port: 9200
 discovery.zen.ping.unicast.hosts: ["10.10.9.109","10.10.9.107","10.10.9.119"]
 #-#
+
+
+#run
 su elasticsearch
 ./bin/elasticsearch -d
 ##
 
-## check
+
+#test
 # nodes
 curl -XGET '10.10.9.109:9200/_cat/nodes?v'
 # node indices
 curl -XGET '10.10.9.109:9200/_cat/indices?v'
+
+
 
 
 #- pre other 
