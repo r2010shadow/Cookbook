@@ -339,9 +339,16 @@ fi
 -le           //lesser and equal
 
 ## vim
-//关闭行号
+//close show line No.
 ：set nonumber
 
-//开启行号
+//show line No.
 ：set number
+
+//row edit
+1. ctrl + v
+2. up or down select lines
+3. push space bar 
+4. push esc exit edit
+
 
