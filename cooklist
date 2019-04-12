@@ -338,4 +338,10 @@ fi
 -ge           //greater and equal
 -le           //lesser and equal
 
+## vim
+//关闭行号
+：set nonumber
+
+//开启行号
+：set number
 
