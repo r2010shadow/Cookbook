@@ -8,9 +8,11 @@
 
 
 # test
+show engine innodb status\G;
 
 
 # clean
+## /etc/init.d/zabbix_server stop
 
 ## check zabbix table
 SELECT table_name AS "Tables",
