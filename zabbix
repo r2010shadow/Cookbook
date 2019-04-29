@@ -1,0 +1,35 @@
+#
+
+# get
+
+# set
+
+# run
+
+
+# test
+
+
+# clean
+
+## check zabbix table
+SELECT table_name AS "Tables",
+round(((data_length + index_length) / 1024 / 1024), 2) "Size in MB"
+FROM information_schema.TABLES
+WHERE table_schema = 'zabbix'
+ORDER BY (data_length + index_length) DESC;
+
+## clean table
+truncate table history;
+truncate table history_uint;
+truncate table alerts;
+truncate table trends_uint;
+truncate table trends;
+truncate table history_text;
+truncate table events;
+
+
+
+
+
+
