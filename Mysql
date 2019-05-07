@@ -125,6 +125,27 @@ pt-online-schema-change --user=root --password=welcome --alter "add p1 float(10,
 pt-online-schema-change --user=root --password=welcome --alter "drop p1" D=mytest,t='pt' --execute --print --statistics --no-check-alter
 
 
+##monitor
+# per sec operate
+show global status where Variable_name in('com_select','com_insert','com_delete','com_update');
+
+# qps 每秒处理的查询数
+  tps 每秒处理的事务数
+  IOPS，每秒磁盘进行的I/O操作次数
+
+QPS (Query per second) （每秒查询量）
+TPS(Transaction per second) （每秒事务量，如果是InnoDB会显示，没有InnoDB就不会显示）
+
+QPS
+Questions = SHOW GLOBAL STATUS LIKE 'Questions';
+Uptime = SHOW GLOBAL STATUS LIKE 'Uptime';
+QPS=Questions/Uptime
+TPS
+Com_commit = SHOW GLOBAL STATUS LIKE 'Com_commit';
+Com_rollback = SHOW GLOBAL STATUS LIKE 'Com_rollback';
+Uptime = SHOW GLOBAL STATUS LIKE 'Uptime';
+TPS=(Com_commit + Com_rollback)/Uptime
+
 
 
 
