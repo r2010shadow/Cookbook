@@ -208,9 +208,12 @@ setenforce 0
 
 
 ### Finger
+more /var/log/secure
+
 ac -p
 ac -d
 last
+lastlog
 
 
 ### analyze
