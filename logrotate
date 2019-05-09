@@ -19,7 +19,7 @@ cat /etc/logrotate.d/nginx
 
 #run
 #-#corntab
-/bin/bash /root/scripts/logrotate/logrotate
+59 23 * * * /bin/bash /root/scripts/logrotate/logrotate
  
 #--#cat /root/scripts/logrotate/logrotate
 #!/bin/sh
