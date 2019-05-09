@@ -2,6 +2,7 @@
 #get
 
 #set
+## /etc/logrotate.d set deploy files
 cat /etc/logrotate.d/nginx
 /data/logs/nginx/*.log {      
         daily
@@ -30,6 +31,25 @@ if [ $EXITVALUE != 0 ]; then
 fi
 exit 0
 
+#---#cat /etc/logrotate.conf
+weekly
+rotate 4
+create
+dateext
+include /etc/logrotate.d          
+/var/log/wtmp {
+    monthly
+    create 0664 root utmp
+	minsize 1M
+    rotate 1
+}
+
+/var/log/btmp {
+    missingok
+    monthly
+    create 0600 root utmp
+    rotate 1
+}
 
 
 
