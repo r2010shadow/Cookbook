@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
+# howto ./arm.py pay.sample.com
 
 import datetime
 import re
