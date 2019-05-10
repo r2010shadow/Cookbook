@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-__author__ = 'Leon'
 
 import datetime
 import re
@@ -69,7 +68,7 @@ c.align['weight'] = 'l'
 
 
 class Eyes(object):
-	def __init__(self,server_name=["www.kjt.com","m.kjt.com","app.kjt.com","pay.kjt.com"]):
+	def __init__(self,server_name=["www.x.com","m.x.com","app.x.com","pay.x.com"]):
 		self.name = server_name
 	def Read_server_default(self):
 		html_dic = {}
@@ -82,7 +81,7 @@ class Eyes(object):
 		                    				c.add_row([k2,v2[0],v2[2],v2[1]])
 								html_dic[k2]=[v2[0],v2[2],v2[1]]
 		page = PyH('LB status')
-		page<<div(style="text-align:center")<<h4('http://lb.kjtjia.com/nginx_info.html')
+		page<<div(style="text-align:center")<<h4('http://lb.x.com/nginx_info.html')
 		mytab = page << table(border="1",cellpadding="3",cellspacing="0",style="margin:auto")
 		tr1 = mytab << tr(bgcolor="lightgrey")
 		tr1 << th('server_name') + th('server_ip')+th('server_status')+th('weight')
