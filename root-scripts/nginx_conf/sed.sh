@@ -1,4 +1,5 @@
 #!/bin/bash
+#howto  /bin/bash /root/scripts/nginx_conf/sed.sh up 10.10.7.99 Pay01
 
 CONFIG="/home/app/nginx/conf.d/upstream.config"
 MAIL_LIST="helpdesk@x.com\;deploy@x.com\;"
