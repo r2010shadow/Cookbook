@@ -1,0 +1,16 @@
+#set
+
+/etc/init.d/nginx
+1. restart
+	sent change mail
+        /root/scripts/nginx_conf/arm.py
+		/home/app/www/nginx_info.html
+2. reload
+	rsync conf files to another nginx {nginx.conf,conf.d,ssl}
+		sendmail if configtest failed.	
+        /root/scripts/nginx_rsync/nginx_rsync.sh
+		/root/scripts/nginx_rsync/nginx_check.sh
+			/root/scripts/nginx_rsync/mail.sh
+	sent change mail	
+        /root/scripts/nginx_conf/arm.py
+		/home/app/www/nginx_info.html

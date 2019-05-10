@@ -1,0 +1,47 @@
+#!/bin/bash
+# function:monitor web status from zabbix
+source /etc/bashrc >/dev/null 2>&1 
+source /etc/profile >/dev/null 2>&1
+
+WEB_SITE_discovery () {
+    WEB_SITE=($(cat /usr/local/zabbix_agentd/conf/web.conf |grep -v "^#"))
+    printf '{\n'
+    printf '\t"data":[\n'
+    for((i=0;i<${#WEB_SITE[@]};++i))
+    {
+        num=$(echo $((${#WEB_SITE[@]}-1)))
+        if [ "$i" != ${num} ];
+        then
+            printf "\t\t{ \n"
+            printf "\t\t\t\"{#SITENAME}\":\"${WEB_SITE[$i]}\"},\n"
+        else
+            printf  "\t\t{ \n"
+            printf  "\t\t\t\"{#SITENAME}\":\"${WEB_SITE[$num]}\"}]}\n"
+        fi
+    }
+}
+web_site_code () {
+    for i in 1 2 3
+    do
+       code=$(/usr/bin/curl -o /dev/null --connect-timeout 5 -s -w %{http_code} $1)
+       if [ ${code} != '000' ];then
+           break
+       fi
+    done
+    if [ ${code} == '000' ];then
+         echo 1 
+    else 
+         echo ${code}
+    fi
+}
+case "$1" in
+web_site_discovery)
+    WEB_SITE_discovery
+    ;;
+web_site_code)
+    web_site_code $2
+    ;;
+*)
+    echo "Usage:$0 {web_site_discovery|web_site_code [URL]}"
+    ;;
+esac

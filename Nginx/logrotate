@@ -1,0 +1,9 @@
+# set
+
+mkdir /data/logs/nginx
+mkdir /home/app/nginx/conf.d
+
+-> nginx.conf
+access_log /data/logs/nginx/access.log json;
+error_log  /data/logs/nginx/error.log notice;
+

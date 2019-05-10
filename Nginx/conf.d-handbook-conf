@@ -1,0 +1,153 @@
+#1.  *.sample.com ALL POINT TO www.sample.com
+server {
+
+	listen 80;
+	server_name sample.com *.sample.com other.com;
+	access_log  /data/logs/nginx/access.log  json;
+	error_log   /data/logs/nginx/error.log error;
+
+	location / {
+		rewrite ^(.*)$ http://www.sample.com$1 permanent;
+	}
+}
+
+server {
+
+	listen 80;
+	listen 443 ssl;
+	server_name www.sample.com;
+	ssl_certificate /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_with_chain.crt;
+	ssl_certificate_key /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_server.key;
+
+	access_log  /data/logs/nginx/access.log  json;
+	error_log   /data/logs/nginx/error.log error;
+
+	location ~ .*\.(php|php5)$ { 
+		rewrite ^(.*)$ http://www.sample.com break;
+	}
+
+	location / {
+		proxy_pass http://sam_www;
+		proxy_temp_path /data/temp;
+	}
+
+}
+
+
+#2. ssl
+server {
+
+	listen 443 ssl;
+	server_name ssl.sample.com;
+        ssl_certificate /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_with_chain.crt;
+        ssl_certificate_key /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_server.key;
+	access_log  /data/logs/nginx/access.log  json;
+	error_log   /data/logs/nginx/error.log error;
+
+	location ~ .*\.(php|php5)$ {
+		rewrite ^(.*)$ https://ssl.sample.com break;
+	}
+
+	location / {
+		proxy_pass http://sam_www;
+		proxy_temp_path /data/temp;
+	}
+}
+
+
+server {
+        listen 443 ssl;
+        server_name sample.com;
+        ssl_certificate /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_with_chain.crt;
+        ssl_certificate_key /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_server.key;        
+	access_log  /data/logs/nginx/access.log  gzip;
+        error_log   /data/logs/nginx/error.log error;
+
+        location / {
+                rewrite ^(.*)$ https://www.sample.com$1 permanent;
+        }
+}
+
+
+#3. cellphone
+server {
+
+        listen 80;
+        server_name m.sample.com;
+        access_log  /data/logs/nginx/access.log  json;
+        error_log   /data/logs/nginx/error.log error;
+
+        location / {
+                proxy_pass http://sam_msite;
+                proxy_temp_path /data/temp;
+                rewrite ^/storeindex/91 http://m.sample.com/storeindex/3178 last;
+        }
+}
+
+#4. Special website , dont include in *.sample.com
+server {
+        listen 80;
+        server_name data.sample.com;
+        access_log  /data/logs/nginx/access.log  json;
+        error_log   /data/logs/nginx/error.log error;
+
+        location / {
+                proxy_pass http://sam_data;
+                proxy_temp_path /data/temp;
+		proxy_connect_timeout 600s;   #timeoutset
+  		proxy_read_timeout 600s;
+  		proxy_send_timeout 600s;
+                allow 10.0.0.0/8;	      #white list,only allow IP
+                allow 172.16.0.0/16;
+                allow 192.168.0.0/16;
+                allow 222.212.80.175/32;
+                deny all;
+        }
+}
+
+#5. forward
+server {
+        listen 80;
+        listen 443;
+        server_name dataanal.sample.com;
+        ssl_certificate /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_with_chain.crt;
+        ssl_certificate_key /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_server.key;
+        access_log  /data/logs/nginx/access.log  json;
+        error_log   /data/logs/nginx/error.log error;
+
+        location / {
+                proxy_pass http://sample_dataanal;
+                proxy_temp_path /data/temp;
+		proxy_set_header Host $host;
+    		proxy_set_header X-Real-IP $remote_addr;
+    		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+}
+
+#6. fastdfs
+server {
+
+        listen 80;
+        listen 443 ssl;
+        server_name image.sample.com image02.sample.com;
+        ssl_certificate /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_with_chain.crt;
+        ssl_certificate_key /home/app/nginx/ssl/ssl-11-2018/newssl/sample.com_server.key;
+        access_log  /data/logs/nginx/img_access.log  json;
+        error_log   /data/logs/nginx/error.log error;
+
+	location  ~* /g[0-9]/M00/ {
+		proxy_pass http://sample_img_fastdfs;
+		proxy_temp_path /data/temp;
+		client_max_body_size 128m;
+	}
+
+        location / {
+                proxy_pass http://sam_img;
+                proxy_temp_path /data/temp;
+                client_max_body_size 128m;
+        }
+}
+
+
+
+
