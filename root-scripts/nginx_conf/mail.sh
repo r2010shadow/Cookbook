@@ -1,4 +1,7 @@
 #!/bin/bash
+#howto ./mail.sh RDC.IT@sam.com test test
+
+
 USER_LIST="$1"
 SUBJECT="$2"
 MESSAGE="$3"
