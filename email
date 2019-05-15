@@ -1,6 +1,8 @@
+#1. sendmail
+#2. postfix
 
 
-# howto use sendmail
+#-# sendmail
 
 # check
 rpm -qa | grep sendmail*
@@ -32,4 +34,35 @@ mail -s "test" xxx@gmail.com < show.txt
 
 ###
 Readmore:http://www.bubuko.com/infodetail-2347881.html
+
+
+
+#-# postfix
+
+#get
+rpm -Uvh postfix-2.x.x.xxx.rpm
+
+#set
+vi /etc/postfix/main.cf
+##
+myhostname = mail.example.com  #指向真正的域
+mydomain = example.com         #指向根域
+myorigin = $mydomain
+mydestination = $mydomain
+inet_interfaces = all          #默认只监听本地地址，如果要与外界通信，就需要监听网卡的所有IP
+mynetworks_style = host        #默认将子网内的机器设置为可信任机器，如果只信任本机，就设置为host
+relay_domains = $mydomain      #配置哪些地址的邮件能够被Postfix转发，当然是mydomain的才能转发，否则其他人都可以用这台邮件服务器转发垃圾邮件了
+
+
+##
+
+
+#run
+
+
+#test
+
+#read more
+https://www.liaoxuefeng.com/article/895886450140288
+
 
