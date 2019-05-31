@@ -29,6 +29,9 @@ lsblk -f
 blkid /dev/sda1
 file -sL /dev/sda1
 grep ^ /sys/block/*/queue/rotational   #return 1 is HDD else SSD
+#--# find big disk
+du -h --max-depth=1
+
 
 #OS
 cat /etc/issue 
