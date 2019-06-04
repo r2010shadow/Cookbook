@@ -1,0 +1,19 @@
+#/etc/snmp/snmpd.conf
+com2sec noconfiguser 127.0.0.1       public
+com2sec noconfiguser 172.16.3.0/24      public
+com2sec noconfiguser 10.0.0.0/8     public
+group noconfigGROUP v1        noconfiguser
+group noconfigGROUP v2c       noconfiguser
+group noconfigGROUP usm       noconfiguser
+view all    included  .1                               80
+view system included  .iso.org.dod.internet.mgmt.mib-2.system
+access MyROSystem ""     any       noauth    exact  all all none
+access MyROGroup ""      any       noauth    exact  all    all none
+access MyRWGroup ""      any       noauth    exact  all    all    none
+access noconfigGROUP ""     any       noauth    exact  all    all  none
+disk / 100000
+disk /home 100000
+disk /data 10000000
+disk /var 100000
+#syslocation
+#syscontact <mail address>
