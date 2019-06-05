@@ -1,0 +1,14 @@
+#get
+yum install varnish
+
+
+#set
+mkdir varnish
+mkdir -p /data/logs/varnish
+chown varnishlog.varnish /data/logs/varnish/
+
+#run
+systemctl start varnish.service
+
+
+#test
