@@ -27,3 +27,23 @@ https://github.com/apache/skywalking
 https://cloud.tencent.com/developer/article/1137652
 
 #.  Open-Tracing
+
+
+2.  部署Pinpoint  ver 1.6.0
+# get
+_## or git install
+git clone https://github.com/naver/pinpoint.git 
+mvn install -Dmaven.test.skip=true
+_## or use war package
+wget https://github.com/naver/pinpoint/releases/download/1.6.0/pinpoint-web-1.6.0.war
+wget https://github.com/naver/pinpoint/releases/download/1.6.0/pinpoint-collector-1.6.0.war
+wget https://github.com/naver/pinpoint/releases/download/1.6.0/pinpoint-agent-1.6.0.tar.gz
+
+_## HBASE
+
+
+# set
+
+# run
+
+# test
