@@ -30,6 +30,7 @@ https://cloud.tencent.com/developer/article/1137652
 
 
 2.  部署Pinpoint  ver 1.6.0
+# quick start https://github.com/naver/pinpoint/tree/master/quickstart
 # get
 _## or git install
 git clone https://github.com/naver/pinpoint.git 
