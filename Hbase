@@ -65,6 +65,19 @@ server.3=node2:2888:3888
 clientPort=2181
 
 
+#设定集群
+  cat > regionservers
+node1
+node2
+
+#指定备用master
+  cat > backup-masters
+node2
+
+  cat >> /etc/profile
+# hbase
+export HBASE_HOME=/data/hbase/
+export PATH=$HBASE_HOME/bin:$PATH
 
 
 
