@@ -1,0 +1,23 @@
+
+#get
+wget  http://mirror.bit.edu.cn/apache/flink/flink-1.8.0/flink-1.8.0-bin-scala_2.12.tgz
+
+
+#set
+cat >> /etc/profile <<EOF 
+# flink
+export FLINK_HOME=/home/app/flink-1.8.0
+export PATH=$FLINK_HOME/bin:$PATH
+EOF
+source /etc/profile
+
+
+#run
+./bin/start-cluster.sh
+
+#test
+
+
+
+#more
+https://flink.apache.org/zh/usecases.html
