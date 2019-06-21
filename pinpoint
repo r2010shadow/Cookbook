@@ -1,5 +1,7 @@
 #pre
 tom='/home/app/tomcat'
+masterIP=10.10.9.109
+spyIP=10.10.9.119
 jdk
 hbase 
 zookeeper
@@ -53,7 +55,7 @@ cluster.web.tcp.port=9997
 cluster.zookeeper.address=master,node1,node2
 cluster.zookeeper.sessiontimeout=30000
 cluster.zookeeper.retry.interval=60000
-cluster.connect.address=10.10.9.109:9997         # collector IP
+cluster.connect.address=$masterIP:9997         # collector IP
 
   #tom/webapps/ROOT/WEB-INF/classes/hbase.properties
 hbase.client.host=master,node1,node2
@@ -62,13 +64,13 @@ hbase.client.host=master,node1,node2
   spy in other host
 mkdir /home/app/pp-agent && tar xzf pinpoint-agent-1.7.3.tar.gz -C /home/app/pp-agent
   /home/app/pp-agent/pinpoint.config
-profiler.collector.ip=10.10.9.109                # collector IP
+profiler.collector.ip=$masterIP              # collector IP
 
   $tom/bin/catalina.sh
 # pinpoint
 CATALINA_OPTS="$CATALINA_OPTS -javaagent:/home/app/pp-agent/pinpoint-bootstrap-1.7.3.jar"      #spy here
 CATALINA_OPTS="$CATALINA_OPTS -Dpinpoint.agentId=test001"                                      
-CATALINA_OPTS="$CATALINA_OPTS -Dpinpoint.applicationName=10.10.9.119_Test_App"
+CATALINA_OPTS="$CATALINA_OPTS -Dpinpoint.applicationName=$spyIP_Test_App"
 
 
 #run 
@@ -77,7 +79,7 @@ sh $tom/bin/catalina.sh start     # start master 、 spy host tomcat
 
 
 #test
-http://10.10.9.109:18080
+http://$masterIP:18080
 
 
 
