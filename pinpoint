@@ -1,3 +1,7 @@
+#pre
+tom='/home/app/tomcat'
+
+
 #get
 https://github.com/naver/pinpoint/releases/tag/1.7.3
   pinpoint
@@ -7,15 +11,17 @@ wget https://github.com/naver/pinpoint/releases/download/1.7.3/pinpoint-web-1.7.
   tomcat
 wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.42/bin/apache-tomcat-8.5.42.tar.gz
 
-
-#set
+#set 
+  _SINGLE MODEL
 create hbase tables
 https://github.com/r2010shadow/pinpoint/blob/master/hbase/scripts/hbase-create.hbase
+$hbase/bin/hbase shell hbase-create.hbase
 
 tar xzf apache-tomcat-8.5.42.tar.gz -C /home/app/tomcat/
 rm -rf /home/app/tomcat/webapps/*
+mkdir /home/app/tomcat/webapps/ROOT
 unzip pinpoint-collector-1.7.3.war.war -C /home/app/tomcat/
-
+unzip pinpoint-web-1.7.3.war -C /home/app/tomcat/webapps/ROOT/
 
 vim     #避免端口冲突
   /home/app/tomcat/conf/server.xml
@@ -24,6 +30,30 @@ sed -i 's/port="8080"/port="18080"/g' server.xml
 sed -i 's/port="8443"/port="18443"/g' server.xml
 sed -i 's/port="8009"/port="18009"/g' server.xml
 sed -i 's/redirectPort="8443"/redirectPort="18443"/g' server.xml
+
+~ pinpoint-collector
+  $tom/webapps/WEB-INF/classes/pinpoint-collector.properties
+cluster.enable=true
+cluster.zookeeper.address=master,node1,node2
+cluster.zookeeper.sessiontimeout=30000
+cluster.listen.ip=0.0.0.0
+cluster.listen.port=9997
+
+  $tom/webapps/WEB-INF/classes/hbase.properties
+hbase.client.host=master,node1,node2
+
+
+~ pinpoint-web
+  #tom/webapps/ROOT/WEB-INF/classes/pinpoint-web.properties
+cluster.enable=true
+cluster.web.tcp.port=9997
+cluster.zookeeper.address=master,node1,node2
+cluster.zookeeper.sessiontimeout=30000
+cluster.zookeeper.retry.interval=60000
+cluster.connect.address=10.10.9.109:9997         # collector IP
+
+  #tom/webapps/ROOT/WEB-INF/classes/hbase.properties
+hbase.client.host=master,node1,node2
 
 
 #run 
