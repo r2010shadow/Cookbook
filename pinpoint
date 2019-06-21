@@ -1,0 +1,34 @@
+#get
+https://github.com/naver/pinpoint/releases/tag/1.7.3
+  pinpoint
+wget https://github.com/naver/pinpoint/releases/download/1.7.3/pinpoint-agent-1.7.3.tar.gz
+wget https://github.com/naver/pinpoint/releases/download/1.7.3/pinpoint-collector-1.7.3.war
+wget https://github.com/naver/pinpoint/releases/download/1.7.3/pinpoint-web-1.7.3.war
+  tomcat
+wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.42/bin/apache-tomcat-8.5.42.tar.gz
+
+
+#set
+create hbase tables
+https://github.com/r2010shadow/pinpoint/blob/master/hbase/scripts/hbase-create.hbase
+
+tar xzf apache-tomcat-8.5.42.tar.gz -C /home/app/tomcat/
+rm -rf /home/app/tomcat/webapps/*
+unzip pinpoint-collector-1.7.3.war.war -C /home/app/tomcat/
+
+
+vim     #避免端口冲突
+  /home/app/tomcat/conf/server.xml
+sed -i 's/port="8005"/port="18005"/g' server.xml
+sed -i 's/port="8080"/port="18080"/g' server.xml
+sed -i 's/port="8443"/port="18443"/g' server.xml
+sed -i 's/port="8009"/port="18009"/g' server.xml
+sed -i 's/redirectPort="8443"/redirectPort="18443"/g' server.xml
+
+
+#run 
+
+
+
+
+#test
