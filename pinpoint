@@ -1,5 +1,8 @@
 #pre
 tom='/home/app/tomcat'
+jdk
+hbase 
+zookeeper
 
 
 #get
