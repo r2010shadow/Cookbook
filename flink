@@ -22,6 +22,18 @@ nc -l 9000
 https://ci.apache.org/projects/flink/flink-docs-release-1.8/tutorials/local_setup.html
 http://10.10.9.109:8081/#/overview
 
+  nc -l 9000   #stream test
+lorem ipsum
+ipsum ipsum ipsum
+bye
+
+  tailf /home/app/flink-1.8.0/log/flink-root-taskexecutor-0-master-9-109.out
+lorem : 1
+ipsum : 1
+ipsum : 3
+bye : 1 
+
+
 
 #more
 https://flink.apache.org/zh/usecases.html
