@@ -16,7 +16,11 @@ source /etc/profile
 ./bin/start-cluster.sh
 
 #test
-
+yum -y install nmap-ncat  # for centos7
+nc -l 9000
+./bin/flink run examples/streaming/SocketWindowWordCount.jar --port 9000
+https://ci.apache.org/projects/flink/flink-docs-release-1.8/tutorials/local_setup.html
+http://10.10.9.109:8081/#/overview
 
 
 #more
