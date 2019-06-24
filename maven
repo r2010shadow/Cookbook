@@ -325,8 +325,14 @@ mvn archetype:generate
 
 
 
-Maven Wrapper
+Maven Wrapper       #保证Java编译的一致性
 	https://github.com/takari/maven-wrapper
-#get
+#set
+mvn -N io.takari:maven:wrapper
 mvn -N io.takari:maven:0.7.6:wrapper
+
+	ls ./.mvn/wrapper/         #生成3个文件
+-rw-rw-r-- 1 root root 4.9K Jun 24 15:44 MavenWrapperDownloader.java
+-rw-rw-r-- 1 root root  50K Jun 24 15:44 maven-wrapper.jar
+-rw-rw-r-- 1 root root  218 Jun 24 15:44 maven-wrapper.properties	
 
