@@ -1,7 +1,5 @@
 ![Zentao](http://www.zentao.net/file.php?f=201604/f_a5a3577d688b18e4dffde47e422704f9.png&t=png&o=&s=&v=1517389139)
 
-[link](http://zentao.kjtjia.com/zentao/doc-view-9.html "开源禅道文档")
-
 [    文档更新日期：20171227-v1.2    ]
 
 [    文档更新摘要：配置文件   ]
