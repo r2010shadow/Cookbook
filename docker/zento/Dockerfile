@@ -5,8 +5,7 @@
 # VERSION 1.0
 
 FROM ubuntu
-MAINTAINER will <yao.yunan@kjt.com>
-
+MAINTAINER will 
 ENV TZ "Asia/Shanghai"
 
 RUN echo "#!/bin/bash" > /run.sh && echo "/opt/zbox/zbox start && tail -f /dev/null" >> /run.sh
