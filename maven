@@ -1,7 +1,7 @@
 
 @ Maven 3 in Action
 
-#install
+#get
 wget -c -t 0 -O /opt/apache-maven-3.5.2.tar.gz https://apache.osuosl.org/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
 tar xvf /opt/apache-maven-3.5.2.tar.gz 
 
@@ -321,3 +321,12 @@ mvn archetype:generate
 
 
 ...
+
+
+
+
+Maven Wrapper
+	https://github.com/takari/maven-wrapper
+#get
+mvn -N io.takari:maven:0.7.6:wrapper
+
