@@ -5,6 +5,9 @@
 wget -c -t 0 -O /opt/apache-maven-3.5.2.tar.gz https://apache.osuosl.org/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
 tar xvf /opt/apache-maven-3.5.2.tar.gz 
 
+wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
+
+
 cat >> /etc/profile <<EOF
 # maven profiles
 MAVEN_HOME=/opt/apache-maven-3.5.2
