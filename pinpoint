@@ -87,9 +87,11 @@ http://$masterIP:18080
 agent默认收集20%的请求所以可能请求一次无法看到的。当然也可以配置全部收集。
 
 
-#编译pinpoint-flink.jar
-
-cd 
+#pinpoint-flink.jar    [存疑] 
 mvn -N io.takari:maven:0.7.6:wrapper
 ./mvnw install -Dmaven.test.skip=true
+flink run /opt/pinpoint/pinpoint/flink/target/pinpoint-flink-job-1.8.3-SNAPSHOT.jar
+https://www.jianshu.com/p/aba6cc752f84
+
+
 
