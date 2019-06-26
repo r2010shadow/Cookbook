@@ -1,0 +1,19 @@
+
+#set
+
+cd / && mkdir iso
+
+cat > /etc/nginx/conf.d/iso.conf << EOF
+server {
+        server_name 10.10.x.x;
+        listen 80;
+        location / {
+                root /iso;
+                autoindex on;
+                autoindex_exact_size off;
+                autoindex_localtime on;
+        }
+}
+EOF
+
+systemctl restart nginx.service
