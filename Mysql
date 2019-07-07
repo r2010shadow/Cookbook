@@ -227,6 +227,7 @@ net start mysql
 mysql -uroot -p
 ALTER USER 'root'@'localhost' IDENTIFIED BY $pwd;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY $pwd;  # navcat connect
+update user set host = '%' where user = 'root';         # for remote client connect
 flush privileges;
 
 #test
