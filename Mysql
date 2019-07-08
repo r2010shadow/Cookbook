@@ -255,3 +255,18 @@ mysql_secure_installation     # 初始化密码
 # test
 
 
+
+## master and slave
+
+ master
+
+# check
+show variables like 'log_bin';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| log_bin       | ON    |
++---------------+-------+
+
+
+ slave
