@@ -201,6 +201,7 @@ fdisk
 
 # Net
 netstat -i
+ss -lnt 
 sar -n DEV 1
 sar -n EDEV 1     #show error info
 sar -n SOCK 1
