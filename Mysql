@@ -300,8 +300,12 @@ relay_log=relay-log         #启用中继日志。在数据目录下有一个rel
 read_only=on                #禁止用户写入数据，这一项的管理员和复制重放无效。
 
 #set slave
-change master to master_host='10.10.9.119', master_user='repluser',master_password='%pwd',master_log_file='log-bin.000001',master_log_pos=667;
+change master to master_host='10.10.9.119', master_user='repluser',master_password='%pwd',master_log_file='log-bin.000001',master_log_pos=493;
 show slave status\G;
+
+
+# test master and check slave mytbl exist or not
+create table mytbl like sometable;
 
 
 
