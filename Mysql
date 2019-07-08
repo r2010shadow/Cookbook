@@ -250,6 +250,8 @@ yum -y install mariadb mariadb-devel mariadb-server
 systemctl enable mariadb
 systemctl start mariadb
 
+mysql_secure_installation     # 初始化密码
+
 # test
 
 
