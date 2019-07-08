@@ -258,15 +258,27 @@ mysql_secure_installation     # 初始化密码
 
 ## master and slave
 
- master
+ _master
+ 
+# grant
+grant replication slave,replication client on *.* to 'repluser'@'10.10.%.%' identified by 'repluser';
 
 # check
-show variables like 'log_bin';
+ show variables like 'log_bin';
 +---------------+-------+
 | Variable_name | Value |
 +---------------+-------+
 | log_bin       | ON    |
 +---------------+-------+
 
+ show master status;
++----------------+----------+--------------+------------------+
+| File           | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++----------------+----------+--------------+------------------+
+| log-bin.000001 |      493 |              |                  |
++----------------+----------+--------------+------------------+ 
+ show binlog events in 'log-bin.000001';
 
- slave
+
+
+ _slave
