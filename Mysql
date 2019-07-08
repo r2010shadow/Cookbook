@@ -282,6 +282,17 @@ grant replication slave,replication client on *.* to 'repluser'@'10.10.%.%' iden
 | log_bin       | ON    |
 +---------------+-------+
 
+# lock table  关闭所有打开的表
+ FLUSH TABLES WITH READ LOCK;
+ show processlist\G;     # 查看未关闭表
+ |  6 | root | localhost | test | Field List |   35 | Waiting for table |    # 也许是select *此类操作未结束
+ 
+ MariaDB [server]> create table mytbl3 like users_user;   # 尝试创建新表及报错信息
+ ERROR 1223 (HY000): Can't execute the query because you have a conflicting read lock 
+ 
+# mysqldump  导出需要同步到slave的库 %.sql
+ mysqldump -uroot -p%pwd somedb > somedb.sql
+
  show master status;
 +----------------+----------+--------------+------------------+
 | File           | Position | Binlog_Do_DB | Binlog_Ignore_DB |
@@ -289,6 +300,10 @@ grant replication slave,replication client on *.* to 'repluser'@'10.10.%.%' iden
 | log-bin.000001 |      493 |              |                  |
 +----------------+----------+--------------+------------------+ 
  show binlog events in 'log-bin.000001';
+
+
+# 解锁    导出库后一定要解锁
+ unlock tables;
 
 
 
@@ -308,4 +323,10 @@ show slave status\G;
 create table mytbl like sometable;
 
 
+# reset slave
+会清除从库的所有复制信息。
+一般应用场景：如切换为不同的Master, 主从重做等；
+1. 命令在slave上执行，执行前一定要stop slave。
+2. 执行reset slave后，会清除复制相关的所有信息，包括：master.info, relay-log.info， 及无条件删除所有的中继日志（relay logs). 注意是无条件的，也就是不管理你Slave SQL线程是否把所有的relay log重放完了。
+3. 注意，stop slave后，先保存show slave status信息，然后再执行reset slave. 一般这个信息都会有用的。
 
