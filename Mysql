@@ -260,6 +260,17 @@ mysql_secure_installation     # 初始化密码
 
  _master
  
+ /etc/my.cnf.d/server.cnf 
+[mysqld]
+server_id=1                 #设置当前服务器的ID号
+log_bin=log-bin             #启动二进制日志并指定文件名
+skip_name_resolve=on        #跳过主机名解析。在CentOS 6自带的mysql后面的=on不用写
+innodb_file_per_table=on    #innodb的每个表是用单独的文件 
+ 
+ 
+ 
+ 
+
 # grant
 grant replication slave,replication client on *.* to 'repluser'@'10.10.%.%' identified by 'repluser';
 
@@ -282,3 +293,15 @@ grant replication slave,replication client on *.* to 'repluser'@'10.10.%.%' iden
 
 
  _slave
+ /etc/my.cnf.d/server.cnf 
+[mysqld]
+server_id=2
+relay_log=relay-log         #启用中继日志。在数据目录下有一个relay-kog.info里面保存了当前的中继日志和位置会主节点二进制文件的名字和位置。
+read_only=on                #禁止用户写入数据，这一项的管理员和复制重放无效。
+
+#set slave
+change master to master_host='10.10.9.119', master_user='repluser',master_password='%pwd',master_log_file='log-bin.000001',master_log_pos=667;
+show slave status\G;
+
+
+
