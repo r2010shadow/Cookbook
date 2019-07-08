@@ -331,3 +331,11 @@ create table mytbl like sometable;
    注意是无条件的，也就是不管理你Slave SQL线程是否把所有的relay log重放完了。
 3. 注意，stop slave后，先保存show slave status信息，然后再执行reset slave. 一般这个信息都会有用的。
 
+
+
+
+
+
+
+
+____________________________________________________________________
