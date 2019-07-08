@@ -240,5 +240,16 @@ case:找不到msvcp140.dll
 https://www.microsoft.com/en-us/download/details.aspx?id=53587
 
 
+## Mariadb
+# get 
+yum -y install mariadb mariadb-devel mariadb-server
+
+# set
+
+# run
+systemctl enable mariadb
+systemctl start mariadb
+
+# test
 
 
