@@ -1,0 +1,43 @@
+# useful count cmd
+
+# 对名称排序，未对累计数排序
+select 购方企业名称, count(*) from 业务提成 group by 购方企业名称 ;
+
+# 使用having ，先对count(*) as ct别名，再筛选ct大于一个的
+# where  用于表、视图(table,view) 在分组和聚集函数之前使用  
+# having 用于组(group by) 在分组和聚集函数后使用 , order by 放在having后面使用
+select 购方企业名称, count(*) as ct from 业务提成 group by 购方企业名称 having ct > 1;
+
+
+# 对累计排序 desc倒序
+select 购方企业名称, count(*) as ct from 业务提成 group by 购方企业名称 having ct > 1 order by ct desc;
+
+# 导出文件 my.ini for win
+show variables like '%secure%';  #查看
+secure_file_priv=c:\\mysql\\data   放置[mysqld]内 重启mysql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
