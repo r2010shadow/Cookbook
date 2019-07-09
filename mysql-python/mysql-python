@@ -1,0 +1,23 @@
+# case-DB
+
+https://downloads.mysql.com/docs/world.sql.gz
+
+# case-1 
+# show city and NO.
+db = pymysql.connect(host='192.168.15.142',user='root',passwd='xxx',db='world',port=3306,charset='utf8')
+conn = db
+cur = conn.cursor()
+table = 'City'
+column = 'Name'
+term = 's%'
+statement = """select * from %s where %s like '%s' """ % (table,column,term)
+cmd = cur.execute(statement)
+results = cur.fetchall()
+record_list  =[]
+for record in results:
+    record_list.append(record[1])
+for i in range(0, len(record_list)):
+    print("%s. %s" %(i+1, record_list[i]))
+
+
+
