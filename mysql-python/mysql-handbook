@@ -1,3 +1,8 @@
+# mysql OPS
+status  # CON-ID SSL VERSION UPTIME characterset
+
+
+
 # useful count cmd
 
 # 对名称排序，未对累计数排序
