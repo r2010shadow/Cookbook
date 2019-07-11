@@ -1,6 +1,6 @@
 # case-DB
 
-https://downloads.mysql.com/docs/world.sql.gz
+    https://downloads.mysql.com/docs/world.sql.gz
 
 # case-1 
 # show city and NO.
@@ -18,6 +18,16 @@ for record in results:
     record_list.append(record[1])
 for i in range(0, len(record_list)):
     print("%s. %s" %(i+1, record_list[i]))
+
+
+
+    https://downloads.mysql.com/doc/sakila-db.zip
+
+#case -2
+
+
+
+
 
 
 
