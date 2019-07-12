@@ -54,6 +54,39 @@ driver是用于连接数据库的DBAPI的名字，这里用的是pymysql（Pytho
 如果这一项不指定，将使用默认的DBAPI。
 '''
 
+case-4
+import pandas as pd
+from sqlalchemy import create_engine
+from sqlalchemy.types import CHAR,INT
 
+connect_info = 'mysql+pymysql://root:wallace@192.168.15.142:3306/world?charset=utf8'
+engine = create_engine(connect_info)
+sql = 'show tables'
+df = pd.read_sql(sql=sql,con=engine)
+df.to_sql(name = 'test1',  
+           con = engine,
+           if_exists = 'append',
+           index = False,
+           dtype = {'id': INT(),
+                    'name': CHAR(length=2),
+                    'score': CHAR(length=2)
+                    }
+           )
+ 
+'''
+name：输出的表名
+con：连接数据库的引擎
+if_exists：三种模式{“fail”,“replace”,"append"}，默认是"fail"。
+    fail：若表存在，引发一个ValueError；
+    replace：若表存在，覆盖原来表内数据；
+    append：若表存在，将数据写到原表数据的后面。
+index：是否将DataFrame的index单独写到一列中，默认为“True”
+index_label：当index为True时，指定列作为DataFrame的index输出
+dtype：指定列的数据类型，字典形式存储{column_name: sql_dtype}，
+常见数据类型是sqlalchemy.types.INT()和sqlalchemy.types.CHAR(length=x)。
+注意：INT和CHAR都需要大写，INT()不用指定长度。
+'''
+ 
+ 
 
 
