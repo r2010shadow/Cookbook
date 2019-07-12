@@ -38,7 +38,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.types import CHAR,INT
 
-connect_info = 'mysql+pymysql://root:wallace@192.168.15.142:3306/base?charset=utf8'
+connect_info = 'mysql+pymysql://root:xxx@192.168.15.142:3306/base?charset=utf8'
 engine = create_engine(connect_info)
 sql = "select * from 客户表 limit 10"
 pd.read_sql(sql=sql, con=engine)
