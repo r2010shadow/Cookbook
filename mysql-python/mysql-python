@@ -6,7 +6,7 @@
 use pymysql
 # case-1  
 # show city and NO.
-db = pymysql.connect(host='192.168.15.142',user='root',passwd='xxx',db='world',port=3306,charset='utf8')
+db = pymysql.connect(host='192.168.15.142',user='root',passwd='xxx',db='world',port=3306,charset='UTF8MB4')
 conn = db
 cur = conn.cursor()
 table = 'City'
@@ -38,7 +38,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.types import CHAR,INT
 
-connect_info = 'mysql+pymysql://root:xxx@192.168.15.142:3306/base?charset=utf8'
+connect_info = 'mysql+pymysql://root:xxx@192.168.15.142:3306/base?charset=UTF8MB4'
 engine = create_engine(connect_info)
 sql = "select * from 客户表 limit 10"
 pd.read_sql(sql=sql, con=engine)
@@ -59,7 +59,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.types import CHAR,INT
 
-connect_info = 'mysql+pymysql://root:xxx@192.168.15.142:3306/world?charset=utf8'
+connect_info = 'mysql+pymysql://root:xxx@192.168.15.142:3306/world?charset=UTF8MB4'
 engine = create_engine(connect_info)
 sql = 'show tables'
 df = pd.read_sql(sql=sql,con=engine)
@@ -88,5 +88,7 @@ dtype：指定列的数据类型，字典形式存储{column_name: sql_dtype}，
 '''
  
  
+# utf8  
+"'utf8' is currently an alias for the character set UTF8MB3, but will be an alias for UTF8MB4 in a future release.
 
 
