@@ -43,7 +43,16 @@ engine = create_engine(connect_info)
 sql = "select * from 客户表 limit 10"
 pd.read_sql(sql=sql, con=engine)
 
+'''
+代码中的con是使用SQLAlchem构建数据库连接引擎，即sqlalchemy.create_engine( )。
+这个函数基于一个URL来产生一个引擎对象，URL通常包含了数据库的相关信息，典型的形式是：
 
+dialect+driver://username:password@host:port/database
+
+dialect表示数据库的名字，比如sqlite，mysql，postgresql，oracle，mssql等，
+driver是用于连接数据库的DBAPI的名字，这里用的是pymysql（Python 3.x，在Python 2.x中用的是mysqldb），
+如果这一项不指定，将使用默认的DBAPI。
+'''
 
 
 
