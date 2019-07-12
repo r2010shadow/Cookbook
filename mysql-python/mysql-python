@@ -1,8 +1,10 @@
 # case-DB
 
     https://downloads.mysql.com/docs/world.sql.gz
-
-# case-1 
+    https://downloads.mysql.com/doc/sakila-db.zip
+    
+use pymysql
+# case-1  
 # show city and NO.
 db = pymysql.connect(host='192.168.15.142',user='root',passwd='xxx',db='world',port=3306,charset='utf8')
 conn = db
@@ -29,10 +31,17 @@ fetch = cursor.fetchall()
 print(fetch)
 
 
-    https://downloads.mysql.com/doc/sakila-db.zip
 
-#case -2
+use pandas
+# case-1  
+import pandas as pd
+from sqlalchemy import create_engine
+from sqlalchemy.types import CHAR,INT
 
+connect_info = 'mysql+pymysql://root:wallace@192.168.15.142:3306/base?charset=utf8'
+engine = create_engine(connect_info)
+sql = "select * from 客户表 limit 10"
+pd.read_sql(sql=sql, con=engine)
 
 
 
