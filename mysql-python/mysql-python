@@ -31,7 +31,6 @@ fetch = cursor.fetchall()
 print(fetch)
 
 
-
 use pandas
 # case-1  
 import pandas as pd
@@ -86,7 +85,8 @@ dtype：指定列的数据类型，字典形式存储{column_name: sql_dtype}，
 常见数据类型是sqlalchemy.types.INT()和sqlalchemy.types.CHAR(length=x)。
 注意：INT和CHAR都需要大写，INT()不用指定长度。
 '''
- 
+
+    # read more https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_sql.html 
  
 # utf8  
 "'utf8' is currently an alias for the character set UTF8MB3, but will be an alias for UTF8MB4 in a future release.
