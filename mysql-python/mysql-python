@@ -23,7 +23,7 @@ for i in range(0, len(record_list)):
 
 # case-2
 import pymysql
-mydb = pymysql.connect('192.168.15.142','root','wallace','world')
+mydb = pymysql.connect('192.168.15.142','root','xxx','world')
 cursor = mydb.cursor()
 statement = """select count(*) from city"""
 run=cursor.execute(statement)
@@ -59,7 +59,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.types import CHAR,INT
 
-connect_info = 'mysql+pymysql://root:wallace@192.168.15.142:3306/world?charset=utf8'
+connect_info = 'mysql+pymysql://root:xxx@192.168.15.142:3306/world?charset=utf8'
 engine = create_engine(connect_info)
 sql = 'show tables'
 df = pd.read_sql(sql=sql,con=engine)
