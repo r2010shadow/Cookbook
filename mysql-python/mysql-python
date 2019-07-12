@@ -19,6 +19,14 @@ for record in results:
 for i in range(0, len(record_list)):
     print("%s. %s" %(i+1, record_list[i]))
 
+# case-2
+import pymysql
+mydb = pymysql.connect('192.168.15.142','root','wallace','world')
+cursor = mydb.cursor()
+statement = """select count(*) from city"""
+run=cursor.execute(statement)
+fetch = cursor.fetchall()
+print(fetch)
 
 
     https://downloads.mysql.com/doc/sakila-db.zip
