@@ -348,6 +348,10 @@ fi
 -le           //lesser and equal
 
 ## vim
+#goto line front   shift + 6
+#goto line end     shift + 4
+
+
 //close show line No.
 ：set nonumber
 
