@@ -1,0 +1,22 @@
+#inode
+
+#1#
+stat filename  # filename inode info
+
+stat --format=%i log.txt    # inode numbers
+ls -li
+
+df -i    # disk inode info
+tune2fs -l
+
+
+
+find /home -type f -size 0 -exec rm {} \;    # find and delete
+ls -lt /tmp | wc -l
+
+
+#2# crontab  CROND出错导致/var/spool/postfix/maildrop/堆积
+vi /etc/crontab；将MAILTO=root修改为MAILTO=""，保存
+/etc/init.d/crond restart
+find /var/spool/postfix/maildrop/ -type f |xargs rm -rf
+
