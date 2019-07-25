@@ -339,3 +339,52 @@ create table mytbl like sometable;
 
 
 ____________________________________________________________________
+Aborted
+
+TYPE:
+[Warning] Aborted connection 305628 to db: 'db' user: 'dbuser' host: 'hostname' (Got an error reading communication packets)
+
+
+show global variables like '%timeout%';
++-----------------------------+----------+
+| Variable_name               | Value    |
++-----------------------------+----------+
+| connect_timeout             | 10       |
+| delayed_insert_timeout      | 300      |
+| have_statement_timeout      | YES      |
+| innodb_flush_log_at_timeout | 1        |
+| innodb_lock_wait_timeout    | 50       |
+| innodb_rollback_on_timeout  | OFF      |
+| interactive_timeout         | 28800    |  #
+| lock_wait_timeout           | 31536000 |
+| net_read_timeout            | 30       |
+| net_write_timeout           | 60       |
+| rpl_stop_slave_timeout      | 31536000 |
+| slave_net_timeout           | 60       |
+| wait_timeout                | 28800    |  #
++-----------------------------+----------+
+
+# 2个参数同时调整
+set global wait_timeout=31536000;
+set global interactive_timeout=31536000；
+
+show global status like 'aborted%';
+观察什么情况下会增加
+
+show global variables like 'max_conn%';
+查看最大连接数
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| max_connect_errors | 500   |
+| max_connections    | 500   |
++--------------------+-------+
+
+set global max_connect_errors=2000；
+set global max_connections=2000;
+
+
+
+
+
+
