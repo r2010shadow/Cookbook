@@ -92,3 +92,9 @@ dtype：指定列的数据类型，字典形式存储{column_name: sql_dtype}，
 "'utf8' is currently an alias for the character set UTF8MB3, but will be an alias for UTF8MB4 in a future release.
 
 
+
+___________________
+python 数据科学手册 p235 Matplotlib数据可视化 
+
+https://raw.githubusercontent.com/jakevdp/data-CDCbirths/master/births.csv
+
