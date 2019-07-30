@@ -81,6 +81,8 @@ du -s * | sort -nr | sed 1q | awk {'print $2'}
 du -sh * | sort -n
 ls -l|sort -nr +4 -5
 find . -type f -size +800M  -print0 | xargs -0 du -h | sort -nr
+grep 'preweb' /data/logs/nginx/access.log | awk -F ',' '{print $4}' | sort | uniq -c | sort -nr
+
 
 #The Older Files
 find -type f -printf '%T+ %p\n' | sort | head -n 1
