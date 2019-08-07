@@ -25,3 +25,28 @@ docker rm $(docker ps -qa)
 #get docker-compose
 curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+
+
+----------------------------------------------------------------------------------------------
+# get windows docker
+http://mirrors.aliyun.com/docker-toolbox/windows/docker-toolbox/
+
+docker toolbox 是一个工具集，它主要包含以下一些内容：
+Docker CLI 客户端，用来运行docker引擎创建镜像和容器
+Docker Machine. 可以让你在windows的命令行中运行docker引擎命令
+Docker Compose. 用来运行docker-compose命令
+Kitematic. 这是Docker的GUI版本
+Docker QuickStart shell. 这是一个已经配置好Docker的命令行环境
+Oracle VM Virtualbox. 虚拟机
+
+
+
+-------------------------------------------------------------------
+镜像加速
+新版的 Docker 使用 /etc/docker/daemon.json（Linux） 或者 %programdata%\docker\config\daemon.json（Windows） 来配置 Daemon。
+
+请在该配置文件中加入（没有该文件的话，请先建一个）：
+
+{
+  "registry-mirrors": ["http://hub-mirror.c.163.com"]
+}
