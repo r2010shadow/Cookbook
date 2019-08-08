@@ -100,3 +100,11 @@ https://raw.githubusercontent.com/jakevdp/data-CDCbirths/master/births.csv
 
 p283 
 http://raw.githubusercontent.com/jakevdp/marathon-data/master/marathon-data.csv
+
+
+
+
+----------------------
+#pip pandas numpy ETC.  for new systems
+yum -y install epel-release
+yum -y install python-pip
