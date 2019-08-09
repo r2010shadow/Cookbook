@@ -1,4 +1,4 @@
-#
+# bigger or smaller datasets
 
 _数据科学实战手册
 
@@ -7,5 +7,9 @@ _数据科学实战手册
   
 # 汽车油耗
 http://fueleconomy.gov/feg/epadata/vehicles.csv.zip
+
+
+# Pandas透视表（pivot_table）详解
+http://pbpython.com/extras/sales-funnel.xlsx
  
  
