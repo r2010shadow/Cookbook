@@ -1,0 +1,6 @@
+
+# python cookbook
+以管道方式处理数据可以用来解决各类其他问题，包括解析，读取实时数据，定时 轮询等。
+David Beazley 在他的 Generator Tricks for Systems Programmers 教程中对于这种 技术有非常深入的讲解。可以参考这个教程获取更多的信息。
+https://github.com/r2010shadow/generators
+
