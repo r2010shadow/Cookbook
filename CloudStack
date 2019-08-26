@@ -337,3 +337,10 @@ systemctl enable iptables.service
 systemctl restart iptables.service
 iptables -L
 ```
+
+
+        异常重启分析：硬件加载记录未见异常，rpcbind服务启动异常，因ipv6禁用导致rpcbind服务启动失败
+        报错日志：rpcbind.socket failed to listen on sockets: Address family not supported by protocol
+        处理过程：1.注释/etc/systemd/system/sockets.target.wants/rpcbind.socket文件中ListenStream=[::]:111
+                  2.重载配置文件 systemctl daemon-reload
+                  3.systemctl restart rpcbind.service && systemctl status rpcbind.service
