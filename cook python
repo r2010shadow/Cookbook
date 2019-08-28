@@ -17,4 +17,11 @@ python -m xxx.py
 1叫做直接运行
 2相当于import,叫做当做模块来启动
 
-
+  #eg
+  python -m SimpleHTTPServer 15000   #Ser
+  
+  from urllib2 import urlopen  # python2
+  from urllib.request import urlopen #python3
+  u = urlopen('http://localhost:15000/fib.py')
+  data = u.read().decode('utf-8')
+  print(data)
