@@ -4,3 +4,17 @@
 David Beazley(http://www.dabeaz.com/index.html) 在他的 Generator Tricks for Systems Programmers 教程中对于这种 技术有非常深入的讲解。可以参考这个教程获取更多的信息。
 https://github.com/r2010shadow/generators
 
+
+
+#参数# -m
+python -m SimpleHTTPServer    #python2中启动一个简单的http服务器
+python -m http.server    #python3中启动一个简单的http服务器
+
+将模块当做脚本去启动有什么用？
+python xxx.py
+python -m xxx.py
+这是两种加载py文件的方式:
+1叫做直接运行
+2相当于import,叫做当做模块来启动
+
+
