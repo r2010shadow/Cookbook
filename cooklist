@@ -156,7 +156,7 @@ pgrep -lo [Pro]			   #Find PID
 pgrep -f [Pro]			   #Find Pro All PID
 
 ps -ef |awk '($8 ~/nginx/){print $2}'   # find pid where rows 8 name is nginx
-
+pstree -p            #process Tree
 
 #CPU
 vmstat
