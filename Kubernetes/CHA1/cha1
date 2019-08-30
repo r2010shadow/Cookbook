@@ -1,0 +1,32 @@
+
+# get
+yum install -y etcd kubernetes
+
+
+
+# set
+  # pre
+  systemctl stop firewalld
+  systemctl disable firewalld
+  
+  # docker
+  vi /etc/sysconfig/docker
+    修改OPTIONS='--selinux-enabled=false --insecure-registry gcr.io'
+
+  # k8s
+  vi /etc/kubernetes/apiserver
+    去掉ServiceAccount 
+
+# run
+  # run order
+  systemctl start etcd
+  systemctl start docker
+  systemctl start kube-apiserver
+  systemctl start kube-controller-manager
+  systemctl start kube-scheduler
+  systemctl start kublet
+  systemctl start kubelet
+  systemctl start kube-proxy
+
+
+# test
