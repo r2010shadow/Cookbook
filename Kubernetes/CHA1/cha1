@@ -27,3 +27,5 @@ Desc :
   systemctl start kubelet
   systemctl start kube-proxy
 
+  # 示例docker images
+  https://hub.docker.com/u/kubeguide
