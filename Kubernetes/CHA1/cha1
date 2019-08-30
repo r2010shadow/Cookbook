@@ -1,13 +1,13 @@
+"""
+Topic: Kubernetes 入门
+Desc : 
+"""
 
-# get
-yum install -y etcd kubernetes
 
-
-
-# set
-  # pre
+#1.3.1
   systemctl stop firewalld
   systemctl disable firewalld
+  yum install -y etcd kubernetes
   
   # docker
   vi /etc/sysconfig/docker
@@ -16,8 +16,7 @@ yum install -y etcd kubernetes
   # k8s
   vi /etc/kubernetes/apiserver
     去掉ServiceAccount 
-
-# run
+    
   # run order
   systemctl start etcd
   systemctl start docker
@@ -28,5 +27,3 @@ yum install -y etcd kubernetes
   systemctl start kubelet
   systemctl start kube-proxy
 
-
-# test
