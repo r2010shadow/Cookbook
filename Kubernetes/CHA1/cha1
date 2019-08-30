@@ -59,7 +59,7 @@ mysql-dpcmp   0/1       ContainerCreating   0          17s
     # 镜像处理
     docker search pod-infrastructure
     docker pull docker.io/tianyebj/pod-infrastructure
-    docker tag IMAGE-ID rhel7/pod-infrastructure:latest
+    docker tag IMAGE-ID 127.0.0.1:5000/rhel7/pod-infrastructure:latest
     # 修改kubelet中k8s pod 基础容器镜像地址
     cp /etc/kubernetes/kubelet /etc/kubernetes/kubelet-bak
     KUBELET_POD_INFRA_CONTAINER="--pod-infra-container-image=127.0.0.1:5000/rhel7/pod-infrastructure:latest"
