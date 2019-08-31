@@ -1,3 +1,12 @@
+# python3.7 for centos7
+wget -c https://www.python.org/ftp/python/3.7.1/Python-3.7.1.tgz
+tar -xvzf Python-3.7.1.tgz -C /usr/local
+cd /usr/local/Python-3.7.1
+./configure --prefix=/usr/local/python3.7.1 --enable-optimizations
+make && make install
+ln -s /usr/local/python3/bin/python3.7.1 /usr/local/bin/python3
+ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
+
 
 # python cookbook
 以管道方式处理数据可以用来解决各类其他问题，包括解析，读取实时数据，定时 轮询等。
