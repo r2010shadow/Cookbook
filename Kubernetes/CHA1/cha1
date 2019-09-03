@@ -71,6 +71,158 @@ mysql-dpcmp   0/1       ContainerCreating   0          17s
     
   
   
+kubectl create -f myweb-svc.yaml
+docker ps
+kubectl get rc
+kubectl get svc
+kubectl get pods
+curl 10.10.2.22:/30001/demo/
+curl 10.10.2.22:/30001
+curl 10.10.2.22:30001/demo
+curl 10.10.2.22:30001/demo/
+curl 10.10.2.22:30001
+curl 10.10.2.22:30001/demo/
+netstat -ntpl
+arp -an
+netstat -route
+ip addr
+curl 10.10.9.10:30001
+curl 10.10.9.10:30001/demo/
+cat mysql-rc.yaml
+netstat -ntpl
+kubectl get nodes
+kubectl describe node 127.0.0.1
+cat mysql-rc.yaml
+kubectl get nodes
+kubectl get rc
+cat mysql-rc.yaml
+cat myweb-rc.yaml
+kubectl scale rc myweb --replicas=2
+cat myweb-rc.yaml
+kubectl get pods
+docker ps
+kubectl scale rc myweb --replicas=10
+docker ps
+kubectl get pods
+kubectl scale rc myweb --replicas=3
+kubectl get pods
+rpm -qa | grep kebunets
+rpm -qa | grep kuerunets
+rpm -qa | grep kuberunets
+rpm -qa | grep kubernets
+rpm -qa | grep kubernetes
+cat > 1
+mv 1 tomcat-deployment.yaml
+vim tomcat-deployment.yaml
+kubectl create -f tomcat-deployment.yaml
+kubectl get deployments
+kubectl get rs
+kubectl get pods
+kubectl describe deployments
+kubectl scale deployments tomcat-deployment --replicas=2
+kubectl get pods
+kubectl get rs
+kubectl describe deployments
+kubectl get rs
+docker ps
+w
+docker stats
+cat tomcat-deployment.yaml
+cat > 1
+mv 1 php-apache.yaml
+vim php-apache.yaml
+kubectl create -f php-apache.yaml
+kubectl get pods
+kubectl get rc
+kubectl get nodes
+kubectl get hpa
+kubectl delete hpa php-apache
+kubectl get hpa
+kubectl get svc
+kubectl autoscale deployment php-apache --cpu-percent=90 --min=1 --max=10
+kubectl get deployment
+kubectl autoscale deployment tomcat-deployment --cpu-percent=90 --min=1 --max=10
+kubectl get hpa
+kubectl describe hpa tomcat-deployment
+kubectl get deployment
+kubectl delete hpa tomcat-deployment
+kubectl describe hpa tomcat-deployment
+kubectl get deployment
+cat tomcat-deployment.yaml
+cat > tomcat-service.yaml
+vim tomcat-service.yaml
+kubectl create -f tomcat-service.yaml
+kubectl get endpoints
+kubectl get service
+kubectl get svc tomcat-service -o yaml
+kubectl get svc
+cat tomcat-service.yaml
+kubectl delete service tomcat-service
+kubectl get service
+vim tomcat-service.yaml
+kubectl create -f tomcat-service.yaml
+vim tomcat-service.yaml
+kubectl create -f tomcat-service.yaml
+history
+kubectl create -f tomcat-service.yaml
+vim tomcat-service.yaml
+kubectl create -f tomcat-service.yaml
+kubectl get service
+kubectl get hpa
+kubectl get pods
+kubectl get deploymnet
+kubectl get deployment
+kubectl describe service
+kubectl get svc
+kubectl get svc tomcat-service
+kubectl get svc tomcat-service -o yaml
+ping 10.254.86.113
+ping 172.16.0.6
+ping 172.17.0.6
+kubectl get pods
+kubectl get svc
+kubectl get
+kubectl get pods mysql-snmjq
+ls
+cat > 1
+mv 1 tomcat-frontend-rc.yaml
+vim tomcat-frontend-rc.yaml
+docker images
+vim tomcat-frontend-rc.yaml
+docker search daocloud
+docker search daocloud.io/library/tomcat
+docker pull daocloud.io/library/tomcat:9.0.0.M20-alpine
+docker images
+vim tomcat-frontend-rc.yaml
+cd /
+mkdir mydata-data
+cd -
+ls
+pwd
+ls /mydata-data/
+> /mydata-data/testfile123
+ls /mydata-data/
+kubectl create -f tomcat-frontend-rc.yaml
+kubectl get pods
+docker ps
+docker inspect ad
+docker inspect ad | grep my-data
+docker inspect ad | grep mydata
+docker inspect ad | grep mydata -A 2 -B 2
+ls /mydata-data/
+cat tomcat-frontend-rc.yaml
+kubectl get namespace
+cat > 1
+mv 1 development-ns.yaml
+cat > 1
+mv 1 busybox-pod.yaml
+kubectl apply -f development-ns.yaml
+kubectl apply -f busybox-pod.yaml
+kubectl get namespace
+kubctl get pod
+kubectl get pod
+kubectl get pod --namespace=developmnet
+kubectl get pod --namespace=development
 
 
   
