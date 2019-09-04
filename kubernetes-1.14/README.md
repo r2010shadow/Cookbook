@@ -1,4 +1,4 @@
-![k8s](https://img3.doubanio.com/view/subject/l/public/s32318112.jpg)
+![k8s](http://booksk.com/wp-content/uploads/2019/08/d538a0c1b2cd07b-170x217.jpg)
 
 
 ## 第4版基于Kubernetes 1.14版本进行内容升级，去掉了前三版源码篇的内容。
