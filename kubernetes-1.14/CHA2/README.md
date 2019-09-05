@@ -4,6 +4,7 @@
 
 ### 2.2.1
 wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+
 yum install docker-ce-18.09.3 -y
 
 cat >  /etc/docker/daemon.json  << EOF
