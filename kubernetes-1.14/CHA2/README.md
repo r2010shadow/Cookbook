@@ -16,18 +16,31 @@
 	mkdir -p /etc/systemd/system/docker.service.d
 
 cat >  /etc/docker/daemon.json  << EOF
+
 {
+
   "exec-opts": ["native.cgroupdriver=systemd"],
+
   "log-driver": "json-file",
+
   "log-opts": {
+
     "max-size": "100m"
+
   },
+
   "storage-driver": "overlay2",
+
   "storage-opts": [
+
     "overlay2.override_kernel_check=true"
+
   ],
+
   "registry-mirrors": ["http://registry.docker-cn.com"]
+
 }
+
 EOF
 
 	systemctl restart docker
@@ -41,21 +54,13 @@ EOF
 	kubeadm config images pull --config=init-config.yaml
 
 ### 2.2.4
-	kubeadm init --config=init-config.yaml
+	kubeadm init --config=init-config.yaml   # log-> init-config
 
-#### more info @ init-config
 	mkdir -p $HOME/.kube
 	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 	sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 	kubectl get -n kube-system configmap
-
-NAME                                 DATA   AGE
-coredns                              1      65m
-extension-apiserver-authentication   6      65m
-kube-proxy                           2      65m
-kubeadm-config                       2      65m
-kubelet-config-1.14                  1      65m
 
 
 ### 2.2.5
