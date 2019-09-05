@@ -3,12 +3,15 @@
 
 ### 2.2.1
 wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+
 yum install docker-ce-18.09.3 -y
+
 systemctl enable docker && systemctl start docker
 
 #### Container runtimes https://kubernetes.io/docs/setup/production-environment/container-runtimes/
 
 yum install yum-utils device-mapper-persistent-data lvm2
+
 mkdir -p /etc/systemd/system/docker.service.d
 
 cat >  /etc/docker/daemon.json  << EOF
@@ -25,6 +28,7 @@ cat >  /etc/docker/daemon.json  << EOF
   "registry-mirrors": ["http://registry.docker-cn.com"]
 }
 EOF
+
 systemctl restart docker
 
 yum install kubelet-1.14.1  kubectl-1.14.1 kubeadm-1.14.1
