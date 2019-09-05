@@ -24,4 +24,5 @@ kubeadm config print init-defaults > init.default.yaml
 kubeadm config images pull --config=init-config.yaml
 
 ### 2.2.4
-kubeadm init --config=init-config.yaml
+kubeadm init --config=init-config.yaml  
+	# more info @init-config
