@@ -1,0 +1,33 @@
+## Trouble is A Friend
+
+
+
+
+### kubelet cgroup driver: "cgroupfs" is different from docker cgroup driver: "systemd"
+#### case
+kubeadm init --config=init-config.yaml
+### fix
+docker info | grep Cgroup  # before :  Cgroup Driver: systemd
+cat /etc/docker/daemon.json
+{
+  "registry-mirrors": ["http://registry.docker-cn.com"]
+}
+systemctl restart docker
+docker info | grep Cgroup  # after  :  Cgroup Driver: cgroupfs
+
+
+### error execution phase kubelet-start: error uploading crisocket: timed out waiting for the condition
+#### case
+kubeadm join --config=join-config.yaml	
+#### fix
+swapoff -a    # will turn off the swap 
+kubeadm reset
+systemctl daemon-reload
+systemctl restart kubelet
+iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X  # will reset iptables
+
+
+
+
+
+

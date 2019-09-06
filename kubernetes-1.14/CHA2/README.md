@@ -51,7 +51,15 @@
 	
 	kubectl taint nodes --all node-role.kubernetes.io/master-
 
+### 2.2.6 CNI install - weave
+	kubectl get nodes  # NotReady
+	kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+	kubectl get pods --all-namespaces
+	
+#### TIPS: When install Failed use kubeadm reset reinstall.
 
+### 2.6.1
+	docker run -d     -p 5000:5000      -v /usr/local/registry:/var/lib/registry      --restart=always     --name registry     registry:2
 
 
 
