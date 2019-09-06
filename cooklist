@@ -159,6 +159,7 @@ ps -ef |awk '($8 ~/nginx/){print $2}'   # find pid where rows 8 name is nginx
 pstree -p            #process Tree
 
 #CPU
+systemd-cgtop      # top cpu memory tasks
 vmstat
 sar -u 1				   #Total CPU info
 mpstat -P ALL 1			   #Each CPU info
