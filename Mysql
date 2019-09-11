@@ -331,9 +331,14 @@ create table mytbl like sometable;
    注意是无条件的，也就是不管理你Slave SQL线程是否把所有的relay log重放完了。
 3. 注意，stop slave后，先保存show slave status信息，然后再执行reset slave. 一般这个信息都会有用的。
 
-
-
-
+# Slave Error log:Could not find first log file name in binar y log index file
+## fix
+1. master root:(none)> flush logs;     # 在master 关闭当前使用的binary log，然后打开一个新的binary log文件，文件的序号加1
+2. show master status;
+3. stop slave
+4. change master to master_host='10.10.2.12',master_user='root',master_password='PWD',master_log_file='db01-012.000002',master_log_pos=3603963; 
+5. start slave
+6. show slave status\G;
 
 
 
