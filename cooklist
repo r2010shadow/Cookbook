@@ -367,4 +367,16 @@ fi
 3. push space bar 
 4. push esc exit edit
 
+# color -1
+RED_COLOR='\E[1;31m'  #红
+GREEN_COLOR='\E[1;32m' #绿
+YELOW_COLOR='\E[1;33m' #黄
+BLUE_COLOR='\E[1;34m'  #蓝
+PINK='\E[1;35m'      #粉红
+#需要使用echo -e
+echo -e  "${RED_COLOR}======red color======${RES}"
+# color -2
+echo -e "\033[1;32m ======red color====== "
+
+
 
