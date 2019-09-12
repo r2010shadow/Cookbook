@@ -11,6 +11,6 @@ spec:
       ports:
       - containerPort: 80
     - name: redis
-      image: kubeguide/redis-master
+      image: kubeguide/redis-master 
       ports:
       - containerPort: 6379

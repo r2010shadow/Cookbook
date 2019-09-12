@@ -1,0 +1,2 @@
+echo -e "\033[1;32m kubectl get $1 $2 -o yaml"
+kubectl get $1 $2 -o yaml

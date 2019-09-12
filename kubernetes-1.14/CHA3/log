@@ -1,0 +1,2 @@
+echo -e "$T \033[1;32m kubectl log $1 $2" 
+kubectl logs $1 $2 

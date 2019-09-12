@@ -1,0 +1,2 @@
+echo -e "\033[1;32m kubectl describe $1 $2"
+kubectl describe $1 $2
