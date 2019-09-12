@@ -21,7 +21,11 @@
 	kubectl describe configmap cm-appvars
 	kubectl get configmap cm-appvars -o yaml
 
+### 3.9
 
+#### 定向调度 1. 为nodes加label标签  2. pod中指定nodeSelector的zone  
+       kubectl label nodes vmnode zone=north
+       kubectl label nodes vmnode2 zone=south
 
 
 
