@@ -3,5 +3,5 @@ if [ ! -n "$2" ]; then
 	echo "Need pods name" 
 else
 	kubectl delete $1 $2
-	kubectl get $1
+	kubectl get $1 -o wide
 fi 

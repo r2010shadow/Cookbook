@@ -27,6 +27,15 @@
        kubectl label nodes vmnode zone=north
        kubectl label nodes vmnode2 zone=south
 
+#### Taints & Tolerations
+       kubectl taint nodes vmnode2 key=value:NoSchedule
+       kubectl taint nodes vmnode2 key-
+
+#### Job
+       mkdir jobs
+       for i in apple banana cherry; do cat job.yaml.txt | sed "s/\$ITEM/$i/" > ./jobs/job-$i.yaml; done
+       kubectl create -f jobs    # under folder jobs has 3 yaml files.
+       kubectl get jobs -l jobgroup=jobexample       
 
 
 

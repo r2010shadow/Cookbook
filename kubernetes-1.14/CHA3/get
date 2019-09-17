@@ -2,4 +2,5 @@ echo -e "$T \033[1;32m kubectl get $1 $2 $3"
 kubectl get $1 $2 $3
 if [ $1 == help ]; then
  echo 'Options:  kubectl get pods -o wide   # show pods in which nodes.'
+ echo 'get [pod | rc | hpa | jobs | nodes] '
 fi 

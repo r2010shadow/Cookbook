@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: anti-affinity
+spec:
+  affinity:
+   podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+       matchExpressions:
+       - key: security
+         operator: In
+         values:
+         - S1
+      topologyKey: failure-domain.beta.kubernetes.io/zone
+   podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+       matchExpressions:
+       - key: app
+         operator: In
+         values:
+         - nginx
+      topologyKey: kubernetes.io/hostname
+  containers:
+  - name: anti-affinity
+    image: anjia0532/google-containers.pause:2.0
+    #image: gcr.io/google-containers/pause:2.0
+    #more images of google-containers info from : https://anjia0532.github.io/2017/11/15/gcr-io-image-mirror/ 
