@@ -1,0 +1,12 @@
+Command "rolling-update" is deprecated, use "rollout" instead
+Created redis-master-vlatest
+Scaling up redis-master-vlatest from 0 to 3, scaling down redis-master from 3 to 0 (keep 3 pods available, don't exceed 4 pods)
+Scaling redis-master-vlatest up to 1
+Scaling redis-master down to 2
+Scaling redis-master-vlatest up to 2
+Scaling redis-master down to 1
+Scaling redis-master-vlatest up to 3
+Scaling redis-master down to 0
+Update succeeded. Deleting old controller: redis-master
+Renaming redis-master-vlatest to redis-master
+replicationcontroller/redis-master rolling updated
