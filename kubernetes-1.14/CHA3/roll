@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ $1 == help ]; then
+ echo '[status | undo | history | pause | resume]'
+ exit
+fi
+
+
+echo -e "$T \033[1;32m kubectl rollout $1 $2"
+kubectl rollout $1 $2

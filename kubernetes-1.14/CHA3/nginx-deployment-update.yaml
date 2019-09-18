@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx-deployment-update
 spec:
   selector:
    matchLabels:
@@ -16,7 +16,6 @@ spec:
     - name: nginx
       image: nginx:1.7.9
       ports:
-      - containerPort: 80
+      - containerPort: 80      
     nodeSelector:     # 定向调度
-     zone: north
-      
+      zone: south

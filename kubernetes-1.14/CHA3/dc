@@ -1,2 +1,11 @@
+#!/bin/bash
+
+if [ $1 == help ]; then
+ echo 'kubectl describe deployment/nginx-deployment-update'
+ exit
+fi
 echo -e "\033[1;32m kubectl describe $1 $2"
 kubectl describe $1 $2
+
+
+

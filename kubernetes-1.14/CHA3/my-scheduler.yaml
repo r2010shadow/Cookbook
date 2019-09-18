@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  schedulerName: my-scheduler
+  containers:
+  - name: nginx
+    image: nginx
+# 如果自定义的调度器还未在系统中部署，默认的调度器会忽略这个pod，永远处于Pending状态
+# 下面用脚本方式实现自定义调度器，通过kubectl proxy运行。
