@@ -37,5 +37,8 @@
 
     ./it dns-example cat /etc/resolv.conf
 
-#### 4.6 Ingress    more info:https://www.cnblogs.com/terrycy/p/10048165.html
+#### 4.6 Ingress    
+
+##### case https://www.cnblogs.com/panwenbin-logs/p/9915927.html
+
     

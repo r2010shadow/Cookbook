@@ -5,9 +5,15 @@ if [ $1 == help ]; then
  exit
 fi
 
-if [[ $3 == 'kube' ]]; then
+if [[ $3 == 'ks' ]]; then
   echo -e "$T \033[1;32m kubectl describe $1 $2 --namespace=kube-system"
   kubectl describe $1 $2 --namespace=kube-system
+  exit
+fi
+
+if [[ $3 == 'name' ]]; then
+  echo -e "$T \033[1;32m kubectl describe $1 $2 --namespace=$4"
+  kubectl describe $1 $2 --namespace=$4
   exit
 fi
 
