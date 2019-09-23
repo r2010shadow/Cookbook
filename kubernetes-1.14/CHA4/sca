@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $1 == help ]; then
+ echo 'kubectl scale -h'
+ exit
+fi
+echo -e "\033[1;32m kubectl scale rc $1 --replicas=$2"
+kubectl scale rc $1 --replicas=$2
+
+
+

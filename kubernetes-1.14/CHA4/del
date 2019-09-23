@@ -1,0 +1,14 @@
+#!/bin/bash
+if [[ $3 == 'kube' ]]; then
+  echo -e "$T \033[1;32m kubectl delete $1 $2  --namespace=kube-system"
+  kubectl delete $1 $2  --namespace=kube-system
+  exit
+fi
+
+echo -e "$T \033[1;32m kubectl delete $1 $2" 
+if [ ! -n "$2" ]; then  
+	echo "Need pods name" 
+else
+	kubectl delete $1 $2
+	kubectl get $1 -o wide
+fi 

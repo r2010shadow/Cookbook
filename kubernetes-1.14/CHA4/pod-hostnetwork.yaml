@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+spec:
+  hostNetwork: true  # pod所有端口都将直接映射到物理机上, podIP == hostIP
+  containers:
+  - name: webapp
+    image: tomcat
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 8080
+      #hostPort: 8081   非端口映射, 若设定则必须等于containerPort的值。

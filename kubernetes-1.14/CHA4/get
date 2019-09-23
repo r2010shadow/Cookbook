@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ $1 == 'help' ]]; then
+ echo 'Options:  kubectl get pods -o wide   # show pods in which nodes.'
+ echo 'get [pod | rc | hpa | jobs | nodes | endpoints] '
+ echo 'get pod -l='name=cassandra''
+ echo 'kubectl get pods --namespace=kube-system'
+ exit
+fi
+
+if [[ $2 == 'kube' ]]; then
+  echo -e "$T \033[1;32m kubectl get $1 --namespace=kube-system"
+  kubectl get $1 --namespace=kube-system
+  exit
+fi 
+
+echo -e "$T \033[1;32m kubectl get $1 $2 $3"
+kubectl get $1 $2 $3
