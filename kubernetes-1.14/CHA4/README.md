@@ -41,4 +41,8 @@
 
 ##### case https://www.cnblogs.com/panwenbin-logs/p/9915927.html
 
+##### Test
+      curl 10.32.0.3                                          # default backend - 404
+      curl -H 'Host:myapp.magedu.com' http://10.32.0.3        # 
+      curl -H 'Host:tomcat.magedu.com' -k https://10.32.0.3   # ssl test
     
