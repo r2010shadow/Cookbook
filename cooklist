@@ -1,3 +1,6 @@
+[tcp]
+tcpdump -nn -q -i eth0
+
 efficiency
 time [CMD] # show do this cmd cost times
 
