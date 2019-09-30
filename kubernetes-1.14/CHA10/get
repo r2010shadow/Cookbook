@@ -1,0 +1,35 @@
+#!/bin/bash
+if [ -z $1 ]; then
+ echo -e "\033[1;32m  kubectl get pods"
+ kubectl get pods
+ exit
+fi
+
+if [[ $1 == 'help' ]]; then
+ echo 'Options:  kubectl get pods -o wide   # show pods in which nodes.'
+ echo 'get [pod | rc | hpa | jobs | nodes | endpoints] '
+ echo 'get pod -l='name=cassandra''
+ echo 'kubectl get pods --namespace=kube-system'
+ exit
+fi
+
+if [[ $2 == 'ks' ]]; then
+  echo -e "$T \033[1;32m kubectl get $1 --namespace=kube-system"
+  kubectl get $1 --namespace=kube-system
+  exit
+fi 
+
+if [[ $2 == 'name' ]]; then
+  echo -e "$T \033[1;32m kubectl get $1 --namespace=$3"
+  kubectl get $1 --namespace=$3
+  exit
+fi
+
+if [[ $2 == 'ns' ]]; then
+  echo -e "$T \033[1;32m kubectl get namespaces"
+  kubectl get namespaces
+  exit
+fi
+
+echo -e "$T \033[1;32m kubectl get $1 $2 $3"
+kubectl get $1 $2 $3

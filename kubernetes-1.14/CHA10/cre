@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ -z $1 ]; then
+ echo -e "\033[1;32m kubectl create -f somefile.yaml"
+ exit
+fi
+
+
+echo -e "\033[1;32m kubectl create -f $1"
+kubectl create -f $1

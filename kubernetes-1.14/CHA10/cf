@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+if [ -z $1 ]; then
+ echo -e "\033[1;32m  kubectl config view"
+ kubectl config view
+ exit
+fi
+
+if [ $1 == set ]; then
+ echo -e "\033[1;32m  kubectl config set-context $2 --namespace=$3 --cluster=kubernetes-cluster --user=$4"
+ kubectl config set-context $2 --namespace=$3 --cluster=kubernetes-cluster --user=$4
+ exit
+fi
+
+if [ $1 == use ]; then
+  echo -e "\033[1;32m  kubectl config use-context $2"
+  kubectl config use-context $2
+  exit
+fi
+
+
+if [ $1 == del ]; then
+ echo -e "\033[1;32m  kubectl config delete-context $2 --namespace=$3 --cluster=kubernetes-cluster --user=$4"
+ kubectl config delete-context $2 --namespace=$3 --cluster=kubernetes-cluster --user=$4
+ exit
+fi
+
+echo -e "\033[1;32m  kubectl config $1 $2 $3 $4"
+kubectl config $1 $2 $3 $4

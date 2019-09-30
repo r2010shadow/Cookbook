@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Node
+metadata:
+  name: vmnode2
+  labels:
+    kubernetes.io/hostname: vmnode2
+spec:
+  unschedulable: true
