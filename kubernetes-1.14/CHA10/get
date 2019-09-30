@@ -1,7 +1,8 @@
 #!/bin/bash
 if [ -z $1 ]; then
- echo -e "\033[1;32m  kubectl get pods"
- kubectl get pods
+ echo -e "\033[1;32m  kubectl get pods -owide"
+ kubectl get pods -owide
+ kubectl config view | grep current
  exit
 fi
 
@@ -19,7 +20,7 @@ if [[ $2 == 'ks' ]]; then
   exit
 fi 
 
-if [[ $2 == 'name' ]]; then
+if [[ $2 == 'nsname' ]]; then
   echo -e "$T \033[1;32m kubectl get $1 --namespace=$3"
   kubectl get $1 --namespace=$3
   exit

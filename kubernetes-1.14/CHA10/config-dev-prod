@@ -1,0 +1,31 @@
+[1;32m  kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://10.10.6.110:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    namespace: development
+    user: kubernetes-admin
+  name: ct-dev
+- context:
+    cluster: kubernetes
+    namespace: production
+    user: kubernetes-admin
+  name: ct-prod
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+Mode: ./cf [ set | del ] NAME NAMESPACE CLUSTER USER

@@ -4,6 +4,19 @@ if [ -z $1 ]; then
  exit
 fi
 
+if [ $1 == crens ]; then
+ echo -e "\033[1;32m kubectl create namespace $2"
+ kubectl create namespace $2
+ kubectl get namespaces
+ exit
+fi
+
+if [ $1 == usens ]; then
+ echo -e "\033[1;32m kubectl create -f $2 --namespace=$3"
+ kubectl create -f $2 --namespace=$3
+ exit
+fi
+
 
 echo -e "\033[1;32m kubectl create -f $1"
 kubectl create -f $1
