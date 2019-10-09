@@ -16,7 +16,7 @@ if [[ $3 == 'ks' ]]; then
   exit
 fi
 
-if [[ $3 == 'nsname' ]]; then
+if [[ $3 == 'usens' ]]; then
   echo -e "$T \033[1;32m kubectl describe $1 $2 --namespace=$4"
   kubectl describe $1 $2 --namespace=$4
   exit
