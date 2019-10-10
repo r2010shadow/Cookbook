@@ -12,6 +12,7 @@
     ./cf use kubernetes-admin@kubernetes    # Switched to Default context. 
 
 #### Q. How to see All Context status once.
+     kubectl get po,no --all-namespaces -owide
 
 ###  10.4.2
     ./cre crens limit-example 
@@ -50,6 +51,16 @@
 
      kubectl -n kube-system create secret generic kubernetes-dashboard-certs --from-file=dashboard.key --from-file=dashboard.crt
 
-     ./get secret ks    # copy and paste def-ns-admin-token Token to browser.
+##### craete user case 1 - logged in as an admin
+     WEBSITE:https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+     ./cre crens kubernetes-dashboard  # create namespace
+     ./cre dashboard-adminuser.yaml    # create user
+     kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+     VIEW: paste token to browser.
+
+##### create user case 2 - logged in as normal user
+     kubectl create serviceaccount def-ns-admin -n default
+     kubectl create rolebinding def-ns-admin --clusterrole=admin --serviceaccount=default:def-ns-admin
+     kubectl describe secret   # copy and paste def-ns-admin-token Token to browser.
 
 ##### readmore: https://www.cnblogs.com/zydev/p/10314815.html    https://www.jianshu.com/p/c6d560d12d50
