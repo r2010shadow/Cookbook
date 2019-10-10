@@ -22,6 +22,12 @@ if [[ $3 == 'usens' ]]; then
   exit
 fi
 
+if [[ $2 == 'usens' ]]; then
+  echo -e "$T \033[1;32m kubectl describe $1 --namespace=$3"
+  kubectl describe $1  --namespace=$3
+  exit
+fi
+
 echo -e "\033[1;32m kubectl describe $1 $2"
 kubectl describe $1 $2
 

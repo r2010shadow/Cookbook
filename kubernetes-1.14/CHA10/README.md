@@ -20,7 +20,36 @@
     kubectl get pods nginx-7db9fccd9b-cn2wb --namespace=limit-example -o yaml | grep resources -C 8
 
 
-### 10.4.5 
+### 10.4.5 ResourceQuota & LimitRange EX. 
     kubectl run nginx --image=nginx --replicas=1 --namespace=quota-example     # Failed create , Dont set CPU&MEM Limits and Requests
 
     kubectl run nginx --image=nginx --replicas=1 --requests=cpu=100m,memory=256Mi --limits=cpu=200m,memory=512Mi --namespace=quota-example
+
+    kubectl run best-effort-nginx --image=nginx --replicas=8 --namespace=quota-scopes
+    kubectl run not-effort-nginx  --image=nginx --replicas=2 --requests=cpu=100m,memory=256Mi --limits=cpu=200m,memory=512Mi  --namespace=quota-scopes
+
+
+
+
+
+### 10.11 WEB UI Bashboard
+     WEBSITE: https://github.com/kubernetes/dashboard
+  
+     wget https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+     EDIT:kubernetes-dashboard.yaml [image/type: NodePort/nodePort: 30000] and commit part of - Dashboard Secret -
+
+     ./cre kubernetes-dashboard.yaml  # Use Clean*.sh to reset.
+     VIEW: https://10.10.6.110:30000  # paste token as fellow step
+
+
+#### Make and Use RSA
+     openssl genrsa -des3 -passout pass:x -out dashboard.pass.key 2048
+     openssl rsa -passin pass:x -in dashboard.pass.key -out dashboard.key
+     openssl req -new -key dashboard.key -out dashboard.csr -subj "/C=CN/ST=SH/L=SH/O=Sin/OU=IT/CN=10.10.6.110"
+     openssl x509 -req -in dashboard.csr -signkey dashboard.key -out dashboard.crt
+
+     kubectl -n kube-system create secret generic kubernetes-dashboard-certs --from-file=dashboard.key --from-file=dashboard.crt
+
+     ./get secret ks    # copy and paste def-ns-admin-token Token to browser.
+
+##### readmore: https://www.cnblogs.com/zydev/p/10314815.html    https://www.jianshu.com/p/c6d560d12d50

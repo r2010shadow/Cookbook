@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-poddb
+  labels:
+    name: nginx-poddb
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: nginx-poddb
+  template:
+    metadata:
+      labels:
+        name: nginx-poddb
+    spec:
+      containers:
+      - name: nginx-poddb
+        image: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+
+

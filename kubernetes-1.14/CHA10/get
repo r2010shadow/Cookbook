@@ -6,6 +6,13 @@ if [ -z $1 ]; then
  exit
 fi
 
+if [[ $1 == 'all' ]]; then
+  echo -e "$T \033[1;32m kubectl get po,no --all-namespaces -owide"
+  kubectl get po,no --all-namespaces -owide
+  exit
+fi
+
+
 if [[ $1 == 'help' ]]; then
  echo 'Options:  kubectl get pods -o wide   # show pods in which nodes.'
  echo 'get [pod | rc | hpa | jobs | nodes | endpoints] '

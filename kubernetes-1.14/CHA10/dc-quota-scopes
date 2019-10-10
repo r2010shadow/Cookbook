@@ -1,0 +1,35 @@
+  kubectl get pods  --namespace=quota-scopes -owide
+NAME                                 READY   STATUS    RESTARTS   AGE    IP           NODE      NOMINATED NODE   READINESS GATES
+best-effort-nginx-848fc9b87b-4tbrc   1/1     Running   0          3m4s   10.32.0.13   vmnode    <none>           <none>
+best-effort-nginx-848fc9b87b-96x44   1/1     Running   0          3m4s   10.32.0.12   vmnode    <none>           <none>
+best-effort-nginx-848fc9b87b-bjp7b   1/1     Running   0          3m4s   10.32.0.11   vmnode    <none>           <none>
+best-effort-nginx-848fc9b87b-d64f9   1/1     Running   0          3m4s   10.32.0.14   vmnode    <none>           <none>
+best-effort-nginx-848fc9b87b-hk5pk   1/1     Running   0          3m4s   10.46.0.8    vmnode2   <none>           <none>
+best-effort-nginx-848fc9b87b-j56w6   1/1     Running   0          3m4s   10.46.0.12   vmnode2   <none>           <none>
+best-effort-nginx-848fc9b87b-s287z   1/1     Running   0          3m4s   10.46.0.11   vmnode2   <none>           <none>
+best-effort-nginx-848fc9b87b-xlzq4   1/1     Running   0          3m4s   10.46.0.6    vmnode2   <none>           <none>
+not-effort-nginx-57b58564c8-28sfg    1/1     Running   0          119s   10.46.0.13   vmnode2   <none>           <none>
+not-effort-nginx-57b58564c8-b5z6c    1/1     Running   0          119s   10.32.0.15   vmnode    <none>           <none>
+
+
+  kubectl describe quota --namespace=quota-scopes
+Name:       best-effort
+Namespace:  quota-scopes
+Scopes:     BestEffort
+ * Matches all pods that do not have resource requirements set. These pods have a best effort quality of service.
+Resource  Used  Hard
+--------  ----  ----
+pods      8     10
+
+
+Name:       not-best-effort
+Namespace:  quota-scopes
+Scopes:     NotBestEffort
+ * Matches all pods that have at least one resource requirement set. These pods have a burstable or guaranteed quality of service.
+Resource         Used   Hard
+--------         ----   ----
+limits.cpu       400m   2
+limits.memory    1Gi    2Gi
+pods             2      4
+requests.cpu     200m   1
+requests.memory  512Mi  1Gi
