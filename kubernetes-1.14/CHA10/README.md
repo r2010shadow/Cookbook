@@ -64,3 +64,12 @@
      kubectl describe secret   # copy and paste def-ns-admin-token Token to browser.
 
 ##### readmore: https://www.cnblogs.com/zydev/p/10314815.html    https://www.jianshu.com/p/c6d560d12d50
+
+### 10.12 Helm
+
+    INSTALL: sh install-helm.sh
+    helm repo update
+    helm install stable/mariadb
+    helm list
+    helm delete `helm list | grep -v NAME |  awk {'print $1'}`
+    

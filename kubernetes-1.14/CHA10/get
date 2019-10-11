@@ -9,6 +9,10 @@ fi
 if [[ $1 == 'all' ]]; then
   echo -e "$T \033[1;32m kubectl get po,no --all-namespaces -owide"
   kubectl get po,no --all-namespaces -owide
+  echo " kubectl get cs "
+  kubectl get cs
+  echo " kubectl cluster-info" 
+  kubectl cluster-info
   exit
 fi
 
