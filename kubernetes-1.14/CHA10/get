@@ -6,6 +6,12 @@ if [ -z $1 ]; then
  exit
 fi
 
+if [ $1 == 'w' ];then
+ echo -e "\033[1;32m  kubectl get pods --watch"
+ kubectl get pods --watch
+ exit
+fi
+
 if [[ $1 == 'all' ]]; then
   echo -e "$T \033[1;32m kubectl get po,no --all-namespaces -owide"
   kubectl get po,no --all-namespaces -owide
@@ -13,7 +19,11 @@ if [[ $1 == 'all' ]]; then
   kubectl get cs
   echo " kubectl cluster-info" 
   kubectl cluster-info
-  exit
+  kubectl -n kubernetes-dashboard get secret | grep admin-user | wc -l  > /dev/null 2>&1
+  if [ $? -eq 0 ];then
+   kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}') | grep ^token
+  fi
+  exit 
 fi
 
 

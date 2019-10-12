@@ -27,5 +27,5 @@ helm version
 # https://blog.csdn.net/dayi_123/article/details/91874659
 # https://www.kubernetes.org.cn/3435.html
 # https://www.cnblogs.com/fawaikuangtu123/p/11296574.html
-
+# https://www.jianshu.com/p/5db132101a09
 

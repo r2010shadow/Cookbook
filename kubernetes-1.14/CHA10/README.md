@@ -65,11 +65,38 @@
 
 ##### readmore: https://www.cnblogs.com/zydev/p/10314815.html    https://www.jianshu.com/p/c6d560d12d50
 
-### 10.12 Helm
+### 10.12 Helm    https://github.com/helm/helm/blob/master/docs/quickstart.md
 
     INSTALL: sh install-helm.sh
-    helm repo update
-    helm install stable/mariadb
-    helm list
-    helm delete `helm list | grep -v NAME |  awk {'print $1'}`
+     helm repo update           # helm repo list
+     helm install --name NAME stable/mariadb  # helm keep all NAME include deleted.  different name is NEEDED. 
+     helm list  # helm list -all  Include deleted
+     helm delete `helm list | grep -v NAME |  awk {'print $1'}`
+    DIY: Chart 
+     helm fetch stable/mariadb  # download & edit Chart files
+     helm package PACKAGENAME   # package Chart
+     helm install PACKAGENAME.tgz
+
+    CASE:
+     helm create hero           # create a Chart
+     helm lint hero             # check Chart
+     helm install --dry-run --debug hero/   # test
+     helm package hero
+     helm serve [--address IP:PORT] # Service Chart Store
+     helm serve --address "0.0.0.0:8879" --repo-path "/root/.helm/repository/local" --url http://10.10.6.110:8879/chart/
+     helm search hero
+     helm inspect local/hero 
+     helm install --name myhero local/hero
+     helm ls                    # eq. helm list
+     helm delete --purge myhero # delete with name 
     
+    Monocular:    https://github.com/helm/monocular
+     docker pull registry.cn-shanghai.aliyuncs.com/hhu/defaultbackend:1.4
+     docker tag registry.cn-shanghai.aliyuncs.com/hhu/defaultbackend:1.4 k8s.gcr.io/defaultbackend:1.4
+     docker rmi registry.cn-shanghai.aliyuncs.com/hhu/defaultbackend:1.4
+     helm install stable/nginx-ingress --set controller.hostNetwork=true,rbac.create=true
+     helm repo add monocular https://helm.github.io/monocular
+     helm install monocular/monocular
+     
+
+
