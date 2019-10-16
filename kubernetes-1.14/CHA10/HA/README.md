@@ -96,15 +96,7 @@
   kubeadm join 10.10.9.109:12567 --token vece8z.81km6d8z59ujgk9k \
     --discovery-token-ca-cert-hash sha256:4b61f12d0833daeaa7c2ed399046910eba8717a8be1d6e090647a8ae9bbda18e
 
-
-
-
 ## mode B: outside etcd case
-
-
-
-
-
 
 
 
