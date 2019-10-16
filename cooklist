@@ -96,6 +96,9 @@ find -type f -printf '%T+ %p\n' | sort | tail -n 5
 ##
 ls -sh
 du -sh
+
+ls -lrt   # sort the files
+
 ### find group floders file contents
 grep -R --include="*.php" "/opt/zbox" /home/app
 
