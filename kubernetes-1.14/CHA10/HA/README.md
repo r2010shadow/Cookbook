@@ -108,18 +108,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 # more
   https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/ 
   https://www.ucloud.cn/yun/32964.html   kubeadm部署1.14版本高可用集群
