@@ -47,7 +47,22 @@
 
 ### keeplive [Double]
   yum install keepalived -y
- 
+  EDIT:/etc/keepalived/keepalived.conf
+  systemctl start keepalived.service
+  systemctl enable keepalived.service 
+
+  <case1> Use keepalive to check
+  EDIT:/etc/keepalived/keepalived.conf  With virtual_server & real_server
+
+  <case2> Use HAProxy to check
+  [Haproxy + keepalive]
+  echo 1 > /proc/sys/net/ipv4/ip_nonlocal_bind
+  sysctl -w net.ipv4.ip_nonlocal_bind=1
+  echo 'net.ipv4.ip_nonlocal_bind=1' >> /etc/sysctl.conf
+  EDIT: /etc/haproxy/haproxy.cfg  # Both HABoth HA  set to virtual_ipaddress
+  systemctl restart haproxy.service
+
+
 
 ### master 1
 
