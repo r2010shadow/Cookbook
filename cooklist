@@ -259,7 +259,7 @@ fsck -N /dev/sda1
 
 # Kill All
 ps -ef|grep [ProcessName]|grep -v grep|cut -c 9-15|xargs kill -9
-
+pidof [ProcessName]
 
 #vi
 yy p			#copy one line
