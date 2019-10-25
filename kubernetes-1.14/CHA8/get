@@ -1,0 +1,57 @@
+#!/bin/bash
+if [ -z $1 ]; then
+ echo -e "\033[1;32m  kubectl get pods -owide"
+ kubectl get pods -owide
+ kubectl config view | grep current
+ exit
+fi
+
+if [ $1 == 'w' ];then
+ echo -e "\033[1;32m  kubectl get pods --watch"
+ kubectl get pods --watch
+ exit
+fi
+
+if [[ $1 == 'all' ]]; then
+  echo -e "$T \033[1;32m kubectl get po,no --all-namespaces -owide"
+  kubectl get po,no --all-namespaces -owide
+  echo " kubectl get cs "
+  kubectl get cs
+  echo " kubectl cluster-info" 
+  kubectl cluster-info
+  kubectl -n kubernetes-dashboard get secret | grep admin-user | wc -l  > /dev/null 2>&1
+  if [ $? -eq 0 ];then
+   kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}') | grep ^token
+  fi
+  exit 
+fi
+
+
+if [[ $1 == 'help' ]]; then
+ echo 'Options:  kubectl get pods -o wide   # show pods in which nodes.'
+ echo 'get [pod | rc | hpa | jobs | nodes | endpoints] '
+ echo 'get pod -l='name=cassandra''
+ echo 'kubectl get pods --namespace=kube-system'
+ exit
+fi
+
+if [[ $2 == 'ks' ]]; then
+  echo -e "$T \033[1;32m kubectl get $1 --namespace=kube-system"
+  kubectl get $1 --namespace=kube-system
+  exit
+fi 
+
+if [[ $2 == 'usens' ]]; then
+  echo -e "$T \033[1;32m kubectl get $1  --namespace=$3 $4 $5 $6"
+  kubectl get $1 --namespace=$3 $4 $5 $6
+  exit
+fi
+
+if [[ $1 == 'ns' ]]; then
+  echo -e "$T \033[1;32m kubectl get namespaces"
+  kubectl get namespaces
+  exit
+fi
+
+echo -e "$T \033[1;32m kubectl get $1 $2 $3"
+kubectl get $1 $2 $3

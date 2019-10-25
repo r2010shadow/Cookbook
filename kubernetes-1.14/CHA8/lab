@@ -1,0 +1,28 @@
+#!/bin/bash
+
+
+if [ -z $1 ]; then
+ echo -e "\033[1;32m  kubectl get pods -Lrole"
+ kubectl get pods -Lrole
+ exit
+fi
+
+if [ $1 == - ]; then
+ echo -e "\033[1;32m kubectl label pod $2 role-"
+ kubectl label pod $2 role-
+ kubectl get pods -Lrole
+ exit
+fi
+
+
+if [ $1 == ow ]; then
+ echo -e "\033[1;32m kubectl label pod $2 role=$3 --overwrite"
+ kubectl label pod $2 role=$3 --overwrite
+ kubectl get pods -Lrole
+ exit
+fi
+
+echo -e "\033[1;32m kubectl label pod $1 role=$2"
+kubectl label pod $1 role=$2
+kubectl get pods -Lrole
+
