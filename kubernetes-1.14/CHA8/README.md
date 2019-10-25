@@ -4,9 +4,9 @@
 ### 8.6 GlusterFs 
 
   [install to all]
-    yum install centos-release-gluster -y
-    yum install -y glusterfs glusterfs-server glusterfs-fuse glusterfs-rdma glusterfs-geo-replication glusterfs-devel
-    systemctl enable glusterd && systemctl start glusterd 
+  yum install centos-release-gluster -y
+  yum install -y glusterfs glusterfs-server glusterfs-fuse glusterfs-rdma glusterfs-geo-replication glusterfs-devel
+  systemctl enable glusterd && systemctl start glusterd 
 
   [add peer]
     gluster peer probe kmaster2
