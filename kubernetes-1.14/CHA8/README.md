@@ -30,6 +30,47 @@
     ./cre glusterfs-pv.yaml
     ./cre glusterfs-pvc.yaml
 
+### Heketi
+
+  [master]
+  yum install heketi -y
+  
+  Edit: /etc/heketi/heketi.json
+        /usr/lib/systemd/system/heketi.service    # username , json path
+  
+  systemctl enable heketi  && systemctl start heketi && systemctl status heketi
+
+  [user heketi]
+  userdel heketi     # dont have /home/heketi
+  useradd heketi
+  echo 'heketi' | passwd --stdin heketi
+  su - heketi
+  echo "heketi    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+  modprobe dm_thin_pool
+  chown heketi:heketi /etc/heketi/ -R || chown heketi:heketi /var/lib/heketi -R
+  ssh-copy-id  heketi@10.10.6.112
+
+  [node]
+  yum install heketi-client -y
+  
+  Edit: /usr/share/heketi/topology-sample.json
+
+  heketi-cli --server http://10.10.6.110:58080 --user admin --secret 123456 cluster list
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
 
 
  
