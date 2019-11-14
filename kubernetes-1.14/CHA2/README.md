@@ -62,4 +62,13 @@
 	docker run -d     -p 5000:5000      -v /usr/local/registry:/var/lib/registry      --restart=always     --name registry     registry:2
 
 
+### Error Case
+        Node join:
+        error execution phase preflight: unable to fetch the kubeadm-config ConfigMap: failed to get config map: Unauthorized
+        Todo:
+	kubeadm token list
+	kubeadm token create --ttl 0 --print-join-command     # never invalid
+	
+	
+	
 
