@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello
+spec:
+  restartPolicy: OnFailure
+  hostNetwork: true
+  containers:
+  - name: hello
+    image: alpine
+    imagePullPolicy: Never
+    command: ["/bin/sh","-c", "sleep 3000"]
+    volumeMounts:
+    - name: rbd
+      mountPath: /mnt/rbd
+  volumes:
+  - name: rbd
+    persistentVolumeClaim:
+      claimName: ceph-rbd-pvc
