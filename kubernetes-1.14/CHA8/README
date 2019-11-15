@@ -59,6 +59,42 @@
 
 
 
+#### CEPH
+
+  [CEPH Cluster] also is [K8s Node]
+  yum install ceph-common ceph-fs-common -y
+
+  rbd:
+      ceph osd pool create rbdceph 32
+      rbd create --size 1024 test --image-feature layering
+
+  key:
+      cat /etc/ceph/ceph.client.admin.keyring | grep key | awk '{print $3}'
+  
+
+
+
+  [K8s master]
+
+
+  Create: 
+  	ceph-secret.yaml        # use the key above
+
+  	pv.yaml                 # use one of the ceph cluster ip 
+
+  	pvc.yaml
+
+  	pod.yaml
+
+  Check:
+  	kubectl exec -it hello df      #@k8s /dev/rbd0               999320      2564    980372   0% /mnt/rbd     
+
+        rbd showmapped                 #@ceph-cluster 
+        mount | grep rbd
+
+
+
+
 
 
 
