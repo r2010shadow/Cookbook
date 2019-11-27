@@ -1,0 +1,19 @@
+initContainer
+
+  <case> tomcat + war  in one pod.
+  
+    image: 1.war(Dockerfile)  2.tomcat
+    volumeMounts: app-volume
+
+  [nodes]
+
+  War file:
+    /home/hello.war
+
+  war image:  copy war files & volumeMount
+    docker build -f Dockerfile -t resouer/sample:v2 .
+
+  Pod:        
+    ./cre  initcontainer.yaml
+  
+
