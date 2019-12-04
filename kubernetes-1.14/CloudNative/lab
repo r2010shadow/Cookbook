@@ -22,7 +22,15 @@ if [ $1 == ow ]; then
  exit
 fi
 
+if [ $1 == help ]; then
+ echo " "
+ exit
+fi
+
+
 echo -e "\033[1;32m kubectl label pod $1 role=$2"
 kubectl label pod $1 role=$2
 kubectl get pods -Lrole
+
+
 

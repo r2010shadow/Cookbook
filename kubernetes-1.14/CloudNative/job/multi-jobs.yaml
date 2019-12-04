@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: paral-1
+spec:
+  completions: 8  # 总执行个数
+  parallelism: 2  # 每次并行个数
+  template:
+    spec:
+      containers:
+      - name: param
+        image: ubuntu
+        command: ["/bin/bash"]
+        args: ["-c", "sleep 30; date"]
+      restartPolicy: OnFailure
+      nodeSelector:     # 定向调度
+        zone: south

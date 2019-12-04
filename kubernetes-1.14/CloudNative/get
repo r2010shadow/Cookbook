@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z $1 ]; then
  echo -e "\033[1;32m  kubectl get pods -owide"
- kubectl get pods -owide
+ kubectl get pods --show-labels -owide
  kubectl config view | grep current
  exit
 fi
@@ -32,6 +32,10 @@ if [[ $1 == 'help' ]]; then
  echo 'get [pod | rc | hpa | jobs | nodes | endpoints] '
  echo 'get pod -l='name=cassandra''
  echo 'kubectl get pods --namespace=kube-system'
+ echo "./get pods find label=labelName,label=labelName"
+ echo "kubectl get pods --show-labels -l 'app in (myapp,rbd-provisioner)'"
+ echo "/get pods PODNAME -o yaml"
+ echo "kubectl edit pods PODNAME"
  exit
 fi
 
@@ -47,11 +51,22 @@ if [[ $2 == 'usens' ]]; then
   exit
 fi
 
+if [[ $2 == 'find' ]]; then
+  echo -e "$T \033[1;32m kubectl get $1 --show-labels -l $3"
+  if [ -z $3 ]; then
+    kubectl get $1 --show-labels
+  else
+    kubectl get $1 --show-labels -l $3
+  fi
+  exit
+fi
+
+
 if [[ $1 == 'ns' ]]; then
   echo -e "$T \033[1;32m kubectl get namespaces"
   kubectl get namespaces
   exit
 fi
 
-echo -e "$T \033[1;32m kubectl get $1 $2 $3"
-kubectl get $1 $2 $3
+echo -e "$T \033[1;32m kubectl get $1 $2 $3 $4"
+kubectl get $1 $2 $3 $4
