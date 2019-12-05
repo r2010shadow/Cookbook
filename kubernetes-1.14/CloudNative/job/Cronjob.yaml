@@ -1,0 +1,23 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+           containers:
+           - name: hello
+             image: busybox
+             args:
+             - /bin/sh
+             - -c
+             - date; echo Hello from the K8s cluster
+           restartPolicy: OnFailure
+           nodeSelector:
+             zone: north
+  startingDeadlineSeconds: 10    # Job最长执行时间，超时关闭。
+  concurrencyPolicy: Allow       # 是否允许job并行运行,一个job未执行完，另一个job是否开始执行。
+  successfulJobsHistoryLimit: 3  # 允许留存历史job个数

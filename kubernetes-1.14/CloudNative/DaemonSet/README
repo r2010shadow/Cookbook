@@ -1,0 +1,24 @@
+  DaemonSet
+
+    Deployment 是 Kubernetes 中用于处理无状态服务的资源，
+    StatefulSet 是用于支持有状态服务的资源，这两种不同的资源从状态的角度对服务进行了划分，
+    而 DaemonSet 从不同的维度解决了集群中的问题 — 如何同时在集群中的所有节点上提供基础服务和守护进程。
+
+    一个DaemonSet对象能确保其创建的Pod在集群中的每一台（或指定）Node上都运行一个副本。
+
+
+  创建DS
+    
+    ./cre daemonset.yaml
+    ./get ds
+    ./get pods
+
+  更新DaemonSet
+
+    <case>
+    kubectl set image ds/fluentd-elasticsearch fluentd-elasticsearch=fluent/fluentd:v1.4
+      <check>
+      kubectl rollout status ds/fluentd-elasticsearch
+
+
+

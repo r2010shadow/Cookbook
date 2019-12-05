@@ -40,8 +40,8 @@ if [[ $1 == 'help' ]]; then
 fi
 
 if [[ $2 == 'ks' ]]; then
-  echo -e "$T \033[1;32m kubectl get $1 --namespace=kube-system"
-  kubectl get $1 --namespace=kube-system
+  echo -e "$T \033[1;32m kubectl get $1 --namespace=kube-system $3 $4"
+  kubectl get $1 --namespace=kube-system $3 $4
   exit
 fi 
 
