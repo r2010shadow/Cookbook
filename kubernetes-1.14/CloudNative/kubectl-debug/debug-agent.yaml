@@ -1,0 +1,229 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "debug-agent-47kdt",
+    "generateName": "debug-agent-",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/pods/debug-agent-47kdt",
+    "uid": "9cb6eec8-1aee-11ea-9c3d-061118000017",
+    "resourceVersion": "10342121",
+    "creationTimestamp": "2019-12-10T01:44:32Z",
+    "labels": {
+      "app": "debug-agent",
+      "controller-revision-hash": "958847487",
+      "pod-template-generation": "1"
+    },
+    "ownerReferences": [
+      {
+        "apiVersion": "apps/v1",
+        "kind": "DaemonSet",
+        "name": "debug-agent",
+        "uid": "9caf53e8-1aee-11ea-8574-06e79c000014",
+        "controller": true,
+        "blockOwnerDeletion": true
+      }
+    ]
+  },
+  "spec": {
+    "volumes": [
+      {
+        "name": "cgroup",
+        "hostPath": {
+          "path": "/sys/fs/cgroup",
+          "type": ""
+        }
+      },
+      {
+        "name": "lxcfs",
+        "hostPath": {
+          "path": "/var/lib/lxc/lxcfs",
+          "type": "DirectoryOrCreate"
+        }
+      },
+      {
+        "name": "docker",
+        "hostPath": {
+          "path": "/var/run/docker.sock",
+          "type": ""
+        }
+      },
+      {
+        "name": "default-token-rdv7k",
+        "secret": {
+          "secretName": "default-token-rdv7k",
+          "defaultMode": 420
+        }
+      }
+    ],
+    "containers": [
+      {
+        "name": "debug-agent",
+        "image": "aylei/debug-agent:latest",
+        "ports": [
+          {
+            "name": "http",
+            "hostPort": 10027,
+            "containerPort": 10027,
+            "protocol": "TCP"
+          }
+        ],
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name": "cgroup",
+            "mountPath": "/sys/fs/cgroup"
+          },
+          {
+            "name": "lxcfs",
+            "mountPath": "/var/lib/lxc/lxcfs",
+            "mountPropagation": "Bidirectional"
+          },
+          {
+            "name": "docker",
+            "mountPath": "/var/run/docker.sock"
+          },
+          {
+            "name": "default-token-rdv7k",
+            "readOnly": true,
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+          }
+        ],
+        "livenessProbe": {
+          "httpGet": {
+            "path": "/healthz",
+            "port": 10027,
+            "scheme": "HTTP"
+          },
+          "initialDelaySeconds": 10,
+          "timeoutSeconds": 1,
+          "periodSeconds": 10,
+          "successThreshold": 1,
+          "failureThreshold": 3
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "Always",
+        "securityContext": {
+          "privileged": true,
+          "procMount": "Default"
+        }
+      }
+    ],
+    "restartPolicy": "Always",
+    "terminationGracePeriodSeconds": 30,
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccountName": "default",
+    "serviceAccount": "default",
+    "nodeName": "kmaster2",
+    "hostPID": true,
+    "securityContext": {},
+    "affinity": {
+      "nodeAffinity": {
+        "requiredDuringSchedulingIgnoredDuringExecution": {
+          "nodeSelectorTerms": [
+            {
+              "matchFields": [
+                {
+                  "key": "metadata.name",
+                  "operator": "In",
+                  "values": [
+                    "kmaster2"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "schedulerName": "default-scheduler",
+    "tolerations": [
+      {
+        "key": "node-role.kubernetes.io/master",
+        "effect": "NoSchedule"
+      },
+      {
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "effect": "NoExecute"
+      },
+      {
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "effect": "NoExecute"
+      },
+      {
+        "key": "node.kubernetes.io/disk-pressure",
+        "operator": "Exists",
+        "effect": "NoSchedule"
+      },
+      {
+        "key": "node.kubernetes.io/memory-pressure",
+        "operator": "Exists",
+        "effect": "NoSchedule"
+      },
+      {
+        "key": "node.kubernetes.io/pid-pressure",
+        "operator": "Exists",
+        "effect": "NoSchedule"
+      },
+      {
+        "key": "node.kubernetes.io/unschedulable",
+        "operator": "Exists",
+        "effect": "NoSchedule"
+      }
+    ],
+    "priority": 0,
+    "enableServiceLinks": true
+  },
+  "status": {
+    "phase": "Running",
+    "conditions": [
+      {
+        "type": "Initialized",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-10T01:44:32Z"
+      },
+      {
+        "type": "Ready",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-10T01:44:52Z"
+      },
+      {
+        "type": "ContainersReady",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-10T01:44:52Z"
+      },
+      {
+        "type": "PodScheduled",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-10T01:44:32Z"
+      }
+    ],
+    "hostIP": "10.10.9.243",
+    "podIP": "10.40.0.4",
+    "startTime": "2019-12-10T01:44:32Z",
+    "containerStatuses": [
+      {
+        "name": "debug-agent",
+        "state": {
+          "running": {
+            "startedAt": "2019-12-10T01:44:51Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "aylei/debug-agent:latest",
+        "imageID": "docker-pullable://aylei/debug-agent@sha256:08faa74631e08425babee4e535c75de6f326982ec97c1c591908cacf80cc68ed",
+        "containerID": "docker://1dcd5177d23faa9c1487bd2bbe35c6f08316c2beb47c4189623dcb226c2c8673"
+      }
+    ],
+    "qosClass": "BestEffort"
+  }
+}
