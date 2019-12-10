@@ -390,4 +390,8 @@ echo -e  "${RED_COLOR}======red color======${RES}"
 echo -e "\033[1;32m ======red color====== "
 
 
+[bash]
+ctrl + w    # delete forward word
+
+
 
