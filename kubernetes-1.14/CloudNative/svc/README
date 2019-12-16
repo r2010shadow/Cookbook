@@ -1,0 +1,33 @@
+  Service 服务发现
+
+  外部网络            Pod B
+          \         /
+            Service - Pod B`
+          /         \
+   Pod A              Pod B``
+
+
+
+  Service 语法
+
+    labels: 服务名
+    selector: pod选择器
+    spec: clusterIP:None  <让Service不再通过虚拟ip来负载均衡
+  
+    type: LoadBalancer    <服务对外部开放，master的IP 
+    externalIPs:          <非gcs，则需要添加此字段
+    - 外部访问的IP
+
+
+  Service 访问
+    1. 通过Service虚拟IP
+    2. 直接访问服务名，依靠dns解析。 如 wget -O- nginx.default
+    3. 通过环境变量访问,使用env查看  如 wget -O- NGINX_SERVICE_HOST  
+  
+
+  -> 举例
+    ./cre service.yaml
+    ./cre server.yaml
+    kubectl exec -it PODNAME wget -O- IP
+   
+   

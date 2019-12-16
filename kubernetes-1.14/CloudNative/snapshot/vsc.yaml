@@ -1,0 +1,33 @@
+apiVersion: snapshot.storage.k8s.io/v1alpha1
+kind: VolumeSnapshotClass
+metadata:
+  name: disk-snapshotclass
+snapshotter: diskplugin.csi.alibabacloud.com
+
+---
+apiVersion: snapshot.storage.k8s.io/v1alpha1
+kind: VolumeSnapshot
+metadata:
+  name: disk-snapshot
+sepc:
+  snapshotClassName: disk-snapshotclass
+  source:
+    name: disk-pvc
+    kind: PersistentVolumeClaim
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: restore-pvc
+spec:
+  dataSource:
+    name: disk-snapshot
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+accessModes:
+  - ReadWriteOnce
+resources:
+  requests:
+    storage: 20Gi
+storageClassName: csi-disk

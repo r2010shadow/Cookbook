@@ -1,0 +1,34 @@
+  Volumes
+
+  Pod Volumes
+    
+    类型
+       1.本地存储  emptydir/hostpath
+       2.网络存储  
+             in-tree       内置的
+             out-of-tree   解耦的
+       3.Projected Volume
+       4.PVC/PC            
+
+
+  PersistentVolume（PV）
+    集群中已由管理员配置的一段网络存储
+    集群中的资源就像一个节点是一个集群资源
+    PV是诸如卷之类的卷插件，但是具有独立于使用PV的任何单个pod的生命周期。 
+    该API对象捕获存储的实现细节，即NFS，iSCSI或云提供商特定的存储系统。
+
+  PersistentVolumeClaim（PVC）
+    是用户存储的请求
+    它类似于pod。Pod消耗节点资源，PVC消耗存储资源。 
+    pod可以请求特定级别的资源（CPU和内存）。 权限要求可以请求特定的大小和访问模式。
+
+  StorageClass
+    为管理员提供了一种描述他们提供的存储的“类”的方法。 不同的类可能映射到服务质量级别，或备份策略，或者由群集管理员确定的任意策略。
+
+
+
+
+
+
+
+

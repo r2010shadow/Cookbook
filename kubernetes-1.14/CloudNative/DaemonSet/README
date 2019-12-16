@@ -19,6 +19,3 @@
     kubectl set image ds/fluentd-elasticsearch fluentd-elasticsearch=fluent/fluentd:v1.4
       <check>
       kubectl rollout status ds/fluentd-elasticsearch
-
-
-

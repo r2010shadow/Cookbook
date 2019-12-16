@@ -1,0 +1,44 @@
+
+  TIF(Trouble Is a Friend)
+
+
+  <NODE>
+
+    -> 驱逐这个节点上的所有pod
+    kubectl drain NODENAME --delete-local-data --force --ignore-daemonsets
+
+      --ignore-daemonsets往往需要指定的,这是因为deamonset会忽略unschedulable标签(使用kubectl drain时会自动给节点打上不可调度标签),
+                         因此deamonset控制器控制的pod被删除后可能马上又在此节点上启动起来,这样就会成为死循环.因此这里忽略daemonset.
+
+      -> 使用kubectl drain时候,命令行一直被阻塞,等了很久还在被阻塞.比如某pod一直处于Terminating状态.
+         kubectl delete pods busybox --grace-period=0 --force来强制马上删除pod
+
+
+    -> 清除节点
+    kubectl del node NODENAME
+
+    -> 节点重置安装
+    kubeadm reset
+
+    -> 重置iptables
+    iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+
+    -> 重置ipvs
+    ipvsadm -C
+
+    -> 重新加入集群
+    kubeadm reset
+    systemctl stop kubelet
+    systemctl stop docker
+    rm -rf /var/lib/cni/
+    rm -rf /var/lib/kubelet/*
+    rm -rf /etc/cni/
+    ifconfig cni0 down
+    ifconfig flannel.1 down
+    ifconfig docker0 down
+    ip link delete cni0
+    ip link delete flannel.1
+    systemctl start docker
+
+    kubeadm join XXXXX
+
