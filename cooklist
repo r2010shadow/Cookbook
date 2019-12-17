@@ -393,5 +393,13 @@ echo -e "\033[1;32m ======red color====== "
 [bash]
 ctrl + w    # delete forward word
 
+# Regex  useful matching
+/^[a-z0-9_-\]{3,16}$/    username
+/^[a-z0-9_-\]{6,18}$/    password
+/^([a-z0-9_\.-\]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/   email
+
+
+
+
 
 
