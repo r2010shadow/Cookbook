@@ -36,6 +36,7 @@ if [[ $1 == 'help' ]]; then
  echo "kubectl get pods --show-labels -l 'app in (myapp,rbd-provisioner)'"
  echo "/get pods PODNAME -o yaml"
  echo "kubectl edit pods PODNAME"
+ echo "./get pod -L controller-revision-hash"
  exit
 fi
 
