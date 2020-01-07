@@ -1,0 +1,18 @@
+  Access Control
+
+  X509
+ 
+    -> read crt file
+    openssl x509 -in ca.crt -noout -text
+
+
+
+  Total rule:
+  1. RBAC & namespace 
+  2. PSP(Pod Security Policies)
+  3. Resource Quota & Limit Range
+  4. secret encryption at REST
+  5. runAsNonRoot rules for container
+  6. Network Policy
+  7. Log everything
+
