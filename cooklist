@@ -1,3 +1,10 @@
+[git]
+>clean files
+git rm -r --cached some-directory
+git commit -m "Remove the now ignored directory some-directory"
+git push
+
+
 [tcp]
 tcpdump -nn -q -i eth0
 
