@@ -93,6 +93,8 @@ ls -l|sort -nr +4 -5
 find . -type f -size +800M  -print0 | xargs -0 du -h | sort -nr
 grep 'preweb' /data/logs/nginx/access.log | awk -F ',' '{print $4}' | sort | uniq -c | sort -nr
 
+# find subfloder files and clean
+find floder -type f -name "*.tmp" -exec rm -rf {} \;
 
 #The Older Files
 find -type f -printf '%T+ %p\n' | sort | head -n 1
