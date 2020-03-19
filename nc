@@ -1,7 +1,10 @@
 Netcat
 
 #TestPort
+nc -nvv -w 2 IP 8899
 
+
+# CS Connect 
 > hostA
 nc -lk 9999
 
