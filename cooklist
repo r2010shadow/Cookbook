@@ -1,4 +1,14 @@
 [git]
+>merge master
+git status
+git add .
+git commit -m "xx"
+git branch            // check branch status
+git checkout master
+git merge XXX         // XXX is branch name
+git push
+git checkout XXX      // choose into some branch
+
 >fetch branch
 git branch -a           //查看本地是否具有dev分支，这一步其实意义不大
 git fetch origin dev   //把远程分支拉到本地
