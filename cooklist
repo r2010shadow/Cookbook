@@ -1,5 +1,10 @@
 [git]
->merge master
+>branch XXX push
+git branch
+...   // add commit
+git push -u origin XXX
+
+>merge master & push
 git status
 git add .
 git commit -m "xx"
