@@ -108,6 +108,9 @@ history | cut -c 28-
 Bigger
 
 #Files
+chattr +i /root/.ssh/authorized_keys      # lock files cant change
+chattr -i /root/.ssh/authorized_keys
+
 du -s * | sort -nr | sed 1q | awk {'print $2'}
 du -sh * | sort -n
 ls -l|sort -nr +4 -5
