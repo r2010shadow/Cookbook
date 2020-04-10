@@ -1,4 +1,13 @@
 [git]
+> Case:  new branch , master merge
+git checkout -b user       # create new branch
+git add .
+git commit -m " "
+git push -u origin user    # create & push to remote git 
+git checkout master        # master merge
+git merge user
+git push
+
 >branch XXX push
 git branch
 ...   // add commit
