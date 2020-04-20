@@ -117,6 +117,26 @@ history | cut -c 28-
 Bigger
 
 #Files
+合并列
+paste 4 5
+ David Cameron	Engela Merkel
+ Narendra Modi	Vladimir Putin
+join 1 2
+ 1 India New Delhi
+ 2 UK London
+ 3 Canada Toronto
+ 4 US Washington
+ 5 Ireland Dublin
+去除重复
+uniq 
+显示重复
+uniq -d
+替换 小写换大写
+tr '[a-z]' '[A-Z]' < 5
+ ENGELA MERKEL
+ VLADIMIR PUTIN
+
+
 chattr +i /root/.ssh/authorized_keys      # lock files cant change
 chattr -i /root/.ssh/authorized_keys
 
