@@ -1,4 +1,7 @@
 [git]
+> ignore folder
+echo node_modules  > .gitignore
+
 > Case:  new branch , master merge
 git checkout -b user       # create new branch
 git add .
