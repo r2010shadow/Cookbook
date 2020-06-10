@@ -390,6 +390,16 @@ set global max_connections=2000;
 
 
 
+----------------------------------------------------------
+# mysqldump 
+## Case: dont lock table
+1. dump
+mysqldump  --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data=2 --databases DatabaseName -hHOSTIP -uroot -p  -PPORT > DatabaseName.sql 
+2. check pos
+head DatabaseName.sql -n 80 | grep 'MASTER_LOG_POS'
+
+
+
 
 
 
