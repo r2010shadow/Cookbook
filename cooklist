@@ -1,4 +1,41 @@
 [git]
+> ignore folder
+echo node_modules  > .gitignore
+target          //忽略这个target目录
+angular.json    //忽略这个angular.json文件
+log/*           //忽略log下的所有文件
+css/*.css       //忽略css目录下的.css文件
+
+> Case:  new branch , master merge
+git checkout -b user       # create new branch
+git add .
+git commit -m " "
+git push -u origin user    # create & push to remote git 
+git checkout master        # master merge
+git merge user
+git push
+
+>branch XXX push
+git branch
+...   // add commit
+git push -u origin XXX
+
+>merge master & push
+git status
+git add .
+git commit -m "xx"
+git branch            // check branch status
+git checkout master
+git merge XXX         // XXX is branch name
+git push
+git checkout XXX      // choose into some branch
+
+>fetch branch
+git branch -a           //查看本地是否具有dev分支，这一步其实意义不大
+git fetch origin dev   //把远程分支拉到本地
+git checkout -b dev origin/dev   //在本地创建分支dev并切换到该分支
+git pull origin dev              //把某个分支的内容拉到本地
+
 >clean files
 git rm -r --cached some-directory
 git commit -m "Remove the now ignored directory some-directory"
@@ -87,6 +124,29 @@ history | cut -c 28-
 Bigger
 
 #Files
+合并列
+paste 4 5
+ David Cameron	Engela Merkel
+ Narendra Modi	Vladimir Putin
+join 1 2
+ 1 India New Delhi
+ 2 UK London
+ 3 Canada Toronto
+ 4 US Washington
+ 5 Ireland Dublin
+去除重复
+uniq 
+显示重复
+uniq -d
+替换 小写换大写
+tr '[a-z]' '[A-Z]' < 5
+ ENGELA MERKEL
+ VLADIMIR PUTIN
+
+
+chattr +i /root/.ssh/authorized_keys      # lock files cant change
+chattr -i /root/.ssh/authorized_keys
+
 du -s * | sort -nr | sed 1q | awk {'print $2'}
 du -sh * | sort -n
 ls -l|sort -nr +4 -5
