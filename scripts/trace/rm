@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# log rm history
+
+#alias rm=logrm
+
+
+#mv /usr/bin/rm /usr/bin/system
+#cat << EOF > /usr/bin/rm
+#!/bin/bash
+# log rm history
+
+rmlog="/tmp/.rmlog"
+
+if [ $# -eq 0 ] ; then
+	echo "cannot remove '$1': No such file or directory"
+	exit 1
+fi
+
+
+if [ "$1" = "-s" ] ; then
+	shift
+else
+	echo "$(date): `whoami`: $@" >> $rmlog
+fi
+
+/bin/system "$@"
+
+exit 0
+
+
+#EOF
+#chmod +x /usr/bin/rm
+
+
+

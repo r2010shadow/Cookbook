@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# ${var:0:1}
+
+
+var="something wicked this way comes..."
+echo "[var:] $var, then {var:10} is:"
+echo ${var:10}
+echo ${var:10:6}
