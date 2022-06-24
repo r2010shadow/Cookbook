@@ -42,7 +42,9 @@
     安装ansible软件包，由于ansible需要epel源，本实验配置了阿里的epel源和阿里的Base源（Base源用于安装ansible所需依赖），本地的CentOS7镜像源
 
 [root@ansible-server ~]# yum -y install wget    #下载wget工具
+
 [root@ansible-server ~]# wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo    #下载阿里Base源
+
 [root@ansible-server ~]# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo         #下载阿里epel源
 
     安装ansible软件包
