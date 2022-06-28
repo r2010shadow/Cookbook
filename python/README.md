@@ -15,4 +15,7 @@
 ### 3.字符串
 ![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.3.png)
 
-### 4.待整理
+### 4.函数
+![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.4.png)
+
+### .待整理
