@@ -18,4 +18,15 @@
 ### 4.函数
 ![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.4.png)
 
+### 5.类与对象
+![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.5.png)
+
+### 6.文件
+![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.6.png)
+
+### 7.网络通信
+![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.7.png)
+
+
+
 ### .待整理
