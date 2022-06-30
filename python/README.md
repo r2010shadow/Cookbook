@@ -27,6 +27,14 @@
 ### 7.网络通信
 ![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.7.png)
 
+### 8.多进程
+![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.8.png)
+
+#### 示意图
+![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.frok.png)
+
+
+
 
 
 ### .待整理
