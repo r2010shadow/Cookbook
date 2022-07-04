@@ -10,10 +10,10 @@
 
 
 ### 2.容器类型的数据
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.2.png)
+![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.2.jpg)
 
 ### 3.字符串
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.3.png)
+![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.3.jpg)
 
 ### 4.函数
 ![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.4.png)
@@ -33,8 +33,7 @@
 #### 示意图
 线程管理，利用join(timeout=None)
 ![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.frok.png)
-利用死循环，控制其他进程
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.thread.png)
+
 
 
 
