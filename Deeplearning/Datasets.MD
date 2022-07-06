@@ -2,14 +2,14 @@
 
 _数据科学实战手册
 
-# world-wealth-and-income
+## world-wealth-and-income
   https://github.com/datasets/world-wealth-and-income-database
   
-# 汽车油耗
+## 汽车油耗
 http://fueleconomy.gov/feg/epadata/vehicles.csv.zip
 
 
-# Pandas透视表（pivot_table）详解
+## Pandas透视表（pivot_table）详解
 https://cloud.tencent.com/developer/article/1437534
 http://pbpython.com/extras/sales-funnel.xlsx
  
