@@ -1,0 +1,13 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: prometheus-k8s
+  labels:
+    type: local
+spec: 
+  capacity:
+    storage: 60Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp"
