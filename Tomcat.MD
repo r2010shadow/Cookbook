@@ -1,6 +1,7 @@
 
-# install tomcat8 @centos7
+#Tomcat cookbook
 
+## install
 groupadd tomcat
 useradd -g tomcat -d /data/tomcat -s /bin/nologin tomcat
 
@@ -9,13 +10,13 @@ tar -zxvf apache-tomcat-*.tar.gz
 mv apache-tomcat-8.5.20/* tomcat
 chown -R tomcat.tomcat tomcat
 
-# start
+## start
 sh /data/tomcat/bin/startup.sh
 
-# stop
+## stop
 sh /data/tomcat/bin/shutdown.sh
 
-#systemd
+## systemd
 cat > /etc/systemd/system/tomcat.service << EOF
 [Unit]
 Description=Apache Tomcat 8.x Web Application Container
@@ -46,7 +47,7 @@ WantedBy=multi-user.target
 EOF
 
 
-# web manage
+## web manage
 /data/tomcat/conf/tomcat-users.xml
 Place the following two lines just above the last line.
 <role rolename="admin-gui,manager-gui"/>
@@ -61,12 +62,12 @@ allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|.*" />
 systemctl restart tomcat
 
 
-#more
+## more
 https://www.itzgeek.com/how-tos/linux/centos-how-tos/install-apache-tomcat-8-on-centos-7-rhel-7.html
 
 
 
-# run war package
+## run war package
 show case#
 git clone https://github.com/efsavage/hello-world-war.git
 cd hello-world-war && mvn package
@@ -83,7 +84,7 @@ http://10.10.9.107:8080/hello-world-war-1.0.0
 
 
 
-# docker
+## docker-tomcat
 mkdir -p /data/tomcat/webapps
 cat > /etc/timezone << EOF
 Asia/Shanghai
