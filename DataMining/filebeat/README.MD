@@ -29,5 +29,55 @@ log_format json '{ "time_local": "$time_local", '
 ```
 
 
+* 2 OUTPUT kafka
+```
+filebeat.inputs:
+- type: log
+  enabled: true
 
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    - /data/logs/nginx/access.log
+
+#-------------------------- kafka output ------------------------------
+output.kafka:
+ enabled: true
+ hosts: [ "10.10.9.109:9092","10.10.9.107:9092","10.10.9.119:9092" ]
+ topic: elk
+ partition.round_robin:
+   reachable_only: false
+
+ required_acks: 1
+ compression: gzip
+ max_message_bytes: 100000000
+
+#================================ Logging =====================================
+
+# Sets log level. The default log level is info.
+# Available log levels are: error, warning, info, debug
+logging.level: info
+logging.to_files: true
+logging.to_syslog: false
+logging.files:
+  path: /var/log/
+  name: filebeat.log
+  rotateeverybytes: 52428800
+  keepfiles: 2
+```
+
+* 3 OUTPUT ES
+```
+# syslog
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/messages
+
+output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["10.10.9.109:9200"]
+  ```
+  
+* 4 RUN
 
