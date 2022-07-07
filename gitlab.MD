@@ -1,8 +1,7 @@
 
+# Gitlab cookbook
 
-
-
-#run by docker
+## run by docker
 docker run --detach\
 --hostname gitlab.x.com\
 --publish 51443:443 --publish 5180:80\
