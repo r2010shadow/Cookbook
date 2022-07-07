@@ -79,5 +79,27 @@ output.elasticsearch:
   hosts: ["10.10.9.109:9200"]
   ```
   
-* 4 RUN
+* 4 RUN 
+```
+nohup ./bin/filebeat -f config/test.conf >>/FILEBEAT_HOME/logs/filebeat.log &
+```
+* 5 Troubleshooting
+```
+A、filebeat运行不成功
 
+问题：配置文件格式有问题
+使用filebeat.exe –c filebeat.yml 查看报错，也可以看filebeat路径下的log文件夹中的filebeat文件
+
+B、 filebeat第一次运行成功无数据
+
+问题：路径有问题,或运行条件设置有问题（例如只采集某个条件下的数据，文件中没有符合条件的数据，这种情况下先注释掉采集条件测试一下）
+
+C、filebeat运行成功第一次运行后有数据，第二次无数据
+
+问题：filebeat读取文件后会生成一个registry文件，注意windows机器中这个文件在手动启动的情况下会在filebeat安装目录下的data文件夹中，服务注册启动的情况下会在C盘下隐藏文件夹C:\ProgramData\filebeat中，删除掉这个就可以了
+
+D、filebeat运行成功有数据，但是新添加数据不读取问题
+
+问题：filebeat传输存在反压机制，在数据量特别大或者传输通道不通的情况下，filebeat会进行反压，暂停发送，等到数据量稳定或者数据传输通道正常的之后才会发送
+
+```
