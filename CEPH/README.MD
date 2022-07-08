@@ -289,15 +289,14 @@
         ceph-deploy mon add node-3-105
         ceph mon add node-3-105 10.10.3.105:6789  
 
-  [CEPH+CLOUDSTACK]
-
+##  [CEPH+CLOUDSTACK]
+```
         Edit: ceph.conf 
         yum install  rbd-fuse python-ceph-compat python-rbd librbd1-devel  -y
 
   二级存储:
         mkdir /storage/stagingsecondary -p
 cat << EOF > /etc/exports
-```
 /storage/stagingsecondary      *(insecure,rw,fsid=1,sync,no_root_squash,no_subtree_check)
 EOF
         exportfs -a
@@ -305,10 +304,12 @@ EOF
 
   Test:
         dd if=/dev/zero of=/storage/StagingSecondary/file1 count=100 bs=1M
-
-  kvm虚拟机导入:
-        mkdir -p /tmp/iso
+```
+##  kvm虚拟机导入
+```
+mkdir -p /tmp/iso
         mount -t nfs -o nolock 127.0.0.1:/storage/stagingsecondary/ /tmp/iso/
         wget http://cloudstack.apt-get.eu/systemvm/4.6/systemvm64template-4.6.0-kvm.qcow2.bz2 -P /opt/src
         /usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt -m /storage/stagingsecondary -f /opt/src/systemvm64template-4.6.0-kvm.qcow2.bz2 -h kvm -F
         umount /tmp/iso/
+ ```     
