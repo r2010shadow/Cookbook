@@ -1,8 +1,8 @@
 # CEPH
 
 
-## pre
-
+## PRE
+```
   [To All]
 
             systemctl disable firewalld.service
@@ -26,9 +26,9 @@
         10.10.3.105 node-3-105
         EOF
 
-
-  [admin]
-
+```
+### [admin]
+```
             su userceph
             ssh-keygen
             ssh-copy-id userceph@admin-node
@@ -82,9 +82,9 @@
   Monitor-keys:
             ceph-deploy mon create-initial
 
-
-  [node]
-
+```
+###  [node]
+```
   Add OSD @ each nodes hosts:
                 #node-3-16 
                     mkdir /var/local/osd0
@@ -111,8 +111,9 @@
   ceph fs ls
   ceph mds stat
   ceph quorum_status --format json-pretty  检查法定人数状态
-
-  [Single Mode for CEPH]
+```
+##  [Single Mode for CEPH]
+```
         systemctl stop firewalld.service
         systemctl disable firewalld.service
         yum install yum-plugin-priorities -y
@@ -149,9 +150,9 @@
         ceph fs new cephfs cephfs_metadata cephfs_data
         ceph fs ls
         ceph mds stat         -> e5: 1/1/1 up {0=admins=up:active}
-
-  [USE CEPH]
-
+```
+##  [USE CEPH]
+```
   Add MDS:
                 ceph-deploy mds create admin-node-3-105 
 
@@ -243,8 +244,9 @@
                     chown ceph:ceph /var/local/osdx
                     ceph-deploy osd prepare nodes:/var/local/osdx
                     ceph-deploy osd activate nodes:/var/local/osdx
-
-  [Error]
+```
+##  [Error]
+```
   OSD down:
             check ceph.conf [osd pool default size]
             ceph-deploy osd activate [nodes]
@@ -295,6 +297,7 @@
   二级存储:
         mkdir /storage/stagingsecondary -p
 cat << EOF > /etc/exports
+```
 /storage/stagingsecondary      *(insecure,rw,fsid=1,sync,no_root_squash,no_subtree_check)
 EOF
         exportfs -a
