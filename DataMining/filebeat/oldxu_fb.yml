@@ -1,0 +1,53 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/nginx/elk.oldxu.com.log
+  json.keys_under_root: true
+  json.overwrite_keys: true
+  tags: ["nginx-elk-host"]
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/nginx/bs.oldxu.com.log
+  json.keys_under_root: true
+  json.overwrite_keys: true
+  tags: ["nginx-bs-host"]
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/nginx/bk.oldxu.com.log
+  json.keys_under_root: true
+  json.overwrite_keys: true
+  tags: ["nginx-bk-host"]
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/nginx/error.log
+  tags: ["nginx-error"]
+
+output.elasticsearch:
+  hosts: ["10.0.0.161:9200","10.0.0.162:9200","10.0.0.163:9200"]
+  indices:
+    - index: "nginx-elk-access-%{[agent.version]}-%{+yyyy.MM.dd}"
+      when.contains:
+        tags: "nginx-elk-host"
+
+    - index: "nginx-bs-access-%{[agent.version]}-%{+yyyy.MM.dd}"
+      when.contains:
+        tags: "nginx-bs-host"
+
+    - index: "nginx-bk-access-%{[agent.version]}-%{+yyyy.MM.dd}"
+      when.contains:
+        tags: "nginx-bk-host"
+
+    - index: "nginx-error-%{[agent.version]}-%{+yyyy.MM.dd}"
+      when.contains:
+        tags: "nginx-error"
+
+setup.ilm.enabled: false
+setup.template.name: nginx   #索引关联的模板名称
+setup.template.pattern: nginx-*
