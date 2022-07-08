@@ -288,7 +288,7 @@
         public network = 10.10.3.0/24 
         ceph-deploy mon add node-3-105
         ceph mon add node-3-105 10.10.3.105:6789  
-
+```
 ##  [CEPH+CLOUDSTACK]
 ```
         Edit: ceph.conf 
