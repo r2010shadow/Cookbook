@@ -431,7 +431,8 @@ systemctl daemon-reload && systemctl restart rpcbind.service && systemctl status
 ## http
 # show http_code No.
 curl -I -m 10 -o /dev/null -s  -w %{http_code} http://baidu.com   #return status
-
+# test log by NG-oldx.conf
+curl -H Host:elk.oldxu.com http://10.0.0.7    #return elk.oldux.com 
 
 ## shell
 # if
