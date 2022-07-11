@@ -32,7 +32,7 @@
 
 #### 示意图
 线程管理，利用join(timeout=None)
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.frok.png)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.frok.png" width=500 alt="线程管理"/>
 
 
 
