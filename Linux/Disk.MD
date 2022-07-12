@@ -89,6 +89,41 @@ Filesystem     Type  Size  Used Avail Use% Mounted on
 [root@localhost ~]# touch /data/newfile.txt
 touch: cannot touch ‘/data/newfile.txt’: No space left on device
 
-```
-## 
+其他例子
+#1#
+stat filename  # filename inode info
 
+stat --format=%i log.txt    # inode numbers
+ls -li
+
+df -i    # disk inode info
+tune2fs -l
+
+
+
+find /home -type f -size 0 -exec rm {} \;    # find and delete
+ls -lt /tmp | wc -l
+
+
+#2# crontab  CROND出错导致/var/spool/postfix/maildrop/堆积
+vi /etc/crontab；将MAILTO=root修改为MAILTO=""，保存
+/etc/init.d/crond restart
+find /var/spool/postfix/maildrop/ -type f |xargs rm -rf
+```
+## 硬链接与软链接
+* 硬链接
+```
+通过文件系统的inode链接来产生的新的文件名，而不是产生新的文件
+一般情况下，每个inode号码对应一个文件名，但是Linux允许多个文件名指向同一个inode号码。意味着可以使用不同的文件名访问相同的内容。
+
+ln 源文件 目标
+运行该命令以后，源文件与目标文件的inode号码相同，都指向同一个inode。inode信息中的链接数这时就会增加1。
+```
+
+* 软链接
+```
+类似于Windows的快捷方式功能的文件，可以快速连接到目标文件或目录，称为软链接。
+
+ln -s 源文件或目录 目标文件或目录
+软链接就是再创建一个独立的文件
+```
