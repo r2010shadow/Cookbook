@@ -29,9 +29,8 @@ inode 和 block 概述
 * block_存数据 
 * inode_存描述数据的数据(元数据)
 
-## inode资源管理
+## inode特有现象
 ```
-特有现象
 由于inode号码与文件名分离，导致一些Unix/Linux系统具备以下几种特有的现象。
 
 1.文件名包含特殊字符，可能无法正常删除。这时直接删除inode，能够起到删除文件的作用；
@@ -43,3 +42,53 @@ find ./* -inum 节点号 -delete
 
 这种情况使得软件更新变得简单，可以在不关闭软件的情况下进行更新，不需要重启。因为系统通过inode号码，识别运行中的文件，不通过文件名。更新的时候，新版文件以同样的文件名，生成一个新的inode，不会影响到运行中的文件。等到下一次运行这个软件的时候，文件名就自动指向新版文件，旧版文件的inode则被回收。
 ```
+## inode耗尽故障
+```
+由于硬盘分区的inode总数在格式化后就已经固定，而每个文件必须有一个inode，因此就有可能发生inode节点用光，但硬盘空间还剩不少，却无法创建新文件。同时这也是一种攻击的方式，所以一些公用的文件系统就要做磁盘限额，以防止影响到系统的正常运行。
+
+至于修复，很简单，只要找出哪些大量占用i节点的文件删除就可以了。
+```
+* 模拟耗尽故障
+```
+1.先准备一个比较小的硬盘分区/dev/sdb1，并格式化挂载，这里挂载到了/data目录下。
+
+[root@localhost ~]# df -hT /data/
+Filesystem     Type  Size  Used Avail Use% Mounted on
+/dev/sdb1      xfs    29M  1.8M   27M   6% /data
+2.先测试可以正常创建文件。
+
+[root@localhost ~]# touch /data/test{1..5}.txt
+[root@localhost ~]# ls /data/
+test1.txt  test2.txt  test3.txt  test4.txt  test5.txt
+3.查看i节点的使用情况。
+
+[root@localhost ~]# df -i /data/
+Filesystem     Inodes IUsed IFree IUse% Mounted on
+/dev/sdb1       16384     8 16376    1% /data
+4.编写一个测试程序，创建大量空文件，用于耗尽此分区中的i节点数。
+
+[root@localhost ~]# vim killinode.sh
+#!/bin/bash
+i=1
+while [ $i -le 16376 ]
+do
+touch /data/file$i
+let i++
+done
+5.运行测试程序，结束后查看i节点占用情况，磁盘分区空间使用情况。
+
+[root@localhost ~]# sh killinode.sh
+[root@localhost ~]# df -i /data/
+Filesystem     Inodes IUsed IFree IUse% Mounted on
+/dev/sdb1       16384 16384     0  100% /data
+[root@localhost ~]# df -hT /data/
+Filesystem     Type  Size  Used Avail Use% Mounted on
+/dev/sdb1      xfs    29M   11M   19M  36% /data
+6.虽然还有很多剩余空间，但是i节点耗尽了，也无法创建创建新文件，这就是i节点耗尽故障。
+
+[root@localhost ~]# touch /data/newfile.txt
+touch: cannot touch ‘/data/newfile.txt’: No space left on device
+
+```
+## 
+
