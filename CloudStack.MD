@@ -1,5 +1,6 @@
-
-# get
+# Cloudstack
+* get
+```
 yum -y install epel-release
 yum install nfs-utils -y
   #Cloudstack.repo
@@ -14,12 +15,12 @@ EOF
 yum clean all
 yum makecache
 wget -c -r -np -k -L -p http://cloudstack.apt-get.eu/centos7/4.9/  
+```
 
 
-
-# set
-  # PRE
-  cat >> /etc/sysctl.conf <<EOF
+* set
+```
+cat >> /etc/sysctl.conf <<EOF
 net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv4.ip_forward = 1
@@ -223,9 +224,10 @@ mount -t nfs -o nolock 127.0.0.1:/storage/secondary/ /tmp/iso/
 wget http://cloudstack.apt-get.eu/systemvm/4.6/systemvm64template-4.6.0-kvm.qcow2.bz2 -P /opt/src
 /usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt -m /tmp/iso/ -f /opt/src/systemvm64template-4.6.0-kvm.qcow2.bz2 -h kvm -F
 umount /tmp/iso/
+```
 
-
-  # Cloudstack-agent
+## Cloudstack-agent
+```
     #安装KVM
 yum groupinstall Virtualization 'Virtualization Client'
 
@@ -344,3 +346,5 @@ iptables -L
         处理过程：1.注释/etc/systemd/system/sockets.target.wants/rpcbind.socket文件中ListenStream=[::]:111
                   2.重载配置文件 systemctl daemon-reload
                   3.systemctl restart rpcbind.service && systemctl status rpcbind.service
+
+```
