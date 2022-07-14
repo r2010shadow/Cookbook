@@ -12,8 +12,15 @@
 
 ## 集成电路
 ---
-# NUMA由来
+# Non-Uniform Memory Access(非一致内存访问)由来
 * 超频--在NUMA架构出现前，CPU欢快的朝着频率越来越高的方向发展。
 * 多核--受到物理极限的挑战，又转为核数越来越多的方向发展。 
 `即SMP架构（对称多处理器结构）。如果每个core的工作性质都是share-nothing（类似于map-reduce的node节点的作业属性），那么也许就不会有NUMA。由于所有CPU Core都是通过共享一个北桥来读取内存，随着核数如何的发展，北桥在响应时间上的性能瓶颈越来越明显。`
 * 非一致内存访问--把内存控制器（原本北桥中读取内存的部分）也做个拆分，平分到了每个die上.
+```
+从操作系统的视角来看，CPU可以划分为几个不同的层级，从大到小依次为NUMA 节点，物理CPU，CPU core，逻辑cpu。 core，逻辑cpu(core上的超线程)。在/proc/cpuinfo中可以查看cpu的相关信息。或者通过lscpu命令。
+
+> 判断依据：
+1.具有相同core id的cpu是同一个core的超线程。
+2.具有相同physical id的cpu是同一颗cpu封装的线程或者cores。
+```
