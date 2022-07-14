@@ -57,6 +57,15 @@ iptables 作为用户空间编写和传递规则的工具，netfilter 是内核�
 LVS 是基于 netfilter 框架
 在 lvs 中，节点分为 Director Server 和 Real Server 两个角色，其中 Director Server 是负载均衡器所在节点，而 Real Server 则是后端服务节点.
 ```
+* Nginx
+```
+算法
+rr：轮叫，轮流分配到后端服务器；
+wrr：权重轮叫，根据后端服务器负载情况来分配；
+lc：最小连接，分配已建立连接最少的服务器上；
+wlc：权重最小连接，根据后端服务器处理能力来分配。
+
+```
 * DPDK
 ```
 基于DPDK的高性能四层负载均衡器（Layer-4 load balancer），DPVS的名字来源于DPDK+LVS，注意这里的LVS是阿里巴巴改进版的LVS。
