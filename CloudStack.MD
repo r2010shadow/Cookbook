@@ -213,10 +213,10 @@ cloudstack-setup-management --tomcat7
 systemctl enable cloudstack-management.service
 
     #如果mysql是5.7需要去掉only_full_group_by数据库执行如下操作
-```bash
+bash
 SET GLOBAL sql_mode = ''; 
 set @@global.sql_mode ='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
-```
+
     
     # load vm system 
 mkdir -p /tmp/iso
@@ -323,7 +323,7 @@ tail -f /var/log/cloudstack/management/catalina.out
 设置Iptables,如果没开启iptables就不用设置
 vim /etc/sysconfig/iptables
 增加如下
-```bash
+bash
 -A INPUT -p udp -m state --state NEW -m udp --dport 662 -j ACCEPT
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 662 -j ACCEPT
 -A INPUT -p udp -m state --state NEW -m udp --dport 875 -j ACCEPT
@@ -338,7 +338,7 @@ vim /etc/sysconfig/iptables
 systemctl enable iptables.service
 systemctl restart iptables.service
 iptables -L
-```
+
 
 
         异常重启分析：硬件加载记录未见异常，rpcbind服务启动异常，因ipv6禁用导致rpcbind服务启动失败
