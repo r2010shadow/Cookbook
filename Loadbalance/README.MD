@@ -16,13 +16,7 @@
 ```
 与WRR类似，但是使用当前后端服务器的active的连接作为权重
 ```
-* 其他算法
-```
-如果我们直接视客户端为balancer（是的，可以这么想），那么我们可以有client random load balancing，即客户端随机请求后端服务器中的一台
-Persistence (stickiness)
-即保证：根据一定的策略（如客户端ip）每次请求都将被转发到统一台后端服务器上
-RR、WRR算法中，balancer其实不用关注后端服务器的状态，而只根据自身的数据将请求分发即可，WLC中，balancer开始需要了解后端服务器状态（比如连接数）。实际上我们也可以根据当前后端服务器的负载（load）来转发请求，当然这需要后端服务器与balancer建立通讯
-```
+
 
 ### 硬件
 * F5
@@ -38,7 +32,7 @@ RR、WRR算法中，balancer其实不用关注后端服务器的状态，而只�
 ### Code代码
 ### 微服务
 ### 开源
-* LVS/Linux 内核自带
+* LVS
 * DPVS
 
 ---
@@ -47,9 +41,17 @@ RR、WRR算法中，balancer其实不用关注后端服务器的状态，而只�
 
 ---
 ## 如何LB
+* Netfilter框架
 ```
+iptables 作为用户空间编写和传递规则的工具，netfilter 是内核态的 Linux 防火墙机制。
+
+```
+* LVS
+```
+LVS 是基于 netfilter 框架
 在 lvs 中，节点分为 Director Server 和 Real Server 两个角色，其中 Director Server 是负载均衡器所在节点，而 Real Server 则是后端服务节点.
 ```
+* DPDK
 ```
 基于DPDK的高性能四层负载均衡器（Layer-4 load balancer），DPVS的名字来源于DPDK+LVS，注意这里的LVS是阿里巴巴改进版的LVS。
 官方声称DPVS的包处理速度，1个工作线程可以达到 2.3Mpps，6个工作线程可以达到万兆网卡小包的转发线速（约 12Mpps)。这主要是因为DPVS绕过了内核复杂的协议栈，并采用轮询的方式收发数据包，避免了锁、内核中断、上下文切换、内核态和用户态数据拷贝产生的性能开销。
