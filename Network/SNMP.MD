@@ -1,5 +1,5 @@
 # SNMP
-`Simple Network Management Protocol,简单网络管理协议`
+`Simple Network Management Protocol,简单网络管理协议,统一并简化网络设备管理。`
 
 * SNMP的基本思想
 ```
@@ -9,7 +9,12 @@
 ```
 管理员需要向设备获取数据，所以SNMP提供了【读】操作；管理员需要向设备执行设置操作，所以SNMP提供了【写】操作；设备需要在重要状况改变的时候，向管理员通报事件的发生，所以SNMP提供了【Trap】操作。
 ```
+* SNMP通信
+```
+SNMP采用UDP协议在管理端和agent之间传输信息。 SNMP采用UDP 161端口接收和发送请求，162端口接收trap，执行SNMP的设备缺省都必须采用这些端口。SNMP消息全部通过UDP端口161接收，只有Trap信息采用UDP端口162。
+```
 
+* 配置
 ```
 #/etc/snmp/snmpd.conf
 com2sec noconfiguser 127.0.0.1       public
