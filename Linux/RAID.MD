@@ -5,6 +5,10 @@
 其基本思想就是把多个相对便宜的硬盘组合起来，成为一个硬盘阵列组，使性能达到甚至超过一个价格昂贵、容量巨大的硬盘。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。
 常分为RAID-0，RAID-1，RAID-1E，RAID-5，RAID-6，RAID-7，RAID-10，RAID-50，RAID-60。
 ```
+
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/Linux/img/RAID.png" width=600 alt="RAID">
+
+
 * RAID 0
 ```
 RAID 0亦称为带区集，它是将多个磁盘并列起来，成为一个大磁盘，需要2块以上的磁盘。并行I/O，不具备冗余，速度最快，性能和容量与磁盘数成正比。
