@@ -30,16 +30,6 @@
 * block_存数据 
 * inode_存描述数据的数据(元数据)
 
-### 进程打开文件机制
-
-<img src="https://github.com/r2010shadow/Cookbook/blob/master/Linux/img/UNIX_process_file.jpg" alt="inode" width=600>
-
-```
-进程每新打开一个文件，系统会分配一个新的文件描述符给这个文件。文件描述符对应着一个文件表。
-表里面存着文件的状态信息（O_APPEND/O_CREAT/O_DIRECT...）、当前文件位置和文件的 inode 信息。
-系统会为每个进程创建独立的文件描述符和文件表，不同进程是不会共用同一个文件表。
-正因为如此，不同进程可以同时用不同的状态操作同一个文件的不同位置。文件表中存的是 inode 信息而不是文件路径，所以文件路径发生改变不会影响文件操作。
-```
 
 ### inode特有现象
 ```
