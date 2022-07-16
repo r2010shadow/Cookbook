@@ -10,6 +10,16 @@ logrotate 是基于 crontab 运行的，所以这个时间点是由 crontab 控�
 系统会按照计划的频率运行 logrotate，通常是每天。在大多数的 Linux 发行版本上，计划每天运行的脚本位于 /etc/cron.daily/logrotate。
 
 ```
+## 配置logrotate
+```
+执行文件： /usr/sbin/logrotate
+主配置文件: /etc/logrotate.conf
+自定义配置文件: /etc/logrotate.d/*.conf
+
+修改配置文件后，并不需要重启服务。
+由于 logrotate 实际上只是一个可执行文件，不是以 daemon 运行。
+```
+
 * 系统自带 cron task：/etc/cron.daily/logrotate，每天运行一次
 ```
 cat /etc/cron.daily/logrotate
@@ -24,8 +34,8 @@ fi
 exit 0
 ```
 
-## 应用举例 nginx
-* /etc/logrotate.d 自定义配置文件 
+## 应用举例  /etc/logrotate.d/自定义配置
+* /nginx 
 `cat /etc/logrotate.d/nginx`
 ```
 /data/logs/nginx/*.log {      
@@ -41,6 +51,46 @@ exit 0
         endscript
 }
 ```
+* /zabbix
+```
+/var/log/zabbix/zabbix_agentd.log {
+    weekly
+    rotate 12
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0664 zabbix zabbix
+}
+```
+
+* /syslog
+```
+/var/log/cron
+/var/log/maillog
+/var/log/messages
+/var/log/secure
+/var/log/spooler
+{
+    missingok
+    sharedscripts
+    postrotate
+    /bin/kill -HUP `cat /var/run/syslogd.pid 2> /dev/null` 2> /dev/null || true
+    endscript
+}
+```
+* /influxdb
+```
+/var/log/influxdb/influxd.log {
+    daily
+    rotate 7
+    missingok
+    dateext
+    copytruncate
+    compress
+}
+```
+
 * corntab
 ``` 
 #-#corntab
