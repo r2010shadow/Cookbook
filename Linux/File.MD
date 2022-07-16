@@ -1,4 +1,4 @@
-# 何为file
+# 何为File
 ```
 Linux文件系统中的文件是数据的集合，文件系统不仅包含着文件中的数据而且还有文件系统的结构，
 所有Linux 用户和程序看到的文件、目录、软连接及文件保护信息等都存储在其中。
@@ -93,8 +93,39 @@ Linux 系统的 Shell 把
 
 
 
+# 通用文件模型
+```
+Linux 通用文件模型最为显著的特性之一就是 I/O 通用性。
+也就是说，同一套系统调用 open()、read()、write()、close() 等所执行的 I/O 操作，可施之于所有文件类型，包括设备文件在内。
+应用程序发起的I/O请求，内核会将其转化为相应的文件系统操作，或者设备驱动程序操作，以此来执行针对目标文件或设备的I/O操作。
+因此，采用这些系统调用的程序能够处理任何类型的文件。
+```
 
+# 内核使用 3 种数据结构来表示一个被打开的文件
+[进程级的文件描述符表 ( file descriptor table )](.)
+```
+每个进程在进程表 (process table) 中都有一个记录项 (process table entry)，即 struct task_struct，内核用它来描述一个进程。
+在 struct task_struct 中包含了一张打开文件描述符表 (open file descriptors table)。
+```
+[系统级的打开文件表 ( open file table ) ](.)
+```
+内核为所有打开文件维持一张打开文件表。每个打开文件表项包含：
 
+1> 文件状态标志 (　file status flags，即 open() 的 flags 参数)；
+2> 当前文件偏移量 ( current file offset )；
+3> 指向该文件 inode 表项的指针 (在某些 UNIX 系统中是 vnode pointer，在 Linux 中是 inode pointer)。
+inode 结构体和 vnode 结构体名称虽然不同，但是 2 者其实是同一个概念，它们都用于描述存储在硬盘中的文件系统的 inode 数据。
+注意区别内存里的 inode 结构体对象和硬盘中的 inode 数据。
+```
+[文件系统的 i-node 表 ( i-node table )](.)
+```
+每个打开文件都有一个 inode 对象。inode 对象包含了：
+
+1> 文件类型和对此文件进行各种操作函数的指针。
+2> 对于大多数文件，inode 对象还包含了指向该文件系统 inode 数据的指针。
+```
+## 三表对应关系
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/Linux/img/file_table.jpg" width=600 alt="table_file">
 
 
 
