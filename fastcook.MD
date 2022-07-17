@@ -487,11 +487,24 @@ ctrl + w    # delete forward word
 /^([a-z0-9_\.-\]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/   email
 ```
 
-* ToolsList
+## ToolsList
+* Editer & Text
 ```
-Postman
 Beyond_Compare
-Notepad++_v8.1.4
+Notepad++
+typora
+```
+
+* Dev Tools
+```
+Xshell
+MobaX
+putty
+winScp
+Postman
+
+
+
 ```
  
 
