@@ -1,4 +1,5 @@
-[git]
+* Git
+```
 > ignore folder
 echo node_modules  > .gitignore
 target          //忽略这个target目录
@@ -42,13 +43,71 @@ git commit -m "Remove the now ignored directory some-directory"
 git push
 
 
-[tcp]
+
+git rm --cached filename 
+git commit -m "clean filename"
+git push origin
+
+#git push
+without password
+  git config --global credential.helper store
+
+#Git global setup
+
+git config --global user.name "user"
+git config --global user.email "user@user.com"
+
+#Create a new repository
+
+git clone http://gitlab.user.com/user/hello-world.git
+cd hello-world
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+
+#Existing folder
+
+cd existing_folder
+git init
+git remote add origin http://gitlab.user.com/user/hello-world.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+
+#Existing Git repository
+
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin http://gitlab.user.com/user/hello-world.git
+git push -u origin --all
+git push -u origin --tags
+
+#gitlab change root password
+cd YOUR_GITLAB_PATH && sudo gitlab-rails console production
+u=User.where(id:1).first
+u.password = 'YOUR_PASSWORD' u.password_confirmation = 'YOUR_PASSWORD'
+u.save!
+
+
+#git reset revert #https://kiwenlau.com/2018/01/24/git-rollback-tutorial/
+git log
+git revert HEAD
+
+```
+
+* tcpdump
+```
 tcpdump -nn -q -i eth0
+```
 
-efficiency
+* efficiency
+```
 time [CMD] # show do this cmd cost times
+```
 
-whatis
+* Info
+```
 # Serial Number,ModelName
 dmidecode
 
@@ -108,8 +167,10 @@ ip -s link show [ethX]     # Rx Tx
 
 watch ifconfig
 watch cat /proc/net/dev
+```
 
-# history 
+* history 
+```
 ## OS starting time
 date -d "$(awk -F. '{print $1}' /proc/uptime) second ago" +"%Y-%m-%d %H:%M:%S" 
 ## OS running time
@@ -120,10 +181,10 @@ cat /etc/profile | grep "^HISTSIZE"
 
 # history without number
 history | cut -c 28-
+```
 
-Bigger
-
-#Files
+* Files
+```
 合并列
 paste 4 5
  David Cameron	Engela Merkel
@@ -146,7 +207,9 @@ tr '[a-z]' '[A-Z]' < 5
 
 chattr +i /root/.ssh/authorized_keys      # lock files cant change
 chattr -i /root/.ssh/authorized_keys
-
+```
+* find
+```
 du -s * | sort -nr | sed 1q | awk {'print $2'}
 du -sh * | sort -n
 ls -l|sort -nr +4 -5
@@ -174,11 +237,7 @@ grep -R --include="*.php" "/opt/zbox" /home/app
 #Folder
 find -type f -exec stat -c "%s %n" {} \; | sort -nr | sed 3q | awk '{print $2}'
 
-
-
-
-
-Last-Time
+#Last-Time
 find -type f -printf '%a+ %p\n' | sort | head -n 1
 find -type f -printf '%a+ %p\n' | sort | tail -n 1
 
@@ -186,9 +245,11 @@ find -type f -printf '%a+ %p\n' | sort | tail -n 1
 find ./ -mtime -1 -type f -exec ls -l {} \; | awk '{print $9}'
 
 find ./ -mtime -1 -type f -exec rm {} \; 
+```
 
-
-#Swap   #gitlab need swap
+* Swap   
+```
+#gitlab need swap
 dd if=/dev/zero of=/home/swapfile bs=1M count=8192
 /sbin/mkswap /home/swapfile
 /sbin/swapon /home/swapfile
@@ -198,7 +259,6 @@ cat >>/etc/fstab   << EOF
 /home/swapfile  swap swap defaults 0 0
 EOF
 
-
 #Create Swapfile to EX swap 
 dd if=/dev/zero of=/data/swapfile bs=1024 count=65535
 mkswap /data/swapfile -f
@@ -207,13 +267,10 @@ cat >> /etc/fstab
 /data/swapfile	none	swap	sw	0	0
 #remove swapfile
 /sbin/swapoff /data/swapfile 
+```
 
-
-
-
-
-
-### capability ###
+* capability 
+```
 yum info sysstat
 
 # Proc 
@@ -232,8 +289,9 @@ pgrep -f [Pro]			   #Find Pro All PID
 
 ps -ef |awk '($8 ~/nginx/){print $2}'   # find pid where rows 8 name is nginx
 pstree -p            #process Tree
-
-#CPU
+```
+* CPU
+```
 systemd-cgtop      # top cpu memory tasks
 vmstat
 sar -u 1				   #Total CPU info
@@ -242,15 +300,12 @@ sar -P 0 				   #No. 0 CPU info
 iostat -c				   
 uptime
 
-
-
 sar -P [cpu count NO.]
 sar -r
 sar -d
-
-
-
-# memory
+```
+*  memory
+```
 free -m
 free -bs 1				   
 watch -n 1 -d free		   #watch iostat vmstat 
@@ -258,9 +313,10 @@ sar -r 1 3				   #show AVG
 ps -aux | sort -k4nr | head -10	   #top 10
 
 echo 3 > /proc/sys/vm/drop_caches  && free -m
+```
 
-
-# Disk
+* Disk
+```
 df -ih				   #hdd inodes status 
 for i in /var/spool/postfix/maildrop/*; do echo $i; find $i | wc -l; done   #crontab made huge inodes files 
 ls | xargs -n 10 rm -rf                           #long time clean
@@ -275,62 +331,73 @@ iostat -x /dev/sda1 1 3
 vmstat -d  | grep sda
 
 fdisk 
+```
 
-
-# Net
+* Net
+```
 netstat -i
 ss -lnt 
 sar -n DEV 1
 sar -n EDEV 1     #show error info
 sar -n SOCK 1
+```
 
 
-
-# speed up
+* speed up
+```
 /etc/init.d/cups stop && chkconfig cups off
 setenforce 0  
+```
 
-
-### Finger
+* Finger
+```
 more /var/log/secure
 
 ac -p
 ac -d
 last
 lastlog
+```
 
-
-### analyze
+* analyze
+```
 sysctl -a 					# kernel info
 env							 
 dmesg  | more 
 pmap -d [pid]				# show offset and device number
+```
 
-
-# Max open files
+* Max open files
+```
 ulimit -SHn 65535
 for pid in "ps axu | grep nginx| grep -v grep | awk '{print $2}'"
 do
 cat /proc/${pid}/limits | grep 'Max open files'
 done
-
-# system reboot
+```
+* system reboot
+```
 who -b
 last reboot
+```
 
 
-
-### DIY
+* DIY
+```
 # repair disk
 fsck -N /dev/sda1
 # show lastest tail info
 !ta 
+```
 
-# Kill All
+* Kill All
+```
 ps -ef|grep [ProcessName]|grep -v grep|cut -c 9-15|xargs kill -9
 pidof [ProcessName]
+```
 
-#vi
+* Vi
+```
 yy p			#copy one line
 :%s/vivian/sky/g	#change all vivian to sky
 :3,23>    # batch tab
@@ -356,85 +423,37 @@ ctrl+v G x  #delele rows
 2.CTRL+v 进入“可视 块”模式，选取这一列操作多少行。
 3.SHIFT+i(I) 输入要插入的内容。
 4.ESC 按两次，会在每行的选定的区域出现插入的内容。
+```
 
-
-
-## port
+* port
+```
 nc -v -w 2 10.10.7.88 22-3389   # scan port from 22-3389
-
-##git
-git rm --cached filename 
-git commit -m "clean filename"
-git push origin
-
-#git push
-without password
-  git config --global credential.helper store
-
-#Git global setup
-
-git config --global user.name "user"
-git config --global user.email "user@user.com"
-
-#Create a new repository
-
-git clone http://gitlab.user.com/user/hello-world.git
-cd hello-world
-touch README.md
-git add README.md
-git commit -m "add README"
-git push -u origin master
-
-#Existing folder
-
-cd existing_folder
-git init
-git remote add origin http://gitlab.user.com/user/hello-world.git
-git add .
-git commit -m "Initial commit"
-git push -u origin master
-
-#Existing Git repository
-
-cd existing_repo
-git remote rename origin old-origin
-git remote add origin http://gitlab.user.com/user/hello-world.git
-git push -u origin --all
-git push -u origin --tags
-
-#gitlab change root password
-cd YOUR_GITLAB_PATH && sudo gitlab-rails console production
-u=User.where(id:1).first
-u.password = 'YOUR_PASSWORD' u.password_confirmation = 'YOUR_PASSWORD'
-u.save!
+```
 
 
-#git reset revert #https://kiwenlau.com/2018/01/24/git-rollback-tutorial/
-git log
-git revert HEAD
+* zabbix
+```
+# check zabbix work status
+./zabbix_get -s 127.0.0.1 -p 10050 -k "system.cpu.load[all,avg15]"  
+```
 
-
-
-
-
-
-## zabbix
-./zabbix_get -s 127.0.0.1 -p 10050 -k "system.cpu.load[all,avg15]"  # check zabbix work status
-
-
-## rpcbind
+* rpcbind
+```
 #-# ipv6 disable caused rpcbind start failed: Address family not supported by protocol
 sudo sed -i 's/^ListenStream=\[/#ListenStream=\[/' /etc/systemd/system/sockets.target.wants/rpcbind.socket && cat /etc/systemd/system/sockets.target.wants/rpcbind.socket
 systemctl daemon-reload && systemctl restart rpcbind.service && systemctl status rpcbind.service
+```
 
-
-## http
+* http
+```
 # show http_code No.
 curl -I -m 10 -o /dev/null -s  -w %{http_code} http://baidu.com   #return status
 # test log by NG-oldx.conf
 curl -H Host:elk.oldxu.com http://10.0.0.7    #return elk.oldux.com 
+```
 
-## shell
+* shell
+```
 # if
 if ［ 1 -ne 1 ］;then
 ...
@@ -447,7 +466,6 @@ fi
 -ge           //greater and equal
 -le           //lesser and equal
 
-
 # color -1
 RED_COLOR='\E[1;31m'  #红
 GREEN_COLOR='\E[1;32m' #绿
@@ -459,7 +477,6 @@ echo -e  "${RED_COLOR}======red color======${RES}"
 # color -2
 echo -e "\033[1;32m ======red color====== "
 
-
 [bash]
 ctrl + w    # delete forward word
 
@@ -467,7 +484,7 @@ ctrl + w    # delete forward word
 /^[a-z0-9_-\]{3,16}$/    username
 /^[a-z0-9_-\]{6,18}$/    password
 /^([a-z0-9_\.-\]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/   email
-
+```
 
 
 
