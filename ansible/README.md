@@ -65,8 +65,9 @@ ansible 2.9.17
 
 ## Tips
 ### 配置与剧本
-![image](https://github.com/r2010shadow/Cookbook/blob/master/ansible/img/ansible.tips.1.png)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/ansible/img/ansible.tips.1.png" width=600>
+
 ### 模块
-![image](https://github.com/r2010shadow/Cookbook/blob/master/ansible/img/ansible.tips.2.png)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/ansible/img/ansible.tips.2.png" width=600>
 
 
