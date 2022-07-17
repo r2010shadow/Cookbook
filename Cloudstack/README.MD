@@ -3,7 +3,7 @@
 VMOps(后来改名为Cloud.com)在2009年首先推出了CloudStack软件，并在次年发布了很多代码作为开源资源。Citrix在2011年收购了Cloud.com，并发布了其余的代码。在2012年4月，Citrix将CloudStack提交到Apache作为孵化项目。
 ```
 # 如何Cloudstack
-* Get
+## 预检
 ```
 yum -y install epel-release
 yum install nfs-utils -y
