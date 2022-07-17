@@ -1,3 +1,4 @@
+# Fastcook
 * Git
 ```
 > ignore folder
@@ -486,7 +487,12 @@ ctrl + w    # delete forward word
 /^([a-z0-9_\.-\]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/   email
 ```
 
-
-
+* ToolsList
+```
+Postman
+Beyond_Compare
+Notepad++_v8.1.4
+```
+ 
 
 
