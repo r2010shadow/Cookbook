@@ -21,7 +21,7 @@ yum clean all
 yum makecache
 wget -c -r -np -k -L -p http://cloudstack.apt-get.eu/centos7/4.9/  
 ```
-* set 
+* Set 
 ```
 cat >> /etc/sysctl.conf <<EOF
 net.ipv6.conf.all.disable_ipv6 = 1
@@ -50,19 +50,26 @@ systemctl stop ntpd.service
 setenforce 0 && getenforce
 sed -i.back "s/SELINUX=.*/SELINUX=disabled/g" /etc/selinux/config
 ```
-  crontab -e
+* ntpdate
+```
+crontab -e
 0,20,40 * * * * /usr/sbin/ntpdate ntp1.aliyun.com
 hwclock --systohc
+```
 
-    # Hosts
+* Hosts
+```
 hostnamectl set-hostname $HOSTNAME
 hostname --fqdn
 cat $IP $HOSTNAME >> /etc/hosts
+```
 
-    # Time
+* Time
+```
 /etc/idmapd.conf   # Domain = xx.com
-
-   # NFS
+```
+* NFS
+```
 yum install nfs-utils rpcbind -y 
 mkdir -p /storage/{primary,secondary}
 cat << EOF > /etc/exports
@@ -87,8 +94,10 @@ systemctl restart rpcbind.service
 systemctl restart nfs-server.service
 systemctl enable rpcbind.service
 systemctl enable nfs-server.service
-  
-  # bond network
+```
+
+* bond network
+```
 cat > /root/scriptes/net.sh << EOF
 #!/bin/bash
 ip route flush table net161
@@ -170,9 +179,10 @@ IPADDR=10.10.9.8
 NETMASK=255.255.255.0
 DNS1=114.114.114.114
 DNS2=8.8.8.8
+```
 
-
-  # mysql install
+* mysql install
+```
 rpm -ivh http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 yum install Percona-Server-client-56 Percona-Server-server-56 -y
 mkdir -p /data/db/mysql/percona5.6
@@ -204,13 +214,15 @@ SET PASSWORD = PASSWORD('XX.com');
 grant all on *.* to 'root'@'%' identified by 'XX.com' with grant option;
 grant all on *.* to 'root'@'management.office.com' identified by 'XX.com' with grant option;
 flush privileges;  
-
-    # cloudstack-management install
+```
+## cloudstack-management install
+```
 yum install cloudstack-management
 chown cloud.cloud -R /var/cloudstack/
 chown cloud.cloud -R /var/log/cloudstack/
-
-    # load Cloudstack db
+```
+* load Cloudstack db
+```
 cloudstack-setup-databases cloud:XX.com@10.10.8.8 --deploy-as=root:XX.com    
 cloudstack-setup-management --tomcat7
 systemctl enable cloudstack-management.service
@@ -219,26 +231,32 @@ systemctl enable cloudstack-management.service
 bash
 SET GLOBAL sql_mode = ''; 
 set @@global.sql_mode ='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
-
+```
     
-    # load vm system 
+* load vm system 
+```
 mkdir -p /tmp/iso
 mount -t nfs -o nolock 127.0.0.1:/storage/secondary/ /tmp/iso/
 wget http://cloudstack.apt-get.eu/systemvm/4.6/systemvm64template-4.6.0-kvm.qcow2.bz2 -P /opt/src
 /usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt -m /tmp/iso/ -f /opt/src/systemvm64template-4.6.0-kvm.qcow2.bz2 -h kvm -F
 umount /tmp/iso/
 Cloudstack-agent
-    #安装KVM
+```
+* 安装KVM
+```
 yum groupinstall Virtualization 'Virtualization Client'
-
-    #创建qemu命令软链
+```
+* 创建qemu命令软链
+```
 ln -sv /usr/libexec/qemu-kvm /usr/bin/qemu
-
-    #配置qemu
+```
+* 配置qemu
+```
 vim /etc/libvirt/qemu.conf
 vnc_listen = "0.0.0.0"
-
-    #配置libvirt
+```
+* 配置libvirt
+```
 cp -rp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirt.conf.bak
 cat << EOF> /etc/libvirt/libvirtd.conf
 listen_tls = 0
@@ -251,23 +269,26 @@ EOF
 vim /etc/sysconfig/libvirtd
 去掉注释
 LIBVIRTD_ARGS="--listen"
+```
 
-
-    #重启KVM
+* 重启KVM
+```
 systemctl restart libvirtd.service
 systemctl enable libvirtd.service
 systemctl status libvirtd.service
+```
 
-
-    #安装agent
+## 安装agent
+```
 yum install cloudstack-agent -y
 vim /etc/cloudstack/agent/agent.properties
 host = 10.10.8.8
 systemctl restart cloudstack-agent.service
 systemctl enable cloudstack-agent.service
 systemctl status cloudstack-agent.service
-
-    #初始化agent
+```
+* 初始化agent
+```
 cloudstack-setup-agent
 Please choose which network used to create VM:[cloudbr0]  ---> 选择cloudbr1
 CloudStack Agent setup is done! #出现这些字样表示成功
@@ -276,9 +297,10 @@ tail -f /var/log/cloudstack/agent/agent.log
 systemctl restart cloudstack-management.service
 systemctl restart cloudstack-agent.service
 systemctl restart libvirtd.service
+```
 
-
-  # ISO
+* ISO
+```
 mkdir /iso
 yum install nginx -y
 /etc/nginx/conf.d/iso.conf
@@ -293,9 +315,10 @@ server {
         }
 }
 systemctl restart nginx.service
+```
 
-
-# run
+* run
+```
 systemctl restart rpcbind.service
 systemctl restart nfs-server.service
 systemctl restart cloudstack-management.service  
@@ -305,10 +328,11 @@ systemctl stop cloudstack-management.service
 systemctl stop cloudstack-agent.service
 systemctl stop nfs-server.service
 systemctl stop rpcbind.service
+```
 
 
-
-# test
+* test
+```
     确定是否具备虚拟化
 cat /proc/cpuinfo |grep -E '(vmx|svm)'
 showmount -e 127.0.0.1
@@ -317,9 +341,10 @@ http://10.10.8.8:8080/client/
 
 tail -f /var/log/cloudstack/management/management-server.log
 tail -f /var/log/cloudstack/management/catalina.out
+```
 
-
-# others
+* others
+```
 设置Iptables,如果没开启iptables就不用设置
 vim /etc/sysconfig/iptables
 增加如下
@@ -338,11 +363,14 @@ bash
 systemctl enable iptables.service
 systemctl restart iptables.service
 iptables -L
+```
 
 
-
-        异常重启分析：硬件加载记录未见异常，rpcbind服务启动异常，因ipv6禁用导致rpcbind服务启动失败
-        报错日志：rpcbind.socket failed to listen on sockets: Address family not supported by protocol
-        处理过程：1.注释/etc/systemd/system/sockets.target.wants/rpcbind.socket文件中ListenStream=[::]:111
-                  2.重载配置文件 systemctl daemon-reload
-                  3.systemctl restart rpcbind.service && systemctl status rpcbind.service
+* 异常重启
+```
+硬件加载记录未见异常，rpcbind服务启动异常，因ipv6禁用导致rpcbind服务启动失败
+报错日志：rpcbind.socket failed to listen on sockets: Address family not supported by protocol
+处理过程：1.注释/etc/systemd/system/sockets.target.wants/rpcbind.socket文件中ListenStream=[::]:111
+        2.重载配置文件 systemctl daemon-reload
+        3.systemctl restart rpcbind.service && systemctl status rpcbind.service
+ ```
