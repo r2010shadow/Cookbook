@@ -40,7 +40,7 @@ else
 
 fi
 
-docker push harbor.CN.com/kaibo/COM-stage:1.0.$BUILD_ID
+docker push harbor.CN.com/COM-stage:1.0.$BUILD_ID
 if [[ $? -eq 0 ]]; then
 	echo "Push is finished"
 else
@@ -53,7 +53,7 @@ function to_deploy_living1(){
 ansible living-0001 -m shell -a "docker rm -f living-stage"
 ansible living-0001 -m shell -a " docker images|grep living-stage|awk '{ print $3 }'|xargs docker rmi  -f "
 ansible living-0001 -m shell -a "docker login -u USER -p PWD harbor.CN.com"
-ansible living-0001 -m shell -a "docker pull harbor.CN.com/kaibo/living-stage:1.0.$BUILD_ID"
+ansible living-0001 -m shell -a "docker pull harbor.CN.com/living-stage:1.0.$BUILD_ID"
 if [[ $? -eq 0 ]]; then
 	echo "Pull is finished"
 else
@@ -62,7 +62,7 @@ else
 fi
 
 
-ansible living-0001 -m shell -a "docker run -it -d --name living-stage --restart=always -p 8001:8001 -v /root/java/log:/logs --network host --privileged=true  harbor.CN.com/kaibo/living-stage:1.0.$BUILD_ID"
+ansible living-0001 -m shell -a "docker run -it -d --name living-stage --restart=always -p 8001:8001 -v /root/java/log:/logs --network host --privileged=true  harbor.CN.com/living-stage:1.0.$BUILD_ID"
 if [[ $? -eq 0 ]]; then
 	echo "Run is finished"
 else
