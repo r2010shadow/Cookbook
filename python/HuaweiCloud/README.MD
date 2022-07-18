@@ -16,3 +16,16 @@
 | pip install huaweicloudsdkcore | pip3 install huaweicloudsdkcore |      |
 ```
 
+* VPC
+```
+| huaweicloudsdkvpc             |      |      |
+| ----------------------------- | ---- | ---- |
+| pip install huaweicloudsdkvpc |      |      |
+```
+
+* AS
+```
+| huaweicloudsdkas              |      |
+| ----------------------------- | ---- |
+| pip3 install huaweicloudsdkas |      |
+```
