@@ -22,6 +22,39 @@ Maven是一个项目管理工具，它包含了一个项目对象模型 (POM：P
 通过在pom.xml文件中添加所需jar包的坐标，这样就很好的避免了jar直接引入进来，在需要用到jar包的时候，只要查找pom.xml文件，再通过pom.xml文件中的坐标，到一个专门用于”存放jar包的仓库”(maven仓库)中根据坐标从而找到这些jar包，再把这些jar包拿去运行。
 ```
 ---
+* 常用
+```
+
+| MVN         |                                         |
+| ----------- | --------------------------------------- |
+| mvn compile | 在根目录生成target文件,初始插件、依赖包 |
+| mvn clean   | 将根目录下生成的target文件移除          |
+| mvn test    | 验收                                    |
+
+```
+
+
+```
+### 参数
+
+| 参数 | 全称                   | 释义                                                         | 说明                                                         |
+| ---- | ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| -pl  | --projects             | Build specified reactor projects instead of all projects     | 选项后可跟随{groupId}:{artifactId}或者所选模块的相对路径(多个模块以逗号分隔) |
+| -am  | --also-make            | If project list is specified, also build projects required by the list | 表示同时处理选定模块所依赖的模块                             |
+| -amd | --also-make-dependents | If project list is specified, also build projects that depend on projects on the list | 表示同时处理依赖选定模块的模块                               |
+| -N   | --Non-recursive        | Build projects without recursive                             | 表示不递归子模块                                             |
+| -rf  | --resume-from          | Resume reactor from specified project                        | 表示从指定模块开始继续处理                                   |
+
+### 对比install和package
+
+| mvn install                                                  | mvn package                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **1.** 将项目打包（jar/war），将打包结果放到项目下的 **target** 目录下 | **1.** 将项目打包（jar/war），将打包结果放到项目下的 **target** 目录下 |
+| **2.** 同时将上述打包结果放到**本地仓库**的相应目录中，供其他项目或模块引用 |                                                              |
+
+
+```
+---
 # Maven 3 in Action
 
 * get
