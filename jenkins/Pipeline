@@ -1,0 +1,110 @@
+# Cook pipeline
+
+* 	Declarative demo
+```
+pipeline {
+	agent any  # where to execute
+	tools {
+		#mvn , gradle, jdk
+		maven Maven  # Maven is from jenkins setting ,Maven name
+	}
+	stages {   # where the 'work' happens
+		stoage("build") {
+			steps {
+				#sh 'npm install'
+				#sh 'npm build'
+				echo 'building the app..'
+			}
+		}
+		stoage("test") {
+			steps {
+				echo 'testing the app..'
+			}
+		}
+		stoage("deploy") {
+			steps {}
+		}        
+	}
+}
+```
+
+* pipeline_ECR
+```
+**Pre-requistes:**
+\1. Jenkins is up and running
+\2. Docker installed on Jenkins instance. Click [here](https://www.coachdevops.com/2020/05/docker-jenkins-integration-building.html) to for integrating Docker and Jenkins
+\3. Docker and Docker pipelines plug-in are installed
+\4. Repo created in ECR, [Click](https://www.cidevops.com/2020/05/how-to-setup-elastic-container-registry.html) here to know how to do that.
+\5. Make sure port 8096 is opened up in firewall rules. 
+\6. Create an IAM role with AmazonEC2ContainerRegistryFullAccess policy, attach to Jenkins
+\7. Make sure [AWS cli ](https://www.coachdevops.com/2020/10/install-aws-cli-version-2-on-linux-how.html)is installed in Jenkins instance.
+
+```
+
+* checkout
+```
+1. create pipeline project
+2. pipeline / pipeline syntax
+3. 示例步骤 / checkout: Check out from version control
+4. SCM : Git / URL : git@xx.git / Credentials: xx@xx 
+5. Branches to build : */xx
+6. 生成流水线脚本  -> CHECKOUT
+7. paste to Pipeline script / stages { stage('Checkout') {steps{ CHECKOUT }}}
+8. jenkins -> Build Now
+
+```
+
+* more scripts with ECR
+```
+pipeline {
+    agent any
+    environment {
+        registry = "acct_id.dkr.ecr.us-east-2.amazonaws.com/your_ecr_repo"
+    }
+   
+    stages {
+        stage('Cloning Git') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/akannan1087/myPythonDockerRepo']]])     
+            }
+        }
+  
+    // Building Docker images
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry
+        }
+      }
+    }
+   
+    // Uploading Docker images into AWS ECR
+    stage('Pushing to ECR') {
+     steps{  
+         script {
+                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin acct_id.dkr.ecr.us-east-2.amazonaws.com'
+                sh 'docker push acct_id.dkr.ecr.us-east-2.amazonaws.com/your_ecr_repo:latest'
+         }
+        }
+      }
+   
+         // Stopping Docker containers for cleaner Docker run
+     stage('stop previous containers') {
+         steps {
+            sh 'docker ps -f name=mypythonContainer -q | xargs --no-run-if-empty docker container stop'
+            sh 'docker container ls -a -fname=mypythonContainer -q | xargs -r docker container rm'
+         }
+       }
+      
+    stage('Docker Run') {
+     steps{
+         script {
+                sh 'docker run -d -p 8096:5000 --rm --name mypythonContainer acct_id.dkr.ecr.us-east-2.amazonaws.com/your_ecr_repo:latest'
+            }
+      }
+    }
+    }
+}
+```
+
+
