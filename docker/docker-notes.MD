@@ -58,3 +58,14 @@ docker network ls
 举例：
 docker run -it -d --name kaibo-item-uat-sgp -p 9090:9090 --network host storage.3tilabs.com/kaibo/kaibo-python-item-dev-xa:1.0.7
 ```
+
+* 清理
+```
+rm 无法删除"/var/lib/docker/overlay/be7db837b8218aa733f3585f93e4c6cf814222441df51a7a7ce10bb19c09e281/merged": 设备或资源忙
+  cat /proc/mounts | grep docker
+  umount  /run/docker/netns/default
+  rm -rf /var/lib/docker
+  rm -rf /var/run/docker
+  # 仍然不可删除 
+  mv XX/XX /tmp/
+ ```
