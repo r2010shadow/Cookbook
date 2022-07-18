@@ -6,35 +6,32 @@
 
 ## 语法Tips
 ### 1.基础语法
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.1.png)
-
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.1.png" width=500>
 
 ### 2.容器类型的数据
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.2.jpg)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.2.png" width=500>
 
 ### 3.字符串
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.3.jpg)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.3.png" width=500>
 
 ### 4.函数
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.4.png)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.4.png" width=500>
 
 ### 5.类与对象
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.5.png)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.5.png" width=500>
 
 ### 6.文件
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.6.png)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.6.png" width=500>
 
 ### 7.网络通信
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.7.png)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.7.png" width=500>
 
 ### 8.多进程
-![image](https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.8.png)
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.8.png" width=500>
 
 #### 示意图
 线程管理，利用join(timeout=None)
-<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.frok.png" width=500 alt="线程管理"/>
-
-
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/python/img/Python.tips.frok.png" width=500>
 
 
 
