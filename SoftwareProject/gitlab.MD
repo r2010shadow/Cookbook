@@ -19,3 +19,21 @@ docker run --detach
 --volume /data/gitlab/data:/var/opt/gitlab\
 gitlab/gitlab-ce:latest
 ```
+
+* Gitlab_Jenkins
+```
+docker run -uroot -d -p 8080:8080 -p 50000:50000 -v /drives/d/jenkins-data:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean
+
+mkdir -p srv/gitlab
+export GITLAB_HOME=/drives/d/srv/gitlab
+sudo docker run --detach \
+  --hostname gitlab.example.com \
+  --publish 443:443 --publish 80:80 --publish 22:22 \
+  --name gitlab \
+  --restart always \
+  --volume $GITLAB_HOME/config:/etc/gitlab \
+  --volume $GITLAB_HOME/logs:/var/log/gitlab \
+  --volume $GITLAB_HOME/data:/var/opt/gitlab \
+  gitlab/gitlab-ee:latest
+
+```
