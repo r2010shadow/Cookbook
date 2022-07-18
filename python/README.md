@@ -1,8 +1,8 @@
 # P.Y.T.H.O.N
 
 ## 近期更新的学习资源
-看漫画学python https://pan.baidu.com/s/1PtydK0epNoHafQ9dkrIV9Q 提取码 aqww
-文件名 看漫画学Python：有趣、有料、好玩、好用：全彩版.pdf
+[看漫画学python](https://pan.baidu.com/s/1PtydK0epNoHafQ9dkrIV9Q) `提取码 aqww`
+`文件名 看漫画学Python：有趣、有料、好玩、好用：全彩版.pdf`
 
 ## 语法Tips
 ### 1.基础语法
