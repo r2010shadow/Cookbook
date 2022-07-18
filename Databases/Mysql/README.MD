@@ -4,3 +4,22 @@ MySQL数据库的历史可以追溯到1979年，那时Bill Gates退学没多久�
 
 1990年，一次Monty接到了一个项目，客户需要为当时的UNIREG提供更加通用的SQL接口，当时有人提议直接使用商用数据库， 但是Monty Widenius觉得商用数据库的速度难以令人满意。于是Monty Widenius找到了David Hughes(mSQL的发明人)商讨合作事宜 。想借助于mSQL的代码，将它集成到自己的存储引擎中。然而令人失望的是，在经过一番测试后，他们发现mSQL的速度并不尽如人 意，无法满足客户的需求。于是Monty Widenius雄心大起，决心自己重写一个SQL支持。从此MySQL就开始诞生了。
 ```
+
+
+
+* 常用
+
+| select version();                                        | 服务重启后失效                                     |
+| -------------------------------------------------------- | -------------------------------------------------- |
+| SHOW VARIABLES LIKE 'character_set%';                    |                                                    |
+| SHOW VARIABLES LIKE 'collation%';                        |                                                    |
+| SHOW VARIABLES LIKE '%max_allowed_packet';               |                                                    |
+| set global max_allowed_packet=104857600;                 | 重新登录客户端观察                                 |
+| SHOW VARIABLES LIKE 'innodb_strict_mode';                | InnoDB严格检查模式                                 |
+| set global innodb_strict_mode=0;                         | 开启                                               |
+| set global COLLATION_SERVER=utf8mb4_general_ci;          |                                                    |
+| SHOW VARIABLES LIKE 'log_bin_trust_function_creators';   |                                                    |
+| set global log_bin_trust_function_creators=1;            | 用于主从复制，而存储函数有可能导致主从的数据不一致 |
+| SET PASSWORD FOR 'dbadmin'@'localhost' = 'newpasswd2';   |                                                    |
+| ALTER USER dbadmin@localhost IDENTIFIED BY 'newpasswd3'; |                                                    |
+|                                                          |                                                    |
