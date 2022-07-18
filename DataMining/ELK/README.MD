@@ -1,4 +1,47 @@
-## 下载与配置
+## 容器部署方式
+* Init
+
+```
+vi /etc/sysctl.conf
+增加：
+vm.max_map_count = 262144
+fs.file-max = 65536
+检查：
+sudo sysctl -p
+```
+
+* Image
+```
+docker pull sebp/elk:640
+docker run -it -d --name elk \
+    -p 5601:5601 \
+    -p 9200:9200 \
+    -p 5044:5044 \
+    sebp/elk:640
+```
+
+
+* Test
+```
+docker exec -it <container-name> /bin/bash
+/opt/logstash/bin/logstash --path.data /tmp/logstash/data  -e 'input { stdin { } } output { elasticsearch { hosts => ["localhost"] } }‘
+输入：
+this is a dummy entry
+Ctrl+c退出
+查看：
+http://<your-host>:5601
+侧边栏Management配置logstash-*
+侧边栏Discover中查看
+```
+
+* 索引模板
+```
+http://<your-host>:9200/_cat/indices?v
+```
+
+
+## 独立部署方式
+* 下载与配置
 ```
 cd /usr/local/src/
 wget -c https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.1.1.zip
@@ -9,7 +52,7 @@ tar -xf kibana-6.1.1-linux-x86_64.tar.gz -C /usr/local/src/
 tar -xf logstash-6.1.1.tar.gz -C /usr/local/src/
 unzip elasticsearch-6.1.1.zip -d /usr/local/src/
 ```
-### 创建软连接
+* 创建软连接
 ```
 ln -sv /usr/local/src/logstash-6.1.1 /usr/local/logstash
 ln -sv /usr/local/src/kibana-6.1.1-linux-x86_64/ /usr/local/kibana
@@ -23,7 +66,7 @@ PATH=$PATH:/usr/local/logstash/bin/
 #
 source /etc/profile.d/els.sh
 ```
-## 配置elasticsearch需要的系统配置
+* 配置elasticsearch需要的系统配置
 ```
 ulimit -n 65536
 vim /etc/security/limits.conf
@@ -31,7 +74,7 @@ vim /etc/security/limits.conf
 * soft nofile 65536
 * hard nofile 65536
 ```
-## ELK安装X-pack扩展(可选)
+* ELK安装X-pack扩展(可选)
 ```
 logstash-plugin install x-pack
 elasticsearch-plugin install -xpack
@@ -39,7 +82,7 @@ kibana-plugin install x-pack
 设置ELK栈的密码
 /usr/local/elasticsearch/bin/x-pack/setup-passwords interactive
 ```
-## 配置nginx的日志格式与日志路径
+* 配置nginx的日志格式与日志路径
 ```
 
 log_format main '{"@timestamp":"$time_iso8601",'
@@ -60,7 +103,7 @@ log_format main '{"@timestamp":"$time_iso8601",'
 access_log /var/logs/nginx/access.log main;
 error_log /var/logs/nginx/error.log error;
 ```
-## 写Logstash的日志收集文件
+* 写Logstash的日志收集文件
 ```
 input {
    file {
@@ -151,16 +194,16 @@ output {
 }
 可以命名为logstash.conf
 ```
-## 如部署到服务器，可使用FTP,scp,rsync,ansible等等工具上传到服务器(可选)
+* 如部署到服务器，可使用FTP,scp,rsync,ansible等等工具上传到服务器(可选)
 
-## 运行logstash进行测试，测试前，因为我们的logstash文件有使用到环境变量ELASTIC_HOST，主机地址可以自己进行定义。
+* 运行logstash进行测试，测试前，因为我们的logstash文件有使用到环境变量ELASTIC_HOST，主机地址可以自己进行定义。
 ```
 export ELASTIC_HOST=[某服务器地址]
 
 logstash -f -t logstash.conf ##检查配置是否正确
 logstash -f logstash.conf ## 运行logstash
 ```
-## 如果想以服务方式运行logstash
+* 如果想以服务方式运行logstash
 ```
 
 cd /usr/local/logstash/bin/
@@ -188,13 +231,13 @@ vim logstash.service
 Environment="KEY=VALUE"
 ExecStart=/usr/local/logstash/bin/logstash "--path.settings" "/usr/share/logstash/config" ###修改服务执行脚本
 ```
-## 添加系统的Logstash用户
+* 添加系统的Logstash用户
 ```
 
 useradd -s /sbin/nologin -M logstash
 chown -R logstash.logstash /usr/local/logstash ## 改变logstash的属主属组，否则服务启动会报错。
 ```
-## 启动logstash
+* 启动logstash
 ```
 systemctrl start logstash
 journalctl -u logstash ## 查看logstash的日志
@@ -204,4 +247,14 @@ cd /usr/local/logstash/config
 xpack.monitoring.elasticsearch.url : "Elasticsearch服务器地址"
 xpack.monitoring.elasticsearch.username: logstash_system
 xpack.monitoring.elasticsearch.password: xxx
+```
+
+## Error handle
+```
+# 清理index时报错处理
+Error:
+blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];
+Fix：
+url -XPUT -H "Content-Type: application/json" http://127.0.0.1:9200/_all/_settings -d '{"index.blocks.read_only_allow_delete": null}'
+
 ```
