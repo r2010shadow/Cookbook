@@ -397,7 +397,7 @@ ps -ef|grep [ProcessName]|grep -v grep|cut -c 9-15|xargs kill -9
 pidof [ProcessName]
 ```
 
-* Vi
+* VI
 ```
 yy p			#copy one line
 :%s/vivian/sky/g	#change all vivian to sky
@@ -424,6 +424,50 @@ ctrl+v G x  #delele rows
 2.CTRL+v 进入“可视 块”模式，选取这一列操作多少行。
 3.SHIFT+i(I) 输入要插入的内容。
 4.ESC 按两次，会在每行的选定的区域出现插入的内容。
+```
+
+* Author
+```
+cp /etc/vimrc /etc/vimrc.ori
+cat >> /etc/vimrc << EOF
+
+map <F4> ms:call AddAuthor()<cr>'s
+
+function AddAuthor()
+        let n=1
+        while n < 5
+                let line = getline(n)
+                if line =~'^\s*\*\s*\S*Last\s*modified\s*:\s*\S*.*$'
+                        call UpdateTitle()
+                        return
+                endif
+                let n = n + 1
+        endwhile
+        call AddTitle()
+endfunction
+
+function UpdateTitle()
+        normal m'
+        execute '/* Last modified\s*:/s@:.*$@\=strftime(": %Y-%m-%d %H:%M")@'
+        normal "
+        normal mk
+        execute '/* Filename\s*:/s@:.*$@\=": ".expand("%:t")@'
+        execute "noh"
+        normal 'k
+        echohl WarningMsg | echo "Successful in updating the copy right." | echohl None
+endfunction
+
+function AddTitle()
+        call append(0,"########################################")
+        call append(1,"# Author        : William")
+        call append(2,"# Email         : Email")
+        call append(3,"# Last modified : ".strftime("%Y-%m-%d %H:%M"))
+        call append(4,"# Filename      : ".expand("%:t"))
+        call append(5,"########################################")
+        echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
+endfunction
+
+EOF
 ```
 
 * port
