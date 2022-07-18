@@ -4,7 +4,61 @@ Filebeat is a lightweight shipper for forwarding and centralizing log data.
 ```
 [Filebeat Reference](https://www.elastic.co/guide/en/beats/filebeat/current/index.html)
 
-## Get
+
+## rpm case
+```
+cd /opt
+wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.4.0-x86_64.rpm
+rpm -ivh filebeat-6.4.0-x86_64.rpm
+```
+* yml
+```
+cd /etc/filebeat && cp filebeat.yml filebeat.yml-bak
+vim filebeat.yml
+
+- type: log
+  enabled: true
+  paths:
+     - /root/java/log/*.log
+output.elasticsearch:
+  hosts: ["<your-host>:9200"]
+```
+* service
+```
+systemctl enable filebeat.service
+systemctl start filebeat.service
+```
+* Index named
+```
+cd /etc/filebeat
+vim filebeat.yml
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+     - /root/java/log/*.log
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+setup.template.settings:
+  index.number_of_shards: 3
+setup.kibana:
+setup.template.name: '<server_name>'
+setup.template.pattern: '<server_name>-*'
+setup.template.enabled: false
+setup.template.overwrite: true
+setup.ilm.enabled: false
+output.elasticsearch:
+  hosts: ["<your-host>:9200"]
+  index: "<server_name>"
+```
+
+
+
+
+---
+## source code case
 ```
 curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.3.1-linux-x86_64.tar.gz
 tar xzvf filebeat-8.3.1-linux-x86_64.tar.gz
