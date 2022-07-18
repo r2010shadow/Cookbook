@@ -97,9 +97,9 @@ cat loadfb.yml
 
 ## Tips
 ### 配置与剧本
-<img src="https://github.com/r2010shadow/Cookbook/blob/master/ansible/img/ansible.tips.1.png" width=600>
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/ansible/img/ansible.tips.1.png" width=500>
 
 ### 模块
-<img src="https://github.com/r2010shadow/Cookbook/blob/master/ansible/img/ansible.tips.2.png" width=600>
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/ansible/img/ansible.tips.2.png" width=500>
 
 
