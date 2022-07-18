@@ -16,6 +16,15 @@ service jenkins start
 cat /var/log/jenkins/jenkins.log  | grep Pl -A 2 | grep -v Pl
 ```
 
+* Get Harbor image
+```
+1. jenkins -> 参数化构建过程
+2. 添加参数 / Image Tag Parameter
+3. Image Name : kaibo/kaibo-living
+4. 高级... / Registry URL / Registry Credential ID
+5. 添加参数 / 选项参数
+6. 名称 : DEPLOY_FLAG / 选项 : DEPLOY <br> ROLLBACK
+```
 
 
 ## gitlab+maven+tomcat 
@@ -105,19 +114,6 @@ docker run -d --name jenkins \
 --restart=always \
 jenkins
 ```
-
-
-
-* Get Harbor image
-```
-1. jenkins -> 参数化构建过程
-2. 添加参数 / Image Tag Parameter
-3. Image Name : kaibo/kaibo-living
-4. 高级... / Registry URL / Registry Credential ID
-5. 添加参数 / 选项参数
-6. 名称 : DEPLOY_FLAG / 选项 : DEPLOY <br> ROLLBACK
-```
-
 
 * read more
 ```
