@@ -72,11 +72,25 @@
 | 4    | 在只改动了yaml文件中的某些声明时，而不是全部**改动**，你可以使用kubectl apply | 在没有改动yaml文件时，使用同一个yaml文件执行命令kubectl replace，将不会成功（fail掉），因为缺少相关改动信息 |
 
 
+* Endpoint
+
+| 特性                                                         |      |
+| ------------------------------------------------------------ | ---- |
+| 一个Service对应的所有Pod副本的访问地址                       |      |
+| Node上的Kube-proxy进程获取每个Service的Endpoints，实现Service的负载均衡功能 |      |
+| pod状态为running + service关联 = endpoint                    |      |
 
 
 
+* 调试
 
-
+| Info         | Script                                                       |
+| ------------ | ------------------------------------------------------------ |
+| POD_NAME     | export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}') |
+| NODE_PORT    | export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}') |
+| NodePort     | kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080 |
+| POD,api,info | curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/ |
+| proxy,status | curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/ |
 
 
 
