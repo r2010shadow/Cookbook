@@ -142,22 +142,40 @@ du -h --max-depth=1
 
 #OS
 cat /etc/issue 
+
 #kernel
 uname -r
+
 #mod list
 lsmod
+
 #hostname
 cat /etc/sysconfig/network | grep HOSTNAME  | cut -c 10-30
 hostnamectl set-hostname HOSTNAME
+
 #IP
 hostname -i
 ifconfig|grep -E "([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})" | awk '{print $2}' | cut -d ":" -f2
+
 #DNS
 cat /etc/resolv.conf | grep nameserver
+查看DNS查询包
+tcpdump –i eth0 port 53
+#查看日志
+tailf /var/log/messages
+# 可以定义日志的记录路径记录过程、记录级别等，将在后文中有所体现
+cat /var/named/data/named.run
+# 953端口是由rndc来使用管理的
+ss -tunl | grep 53
+# 查当前bind运行的状态
+rndc status
+
 #PortServices
 netstat -antlp
+
 #runtime status 
 systemctl status
+
 #FQDN
 hostname -f
 
