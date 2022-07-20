@@ -7,7 +7,7 @@
 - 如何在计划维护中使用 PodDisruptionBudgets 确保服务可用性
 ```
 
-```
+
 | kubectl apply -f zookeeper.yaml                              |                                               |
 | ------------------------------------------------------------ | --------------------------------------------- |
 | kubectl get pods -w -l app=zk                                |                                               |
@@ -16,4 +16,4 @@
 | for i in 0 1 2; do kubectl exec zk-$i -- hostname -f; done   | 获取 `zk` StatefulSet 中每个 Pod 的全限定域名 |
 | kubectl exec zk-0 -- cat /opt/zookeeper/conf/zoo.cfg         | 查看 `zoo.cfg` 文件的内容                     |
 |                                                              |                                               |
-```
+
