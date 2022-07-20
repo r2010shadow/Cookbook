@@ -549,6 +549,37 @@ ctrl + w    # delete forward word
 /^([a-z0-9_\.-\]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/   email
 ```
 
+* awk
+```
+#显示冒号前一列
+cat /etc/passwd | awk -F: '$0=$1'
+
+#显示第二列,到第五列
+awk '{print $2,$3,$4,$5}' file
+
+#去掉第一列
+awk '{$1="";print $0}' file
+
+1、打印文件的第一列(域)                 ： awk '{print $1}' filename
+2、打印文件的前两列(域)                 ： awk '{print $1,$2}' filename
+3、打印完第一列，然后打印第二列           ： awk '{print $1 $2}' filename
+4、打印文本文件的总行数                  ： awk 'END{print NR}' filename
+5、打印文本第一行                       ：awk 'NR==1{print}' filename
+6、打印文本第二行第一列                  ：sed -n "2, 1p" filename | awk 'print $1'
+```
+
+* shell others
+```
+shell里面的赋值方法有两种，格式为
+    1) arg=`(命令)`
+    2) arg=$(命令)
+因此，如果想要把某一文件的总行数赋值给变量nlines，可以表达为：
+    1) nlines=`(awk 'END{print NR}' filename)`
+或者
+    2) nlines=$(awk 'END{print NR}' filename)
+```
+
+
 ## ToolsList
 * Editer & Text
 ```
