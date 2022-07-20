@@ -70,5 +70,33 @@ $ sudo apt-get install nginx mysql-server mysql-client  php5-cli php5-fpm php5-g
 ```
 * 第五步：个性化配置Vagrantfile
 ```    
-在进行 vagrant init 之后我们会发现对应的目录下有个Vagrantfile文件
+在进行 vagrant init 之后我们会发现对应的目录下有个Vagrantfile文件.
+主要配置
+开发目录下有一个文件Vagrantfile
+里面包含有大量的配置信息
+主要包括三个方面的配置
+虚拟机的配置
+SSH配置
+Vagrant的一些基础配置
+注释很全所以不用担心不会配置了
+2.1. box设置
+config.vm.box = "ubuntu12.04"
+2.2. hostname设置
+config.vm.hostname = "for_work"
+2.3. 虚拟机网络设置
+#config.vm.network "private_network", ip: "192.168.33.10"
+config.vm.network "public_network"
+2.4. 同步目录
+config.vm.synced_folder "../data", "/vagrant_data"
+2.5. 端口转发
+config.vm.network "forwarded_port", guest: 80, host: 8080
+2.6. 内存和cpu核心
+       config.vm.provider "virtualbox" do |vb|
+      #Display the VirtualBox GUI when booting the machine
+      vb.gui = true
+      #Customize the amount of memory on the VM:
+      vb.memory = "1024"
+      vb.cpus = 2
+      vb.name = "my_vm"
+      end
 ```
