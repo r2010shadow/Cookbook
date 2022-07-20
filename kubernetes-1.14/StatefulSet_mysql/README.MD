@@ -1,4 +1,4 @@
-
+[Statefulset_mysql](https://kubernetes.io/zh-cn/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
 
 * 资源配置
 
