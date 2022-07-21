@@ -1,4 +1,17 @@
+# Docker
+```
+Docker是Docker公司开源的一个基于轻量级虚拟化技术的容器引擎项目,整个项目基于Go语言开发，并遵从Apache 2.0协议。
+Docker可以在容器内部快速自动化部署应用，并可以通过内核虚拟化技术（namespaces及cgroups等）来提供容器的资源隔离与安全保障等。
 
+```
+
+# Docker架构
+```
+Docker Client、Docker Daemon、Docker Registry、Graph、Driver、libcontainer以及Docker container。
+```
+
+
+---
 ## 如此Docker
 * copy
 ```
