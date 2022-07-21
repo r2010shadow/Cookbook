@@ -3,7 +3,7 @@
 Nagios是一款开源的免费网络监视工具，能有效监控Windows、Linux和Unix的主机状态，交换机路由器等网络设置，打印机等。
 ```
 
-* Dockerfile
+* Dockerfile nagios
 ```
 # Nagios docker modified image
 # VERSION 1.0
@@ -113,3 +113,37 @@ sed -i 's|use_timezone=|#use_timezone=|g' $NAGIOS_HOME/etc/nagios.cfg
 /usr/local/bin/start_nagios
 
 ```
+
+# Dockerfiler nagios-conf
+```
+# Docker Nagios Conf
+# VERSION 1.0
+#INSTRUCTION
+# scratch is a minimal docker image, ideal to hold configuration files.
+FROM scratch
+MAINTAINER Tiago Pires, tandrepires@gmail.com
+ADD configuration-file.cfg /conf/
+VOLUME [ "/conf" ]
+```
+
+* Create Images
+```
+$ cd nagios
+
+$ docker build -t myrepo/nagios .
+
+$ cd conf
+
+$ docker build -t myrepo/nagios-conf .
+```
+
+* put it to work
+```
+$ docker run -d --name nagios-conf myrepo/nagios-conf /dev
+
+$ docker run -d --name nagios -e CONF_PATH=/conf -e NAGIOSADMIN_PASS=myownpassword -e HOME=/root 
+--volumes-from nagios-conf -v /etc/localtime:/etc/localtime -p 8080:80 myrepo/nagios
+```
+
+* Let’s browse 
+` http://localhost:8080  `
