@@ -11,8 +11,13 @@ Docker Client、Docker Daemon、Docker Registry、Graph、Driver、libcontainer�
 ```
 
 # Docker 文件系统
+`每层镜像包含：镜像文件以及镜像json元数据信息`
 
 <img src="https://github.com/r2010shadow/Cookbook/blob/master/docker/img/Docker_fs.png" width=400>
+
+* 可读写层(Read－Write Layer)
+* Docker容器的初始层(Init Layer)
+
 
 ---
 ## 如此Docker
