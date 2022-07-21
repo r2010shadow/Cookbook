@@ -10,6 +10,9 @@ Docker可以在容器内部快速自动化部署应用，并可以通过内核�
 Docker Client、Docker Daemon、Docker Registry、Graph、Driver、libcontainer以及Docker container。
 ```
 
+# Docker 文件系统
+
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/docker/img/Docker_fs.png" width=400>
 
 ---
 ## 如此Docker
