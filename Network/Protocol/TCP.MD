@@ -17,3 +17,16 @@
 
 下面是：“TCP协议的状态机”（图片来源） 和 “TCP建链接”、“TCP断链接”、“传数据” 的对照图，把两个图并排放在一起，对照着看。
 ```
+
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/Network/img/tcp_status.png" width=300 >
+
+* 3次握手
+```
+对于建链接的3次握手，主要是要初始化Sequence Number 的初始值。通信的双方要互相通知对方自己的初始化的Sequence Number（缩写为ISN：Inital Sequence Number）——所以叫SYN，全称Synchronize Sequence Numbers。也就上图中的 x 和 y。这个号要作为以后的数据通信的序号，以保证应用层接收到的数据不会因为网络上的传输的问题而乱序（TCP会用这个序号来拼接数据）。
+```
+* 对于4次挥手
+```
+其实你仔细看是2次，因为TCP是全双工的，所以，发送方和接收方都需要Fin和Ack。只不过，有一方是被动的，所以看上去就成了所谓的4次挥手。如果两边同时断连接，那就会就进入到CLOSING状态，然后到达TIME_WAIT状态。
+```
+
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/Network/img/TCP_34.png" width=300>
