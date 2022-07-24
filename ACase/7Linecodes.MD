@@ -1,9 +1,18 @@
 # 7Linecodes
-## [站点服务不可用的报警--七层SLB的CPU占用率达到了100%](https://github.com/r2010shadow/Cookbook/blob/master/ACase/7Linecodes.MD)
+## [站点服务不可用的报警 --- 七层SLB的CPU占用率达到了100%](https://github.com/r2010shadow/Cookbook/blob/master/ACase/7Linecodes.MD)
 
-
-* 救援
-
+* 运维角度
+```
+热线会议 --- 告知相关环节进而评估风险
+```
+- -
+```
+惯例与绿色通道 --- 预演故障情况下的绿色通道
+```
+```
+排除法 --- 缩小故障范围
+```
+1. 
 
 
 * 起源
