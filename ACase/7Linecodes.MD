@@ -1,5 +1,5 @@
 # 7Linecodes
-## [站点服务不可用的报警--七层SLB的CPU占用率达到了100%]()
+## [站点服务不可用的报警--七层SLB的CPU占用率达到了100%](https://github.com/r2010shadow/Cookbook/blob/master/ACase/7Linecodes.MD)
 
 
 * 救援
