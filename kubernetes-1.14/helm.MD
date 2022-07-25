@@ -20,3 +20,15 @@ Helm将kubernetes资源（Deployment，service或configmap等）打包到一个c
 * 易于升级： 使用就地升级和自定义钩子来解决更新的难题。
 * 简单分享： charts易于通过公共或私用服务完成版本化，分享及主机构建。
 * 回滚：可使用 “helm rollback” 命令轻松实现快速回滚。
+---
+`helm命令`
+* helm repo list 
+- - 查看helm仓库
+```
+Helm安装时已经默认配置好了两个仓库：stable和local。
+stable是官方仓库，local是用户存放自己开发的chart的本地仓库。
+[root@master helm]# helm repo list
+NAME  	URL                                             
+stable	https://kubernetes-charts.storage.googleapis.com
+local 	http://127.0.0.1:8879/charts 
+```
