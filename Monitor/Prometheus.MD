@@ -1,4 +1,6 @@
 
+
+
 `PromQL 时间序列`
 ```
 采集到的样本数据以时间序列（time-series）的方式保存在内存数据库中，并且定时保存到硬盘上。
@@ -38,3 +40,5 @@
 http_request_total{status="200", method="GET"}@1434417560938 => 94355
 http_request_total{status="200", method="GET"}@1434417561287 => 94334
 ```
+
+[Handbook](https://prometheus.fuckcloudnative.io/)
