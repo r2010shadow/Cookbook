@@ -41,3 +41,10 @@ spec:
 kubelet 启动时，由 –pod-manifest-path= 或者 –manifest-url= 参数指定的⽬录下定义的所有 pod 都会自动创建，例如，我们示例中的 static-web
 
 静态pod清理，通过把Yaml文件删除、再次执行 kubectl get pods 验证。
+```
+* 通过HTTP创建Pod
+```
+kubelet 周期地从 –manifest-url= 参数指定的地址下载⽂件，并且把它翻译成 Json/Yaml 格式的pod 定义。
+此后的操作⽅式与 –pod-manifest-path= 相同，kubelet 会不时地重新下载该⽂件，当⽂件变化时对应地终止或启动静态 pod
+```
+
