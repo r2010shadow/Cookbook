@@ -5,6 +5,11 @@
   
 * AWS
 
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/img/aws-Storage%20Gateway.png" width=300>
+
+[AWS Storage Gateway](https://www.aws.training/Transcript/CompletionCertificateHtml?transcriptid=dZzJ6UNomky9JwC44BUnPw2)
+
+
 * HuaweiCloud
 
 * Udacity
