@@ -1,6 +1,5 @@
 
 `PromQL 时间序列`
-* 样本
 ```
 采集到的样本数据以时间序列（time-series）的方式保存在内存数据库中，并且定时保存到硬盘上。
 向量(vector): time-series是按照时间戳和值的序列顺序存放
@@ -12,5 +11,29 @@
   node_cpu{cpu="cpu0",mode="idle"} 362812.7890625
      |            |                        |
   指标的名称    特征和维度               采集到的数值
-```
 
+
+  ^
+  │   . . . . . . . . . . . . . . . . .   . .   node_cpu{cpu="cpu0",mode="idle"}
+  │     . . . . . . . . . . . . . . . . . . .   node_cpu{cpu="cpu0",mode="system"}
+  │     . . . . . . . . . .   . . . . . . . .   node_load1{}
+  │     . . . . . . . . . . . . . . . .   . .  
+  v
+    <------------------ 时间 ---------------->
+    在time-series中的 每一个点 称为 一个样本（sample）
+```
+* 样本组成
+- - 指标(metric)：metric name和描述当前样本特征的labelsets;
+- - 时间戳(timestamp)：一个精确到毫秒的时间戳;
+- - 样本值(value)： 一个float64的浮点型数据表示当前样本的值。
+
+<metric name>{<label name>=<label value>, ...}@timestamp => value
+     |           |                
+  样本的含义   标签过滤/聚合
+ 
+* 指标(Metric)
+```
+<--------------- metric ---------------------><-timestamp -><-value->
+http_request_total{status="200", method="GET"}@1434417560938 => 94355
+http_request_total{status="200", method="GET"}@1434417561287 => 94334
+```
