@@ -23,13 +23,14 @@
     在time-series中的 每一个点 称为 一个样本（sample）
 ```
 * 样本组成
-- - 指标(metric)：metric name和描述当前样本特征的labelsets;
-- - 时间戳(timestamp)：一个精确到毫秒的时间戳;
-- - 样本值(value)： 一个float64的浮点型数据表示当前样本的值。
-
+```
+  指标(metric)：metric name和描述当前样本特征的labelsets
+     |                                        时间戳精确到毫秒
+     |                                            |    
 <metric name>{<label name>=<label value>, ...}@timestamp => value
-     |           |                
-  样本的含义   标签过滤/聚合
+      |             |                                         |          
+   样本的含义     标签过滤/聚合                     样本值float64的浮点型数据
+```
  
 * 指标(Metric)
 ```
