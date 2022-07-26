@@ -107,6 +107,11 @@ tcpdump -nn -q -i eth0
 time [CMD] # show do this cmd cost times
 ```
 
+* HTTP-web
+```
+ab -c NO. -n TotalNo. IP:PORT  # request/sec
+```
+
 * Info
 ```
 # Serial Number,ModelName
