@@ -95,6 +95,7 @@
 
 * 分析
 ```
+sudo yum install util-linux -y                      # setup nsenter
 sudo nsenter -t PID -n tcpdump -i eth0 udp port 53  # DNS
 
 ```
