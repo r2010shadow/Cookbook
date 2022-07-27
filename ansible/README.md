@@ -1,5 +1,17 @@
 # Ansible cookbook
 
+* 远程部署免ssh
+```
+修改/etc/ansible/ansible.cfg
+host_key_checking = False
+
+[dbserver]
+ip1 ansible_ssh_user=root ansible_ssh_pass='yourpasswd'
+ip2 ansible_ssh_user=root ansible_ssh_pass='yourpasswd'
+ip3 ansible_ssh_user=root ansible_ssh_pass='yourpasswd'
+```
+
+
 ## Init
 
 *关闭防火墙与SElinux
