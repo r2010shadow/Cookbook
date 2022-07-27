@@ -93,6 +93,11 @@
 | proxy,status | curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/ |
 
 
+* 分析
+```
+sudo nsenter -t PID -n tcpdump -i eth0 udp port 53  # DNS
+
+```
 
 
 ## Yaml tips
