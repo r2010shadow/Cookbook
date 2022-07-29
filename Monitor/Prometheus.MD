@@ -42,3 +42,17 @@ http_request_total{status="200", method="GET"}@1434417561287 => 94334
 ```
 
 [Handbook](https://prometheus.fuckcloudnative.io/)
+---
+`部署`
+[Download](https://prometheus.io/download/)
+* prometheus.yml 定制
+* 启动
+```
+docker run -p 9090:9090 -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml \
+       prom/prometheus
+# 有状态，带数据卷
+docker run -p 9090:9090 -v /prometheus-data \
+       prom/prometheus --config.file=/prometheus-data/prometheus.yml
+```
+* 
+
