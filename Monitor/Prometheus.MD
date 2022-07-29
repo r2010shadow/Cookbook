@@ -46,7 +46,9 @@ http_request_total{status="200", method="GET"}@1434417561287 => 94334
 `部署`
 [Download](https://prometheus.io/download/)
 * prometheus.yml 定制
-* 启动
+* 启动 
+`./prometheus --config.file=prometheus.yml`
+- - 启动容器
 ```
 docker run -p 9090:9090 -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml \
        prom/prometheus
@@ -54,5 +56,14 @@ docker run -p 9090:9090 -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml \
 docker run -p 9090:9090 -v /prometheus-data \
        prom/prometheus --config.file=/prometheus-data/prometheus.yml
 ```
-* 
+* 访问
+- - 页面
+`localhost:9090` 
+- - metrics 端点
+`localhost:9090/metrics`
+- - `表达式浏览器`
+`http://localhost:9090/graph`
+
+
+
 
