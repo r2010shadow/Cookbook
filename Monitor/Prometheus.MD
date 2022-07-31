@@ -64,7 +64,7 @@ docker run -p 9090:9090 -v /prometheus-data \
 - - `表达式浏览器`
 `http://localhost:9090/graph`
 ---
-`本地存储 不能实现长期的持久化存储`
+## 本地存储 不能实现长期的持久化存储
 ```
 如果本地存储出现故障
 最好的办法是停止运行 Prometheus 并删除整个存储目录。因为 Prometheus 的本地存储不支持非 POSIX 兼容的文件系统，一旦发生损坏，将无法恢复。
@@ -117,5 +117,19 @@ needed_disk_space = retention_time_seconds * ingested_samples_per_second * bytes
     二是增加采集样本的时间间隔。
   考虑到 Prometheus 会对时间序列进行压缩效率，减少时间序列的数量效果更明显。
 ```
-
-
+## 远程存储
+```
+通过定义两个标准接口（remote_write/remote_read），让用户可以基于这两个接口对接将数据保存到任意第三方的存储服务中，这种方式在 Promthues 中称为 Remote Storage。
+```
+- remote_write
+```
+指定 Remote Write（远程写）的 URL 地址，一旦设置了该配置项，Prometheus 将采集到的样本数据通过 HTTP 的形式发送给适配器（Adaptor）。
+而用户则可以在适配器中对接外部任意的服务。外部服务可以是真正的存储系统，公有云的存储服务，也可以是消息队列等任意形式。
+```
+- remote_read
+```
+通过了一个适配器实现。在远程读的流程当中，当用户发起查询请求后，Promthues 将向 remote_read 中配置的 URL 发起查询请求（matchers,ranges），
+Adaptor 根据请求条件从第三方存储服务中获取响应的数据。同时将数据转换为 Promthues 的原始样本数据返回给 Prometheus Server。
+当获取到样本数据后，Promthues 在本地使用 PromQL 对样本数据进行二次处理。
+```
+---
