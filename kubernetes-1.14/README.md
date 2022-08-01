@@ -106,12 +106,38 @@ sudo nsenter -t PID -n tcpdump -i eth0 udp port 53  # DNS
 
 
 ---
-CNI Container Network Interface
-kubernetes 的网络通信可以分为三层去看待：
 
+`CNI Container Network Interface`
+
+kubernetes 的网络通信可以分为三层：
 - Pod 内部容器通信
 `共享Network Namespace`
 - 同主机 Pod 间容器通信
 `共享主机网卡，每个容器都是用docker0与之通信`
 - 跨主机 Pod 间容器通信
 `CNI`
+
+CNI 插件通常有三种实现模式：
+- Overlay：靠隧道打通，不依赖底层网络
+```
+属于应用层网络，它是面向应用层的，不考虑网络层，物理层的问题。
+
+Flannel
+```
+- 路由：靠路由打通，部分依赖底层网络
+- Underlay：靠底层网络打通，强依赖底层网络
+
+Flannel
+`将 TCP 数据包装在另一种网络包里面进行路由转发和通信，目前已经支持 UDP、VxLAN、AWS VPC 和 GCE 路由等数据转发方式。`
+`规定宿主机下各个Pod属于同一个子网，不同宿主机下的Pod属于不同的子网`
+
+支持3种实现：UDP、VxLAN、host-gw，
+- UDP 模式：    使用设备 flannel.0 进行封包解包，不是内核原生支持，频繁地内核态用户态切换，性能非常差；
+```
+UDP 模式的核心就是通过 TUN 设备 flannel0 实现。TUN设备是工作在三层的虚拟网络设备，功能是：在操作系统内核和用户应用程序之间传递IP包。
+```
+- VxLAN 模式：  使用 flannel.1 进行封包解包，内核原生支持，性能较强；性能损失大约在20%~30%
+```
+是由flanneld进程维护的 linux内核再在IP包前面加上二层数据桢头，把Node2的MAC地址填进去。这个MAC地址本身，是Node1的ARP表要学习的，需 Flannel维护
+```
+- host-gw 模式：   无需 flannel.1 这样的中间设备，直接宿主机当作子网的下一跳地址，性能最强； 性能损失大约在10%
