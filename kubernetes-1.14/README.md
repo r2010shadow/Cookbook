@@ -103,3 +103,15 @@ sudo nsenter -t PID -n tcpdump -i eth0 udp port 53  # DNS
 
 ## Yaml tips
 <img src="https://github.com/r2010shadow/Cookbook/blob/master/kubernetes-1.14/img/k8s.yaml.tips..png" width=600>
+
+
+---
+CNI Container Network Interface
+kubernetes 的网络通信可以分为三层去看待：
+
+- Pod 内部容器通信
+`共享Network Namespace`
+- 同主机 Pod 间容器通信
+`共享主机网卡，每个容器都是用docker0与之通信`
+- 跨主机 Pod 间容器通信
+`CNI`
