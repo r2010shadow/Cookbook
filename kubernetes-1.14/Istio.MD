@@ -23,4 +23,22 @@
 - Admission Controller 拦截器
 ```
 拦截 API Server 请求(经过身份验证的)的网关，并且可以修改请求对象或拒绝请求。类似web框架中的middleware，是 Kubernetes API Server 用于拦截请求的一种手段。
+Admission Controller有两种：
+  一种是内置的
+  另一种是用户自定义的(Sidecar Injector)
 ```
+- - Kubernetes 为什么引入 admission 这种机制
+```
+1. 虽然 Kubernetes 有 Authentication & Authorization 这种认证鉴权机制，Authentication & Authorization 运行在 filter 中，
+   只能获取 http 请求 header 以及证书，并不能获取请求的 body。所以不可以对请求的对象进行任何操作，因为获取不到对象。
+2. Admission Controller 运行在 API Server 的增删改查 handler 中，可以自然地操作 API resource。
+   API Server 接收到客户端请求后首先进行认证鉴权，认证鉴权通过后才会进行后续的 endpoint handler 处理
+```
+- Sidecar自动注入实现
+```
+Sidecar Injector 是 Istio 中实现自动注入Sidecar的组件
+以 Kubernetes 准入控制器 Admission Controller 的形式运行
+
+```
+
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/kubernetes-1.14/img/istio-injector.png" width=300>
