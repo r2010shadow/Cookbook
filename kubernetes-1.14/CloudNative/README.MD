@@ -1,18 +1,17 @@
-云原生（Cloud Native）的定义
-
+`云原生（Cloud Native）的定义`
 
   Pivotal 是云原生应用的提出者，并推出了 Pivotal Cloud Foundry 云原生应用平台和 Spring 开源 Java 开发框架，成为云原生应用架构中先驱者和探路者。
 
-  Pivotal最初的定义
+-  Pivotal最初的定义
   早在2015年Pivotal公司的Matt Stine写了一本叫做迁移到云原生应用架构的小册子，其中探讨了云原生应用架构的几个主要特征：
 
-  CNCF最初的定义
+-  CNCF最初的定义
   到了2015年Google主导成立了云原生计算基金会（CNCF），起初CNCF对云原生（Cloud Native）的定义包含以下三个方面：
 
-  重定义
+- 重定义
   到了2018年，随着近几年来云原生生态的不断壮大，所有主流云计算供应商都加入了该基金会，且从Cloud Native Landscape中可以看出云原生有意蚕食原先非云原生应用的部分。CNCF基金会中的会员以及容纳的项目越来越多，该定义已经限制了云原生生态的发展，CNCF为云原生进行了重新定位。
 
-  以下是CNCF对云原生的重新定义（中英对照）：
+-  以下是CNCF对云原生的重新定义（中英对照）：
 
   Cloud native technologies empower organizations to build and run scalable applications in modern, dynamic environments such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach.
 
