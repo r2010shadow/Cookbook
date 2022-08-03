@@ -41,4 +41,14 @@ Sidecar Injector 是 Istio 中实现自动注入Sidecar的组件
 
 ```
 
-<img src="https://github.com/r2010shadow/Cookbook/blob/master/kubernetes-1.14/img/istio-injector.png" width=300>
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/kubernetes-1.14/img/istio-injector.png" width=600>
+
+- - Pod Sidecar容器的注入由以下步骤完成:
+```
+解析 Webhook REST 请求，将 AdmissionReview 原始数据反序列化；
+解析 Pod，将 AdmissionReview 中的 AdmissionRequest 反序列化；
+利用 Pod 及网格配置渲染 Sidecar 配置模板；
+利用 Pod 及渲染后的模板创建 JSON patch；
+构造 AdmissionResponse；
+构造 AdmissionReview，在进行 JSON 编码后，将其发送给 HTTP 客户端即Kube-apiserver；
+```
