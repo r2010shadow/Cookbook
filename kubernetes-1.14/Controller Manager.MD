@@ -16,5 +16,6 @@ Informer 会不断读取 Delta FIFO 队列中的 Object，在触发事件回调�
      通过这种方式避免对 kube-apiserver 的大量不必要请求，缓解其访问压力
 根据对应的事件类型，触发事先注册好的 ResourceEventHandler。
   client-go 的 informer 模块启动时会创建一个 shardProcessor，
-  各种 controller（如 Deployment Controller、自定义 Controller…）的事件 handler 注册到 informer 的时候会转换为一个 processorListener 实例，然后 processorListener 会被 append 到 shardProcessor 的 Listeners 切片中，shardProcessor 会管理这些 listeners。
+  各种 controller（如 Deployment Controller、自定义 Controller…）的事件 handler 注册到 informer 的时候会转换为一个 processorListener 实例，
+  然后 processorListener 会被 append 到 shardProcessor 的 Listeners 切片中，shardProcessor 会管理这些 listeners。
 ```
