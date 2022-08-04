@@ -44,6 +44,7 @@ and will get out-of-memory errors if it exceeds the memory limit set on the cgro
 `There are lots of resources on learning more about namespaces and cgroups that are only a Google search away so I urge you check them out. Here are a couple good ones:`
 
 [What even is a container: namespaces and cgroups](https://jvns.ca/blog/2016/10/10/what-even-is-a-container/)
+
 [Cgroups, namespaces, and beyond: what are containers made from?](https://www.youtube.com/watch?v=sK5i-N34im8)
 
 ```
