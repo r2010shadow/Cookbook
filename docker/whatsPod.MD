@@ -45,6 +45,9 @@ The containers are essentially stand alone silos, with the exception that they m
 
 However, with some extra command line arguments, you can combine Docker containers using a single namespace. First let's create a single container for nginx.
 
+
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/docker/img/wkpa-1.png" width=600>
+
 ```
 $ cat <<EOF >> nginx.conf
 > error_log stderr;
@@ -69,22 +72,65 @@ Next we'll run a container with ghost running in it. But this time we'll add som
 $ docker run -d --name ghost --net=container:nginx --ipc=container:nginx --pid=container:nginx ghost
 ```
 
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/docker/img/wkpa-2.png" width=600>
+
 Now our nginx container can `proxy requests directly on localhost to our ghost container.` If you access http://localhost:8080/ you should be able to see ghost running through an nginx proxy. 
 These commands create a set of containers running in `a single set of namespaces`. These namespaces allow the Docker containers to discover and communicate with each other.
 
 
-- Pods are Containers (sort of)
+## Pods are Containers (sort of)
 
 Now that we've seen that you can combine namespaces and cgroups with multiple processes, we can see that that's exactly what Kubernetes Pods are. Pods allow you to specify the containers that you want to run and Kubernetes automates setting up the namespaces and cgroups in the right way. It's a little more complicated than that, `because Kubernetes doesn't use Docker networking (it uses CNI) but you get the idea.`
 
+
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/docker/img/wkpa-3.png" width=600>
+
 Once we have our containers set up this way, each process "feels" like it's running on the same machine. They can talk to each other on localhost, they can use shared volumes. They can even use IPC or send each other signals like HUP or TERM (With shared PID namespaces in Kubernetes 1.7, Docker >=1.13).
 
+- Update and reload process with container
 Let's imagine now you want to run nginx and confd have confd update the nginx config and restart nginx whenever you add/remove app servers. 
-Let's say you have an etcd server that holds the IP addresses of your backend app servers. When that list changes confd can get a notification and write out a new nginx config and send a HUP signal to nginx to have nginx reload it's config.
+Let's say you have an etcd server that holds the IP addresses of your backend app servers. 
+When that list changes confd can get a notification and write out a new nginx config and send a HUP signal to nginx to have nginx reload it's config.
 
-With Docker the way you would do this is put both nginx and confd in a single container. Because Docker only has one entrypoint you need to keep both processes running with something like supervisord. This is not ideal because you need to run supervisord for every copy of nginx that you run. More importantly, Docker only "knows" about supervisord because that's the entrypoint. It doesn't have visibility into each process which means you and other tools can't get that info via the Docker API. Nginx might be crashing hard but Docker would have no idea.
+
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/docker/img/wkpa-4.png" width=600>
+
+`With Docker` the way you would do this is `put both nginx and confd in a single container`. 
+  Because Docker `only has one entrypoint` you need to keep both processes running with something like supervisord. 
+  This is `not ideal` because you need to run supervisord for every copy of nginx that you run. 
+  
+  More importantly, `Docker only "knows" about supervisord because that's the entrypoint`. 
+  It doesn't have visibility into each process which means you and other tools can't get that info via the Docker API. 
+  Nginx might be crashing hard but Docker would have no idea.
 
 
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/docker/img/wkpa-5.png" width=600>
+
+`With pods` Kubernetes manages each process and thus has insight into its state. 
+  That way it can provide info about that state to users via the API and can also provide services like restarting it when it crashes or automated logging.
+  
+
+<img src="https://github.com/r2010shadow/Cookbook/blob/master/docker/img/wkpa-6.png" width=600>  
+  
+## Pods are Containers as an API
+
+By being able to combine containers into Pods this way we can essentially create containers 
+that can be added to Pods as an "API" that others can `consume`. 
+This isn't an API in the normal Web API sense, but rather an abstraction that other Pods can use.
+
+For instance, take our nginx + confd example. In this example, confd `doesn't know` anything about the nginx process. 
+  All it knows is that it needs to watch a value in etcd and send a HUP signal to a process or run a command. 
+  The app that it runs with `doesn't have` to be nginx. It could be any kind of application. 
+  
+  In this way, you could use the confd container image and configuration and swap it in with any number of different types of Pods. 
+  Pods where you can do that are usually called "sidecar containers" invoking the image of a sidecar on a motorcycle.
+
+You can also think of other types of abstractions you could use. 
+  Service meshes like istio can be bolted on as sidecars and provide service routing, telemetry, policy enforcement 
+  without ever having to change the main application.
+
+You can also use multiple sidecars. There's nothing stopping you from using both the confd sidecar and istio sidecar at the same time. 
+  Applications can be combined in this way to build much more complex and reliable systems while keeping each individual app relatively simple. 
 
 
 
