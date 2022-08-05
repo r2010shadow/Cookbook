@@ -53,7 +53,7 @@ sudo docker run -d --name fake_k8s_pod_nginx \
 sudo docker run -d --name ghost \
         --net=container:fake_k8s_pod_pause \
         --ipc=container:fake_k8s_pod_pause \
-        --pid=container:fake_k8s_pod_pause 
+        --pid=container:fake_k8s_pod_pause \
         ghost
 ```
 - 访问 “Pod” 服务 http://172.20.20.11:8888/
