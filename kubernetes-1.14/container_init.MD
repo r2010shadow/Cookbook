@@ -22,6 +22,47 @@ init 容器没有 Lifecycle actions, Readiness probes, Liveness probes 和 Start
 - 当一个 Pod 有多个 init 容器时，这些 init 容器是顺序运行的，一个 init 容器完成之后，才会运行一个 init 容器。
 
 ## init 容器的资源问题
+根据requests/limits 的总量 ， 加上init容器请求资源之和，选择可调度的Node worker01.
 ```
+# init-pod.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-init-pod
+  labels:
+    app: init
+spec:
+  containers:
+  - name: myapp
+    image: busybox
+    resources:
+      requests:
+        cpu: 100m  
+    command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+  - name: init-01
+    image: busybox
+    command: ['sh', '-c', 'sleep 10']
+    resources:
+      requests:
+        cpu: 20m
+  - name: init-02
+    image: busybox
+    command: ['sh', '-c', 'sleep 10']
+    resources:
+      requests:
+        cpu: 30m
+```
+kubectl apply -f init-pod.yml
+使用 kubectl describe node worker01 可以找到test-init-pod的 requests.cpu 总量计算为 100m，这刚好是应用容器的 requests.cpu
 
-```
+## init 容器的应用场景
+- web + db
+- 前置容器中的资源(如ffmpeg) + app 
+
+
+
+
+
+
+
