@@ -141,3 +141,45 @@ UDP 模式的核心就是通过 TUN 设备 flannel0 实现。TUN设备是工作�
 是由flanneld进程维护的 linux内核再在IP包前面加上二层数据桢头，把Node2的MAC地址填进去。这个MAC地址本身，是Node1的ARP表要学习的，需 Flannel维护
 ```
 - host-gw 模式：   无需 flannel.1 这样的中间设备，直接宿主机当作子网的下一跳地址，性能最强； 性能损失大约在10%
+
+--- 
+`kubeadm 维护类`
+- 驱逐这个节点上的所有pod
+`kubectl drain NODENAME --delete-local-data --force --ignore-daemonsets`
+```
+ --ignore-daemonsets往往需要指定的,这是因为deamonset会忽略unschedulable标签(使用kubectl drain时会自动给节点打上不可调度标签),
+因此deamonset控制器控制的pod被删除后可能马上又在此节点上启动起来,这样就会成为死循环.因此这里忽略daemonset.
+
+使用kubectl drain时候,命令行一直被阻塞,等了很久还在被阻塞.比如某pod一直处于Terminating状态.
+  来强制马上删除pod  kubectl delete pods busybox --grace-period=0 --force
+```
+
+- 清除节点
+`kubectl del node NODENAME`
+
+- 节点重置安装
+`kubeadm reset`
+
+- 重置iptables
+`iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X`
+
+- 重置ipvs
+`ipvsadm -C`
+
+- 重新加入集群
+```
+    kubeadm reset
+    systemctl stop kubelet
+    systemctl stop docker
+    rm -rf /var/lib/cni/
+    rm -rf /var/lib/kubelet/*
+    rm -rf /etc/cni/
+    ifconfig cni0 down
+    ifconfig flannel.1 down
+    ifconfig docker0 down
+    ip link delete cni0
+    ip link delete flannel.1
+    systemctl start docker
+
+    kubeadm join XXXXX
+```
