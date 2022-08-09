@@ -1,15 +1,17 @@
 ## 调度 
-`将一个 Pod 分配到某一个可以满足 Pod 资源请求的节点上，这一过程称之为调度。
+`将一个 Pod 分配到某一个可以满足 Pod 资源请求的节点上，这一过程称之为调度。`
 - 期望与满足
-- - 服务器类型，高性能，高存储
-- - 网络类型，网络协议，bond
-- - 均衡负载，异地
-- - 环境,app,test,prod
+- - 服务器类型 高性能，高存储
+- - 网络类型 网络协议，bond
+- - 均衡负载 异地
+- - 环境 app,test,UAT,prod
 
 - 分组调度
+pod调度 指定label的pod到何处nodeselector
 - 压力驱逐
+node调度 专属节点，运行那些pod入驻
 - 服务容灾
-
+---
 ## 分组调度
 - 标签
 ```
@@ -36,4 +38,7 @@ kubectl get pod [node] --show-labels
 nodeSelector:
   disktype: ssd
 ```
-
+---
+## 压力驱逐
+- 污点
+专用node节点
