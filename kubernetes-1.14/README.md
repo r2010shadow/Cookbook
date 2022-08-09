@@ -1,5 +1,7 @@
 # Kubernetes cooking
 
+[kubectl_备忘单](https://kubernetes.io/zh-cn/docs/reference/kubectl/cheatsheet/)  [kubectl_命令参考](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
+
 * K8S架构
 
 | 特性             | 成员                         | 作用                                                         |
@@ -10,7 +12,7 @@
 |                  | Controller                   | 8 个 Controller，分别对应着副本，节点，资源，命名空间，服务等等 |
 | Node             |                              |                                                              |
 |                  | kubelet                      | 按schedule说的做，用于处理 Master 下发到 Node 的任务<br>向apiserver注册node信息，通过cAdvisor监控容器 |
-|                  | kebu proxy                   | 负责实施 反向代理、负载均衡                                  |
+|                  | kube_proxy                   | 负责实施 反向代理、负载均衡                                  |
 | kubectl          |                              | 下发指令                                                     |
 
 * APISERVER
@@ -83,14 +85,32 @@
 
 
 * 调试
+```
+简化输入
+alias kc="kubectl"
+alias ka="kubectl apply -f"
+alias kd="kubectl delete -f"
+```
 
-| Info         | Script                                                       |
-| ------------ | ------------------------------------------------------------ |
-| POD_NAME     | export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}') |
-| NODE_PORT    | export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}') |
-| NodePort     | kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080 |
-| POD,api,info | curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/ |
-| proxy,status | curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/ |
+| Info                                               | Script、kubectl                                              |
+| -------------------------------------------------- | ------------------------------------------------------------ |
+| pod_name                                           | export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}') |
+| pod_name                                           | kubectl get pods -A -o=name                                  |
+| NODE_PORT                                          | export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}') |
+| NODE_PORT                                          | kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080 |
+| POD,api,info                                       | curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/ |
+| proxy,status                                       | curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/ |
+| 当前命名空间中正在运行的 Pods                      | kubectl get pods --field-selector=status.phase=Running       |
+| 所有工作节点                                       | kubectl get node --selector='!node-role.kubernetes.io/master' |
+| 所有 Services                                      | kubectl get services --sort-by=.metadata.name                |
+| 全部节点的 ExternalIP 地址                         | kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}' |
+| Pod 使用的全部 Secret                              | kubectl get pods -o json \| jq '.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name' \| grep -v null \| sort \| uniq |
+| 运行着的所有镜像                                   | kubectl get pods -A -o=custom-columns='DATA:spec.containers[*].image' |
+| 按重启次数排序列出pod                              | kubectl get pods --sort-by='.status.containerStatuses[0].restartCount' |
+| 按容量排序PV 持久卷                                | kubectl get pv --sort-by=.spec.capacity.storage              |
+| 按时间戳排序列出事件                               | kubectl get events --sort-by=.metadata.creationTimestamp     |
+| 比较当前的集群状态和假定某清单被应用之后的集群状态 | kubectl diff -f ./my-manifest.yaml                           |
+| 查看Pod 负载情况                                   | kubectl top pod POD_NAME --sort-by=cpu  </br> kubectl top pod POD_NAME --containers |
 
 
 * 分析
@@ -183,3 +203,5 @@ UDP 模式的核心就是通过 TUN 设备 flannel0 实现。TUN设备是工作�
 
     kubeadm join XXXXX
 ```
+
+
