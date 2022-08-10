@@ -16,6 +16,7 @@ Cook with Network、System、Cloud、Security、Code and Imagination :)
 * Troubleshooting fix by tools and experience,python、shell、net-tools、sysstat and so on.
 * Other coding experience include MSDOS、javascripts、c#、vue.js、node.js.
 * Other project experience include raspberry pi、Unity3D、Getready.
+* Recording by Read the Docs + sphinx + github
 
 
 ## Make good dish everyday
