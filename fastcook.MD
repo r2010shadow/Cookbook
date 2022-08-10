@@ -1,6 +1,13 @@
 # Fastcook
 * Git
 ```
+> store passwd
+git config –global credential.helper store
+
+cat /root/.gitconfig
+[credential]
+	helper = store
+
 > ignore folder
 echo node_modules  > .gitignore
 target          //忽略这个target目录
