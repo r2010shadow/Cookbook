@@ -1,8 +1,7 @@
 # IT Standard 信息技术标准
 
 
-
-## ITSS、ITIL和 [ISO20000](https://www.cqc.com.cn/www/chinese/txrz/itfw/) 三者的区别?
+## ITSS、ITIL和 ISO20000三者的区别?
 ITSS、ITIL、ISO20000区别为：性质不同、设立组织不同、目的不同、适用对象不同。
 
 - 性质不同
@@ -100,3 +99,14 @@ ITIL 4 的目的是为组织提供现代服务经济中信息技术管理的全�
 - 4）审核结果的陈述。如果达到ISO 200000 体系要求，将进行ISO 20000认证陈述，颁发证书。
 
 `6、维护认证的有效期为三年；所以，每三年，需要进行一次全面的认证审核。每年都须由认证机构进行“监督审核”，以确保认证质量，确保服务管理的持续改进。组织需要根据ISO 20000的要求，进行内部审核。`
+
+
+---
+## 附录
+[The Information Technology Infrastructure ITIL](https://www.itlibrary.org/)  
+
+[International Organization for Standardization ISO)](https://www.iso.org/home.html)
+
+[ITIL4中文知识库](http://www.itil4hub.cn/bin/view/Main/) [中国质量认证中心ISO20000](https://www.cqc.com.cn/www/chinese/txrz/itfw/)
+
+[ServiceDesk Plus](https://www.manageengine.cn/products/service-desk/)
