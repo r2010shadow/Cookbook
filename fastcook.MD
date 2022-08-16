@@ -619,6 +619,7 @@ Packet Tracer
 
 * Cloud tools
 ```
+www.wetools.com  # diff web
 pan.quark.cn
 yun.baidu.com
 shimo.im
