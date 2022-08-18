@@ -1,6 +1,4 @@
-# k3s
-
-## install/uninstall
+# k3s notes
 
 | 先决条件     |                                                              |
 | ------------ | ------------------------------------------------------------ |
@@ -12,6 +10,8 @@
 | 注意事项     | server 节点默认是可以调度的，规避需 server 节点上设置污点。  |
 
 
+
+## install/uninstall
 
 - Server
 
@@ -83,7 +83,13 @@ SERVER
 	./install.sh  
 ```
 
+## 容器清理
 
+为了在升级期间实现高可用性，当 K3s 服务停止时，K3s 容器会继续运行。
+
+- killall 脚本清理容器、K3s 目录和网络组件，同时也删除了 iptables 链和所有相关规则。
+- 集群数据不会被删除。
+- 要从 server 节点运行 killall 脚本，请运行：` /usr/local/bin/k3s-killall.sh`
 
 ---
 
@@ -139,4 +145,68 @@ curl -fL https://get.k3s.io | sh -
 
 ---
 
-- 仪表盘
+## 存储
+
+与 K3s 一起使用：Kubernetes 的[容器存储接口（CSI）](https://github.com/container-storage-interface/spec/blob/master/spec.md)和[云提供商接口（CPI）](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
+
+- 设置 Local Storage Provider
+
+K3s 自带 Rancher 的 Local Path Provisioner，这使得能够使用各自节点上的本地存储来开箱即用地创建持久卷声明。
+
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-path-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-test
+  namespace: default
+spec:
+  containers:
+  - name: volume-test
+    image: nginx:stable-alpine
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+    - name: volv
+      mountPath: /data
+    ports:
+    - containerPort: 80
+  volumes:
+  - name: volv
+    persistentVolumeClaim:
+      claimName: local-path-pvc
+```
+
+---
+
+## 网络
+
+- [Traefik](https://traefik.io/) 是一个现代的 HTTP 反向代理和负载均衡器，它是为了轻松部署微服务而生的。
+  - 默认的配置文件在`/var/lib/rancher/k3s/server/manifests/traefik.yaml`中。
+  - 不应该手动编辑 `traefik.yaml`文件，因为 k3s 一旦重启就会再次覆盖它。
+  - 应在目录里额外的`HelmChartConfig`清单来定制 Traefik
+- [Klipper Load Balancer](https://github.com/k3s-io/klipper-lb) k3s负载均衡器
+  - 对于每个 service load balancer，都会创建一个[DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)。 DaemonSet 在每个节点上创建一个前缀为`svc`的 Pod。例如 svclb-traefik-eeeafbb5-k2x66
+
+---
+
+## Helm
+
+### 自动部署 manifests 和 Helm charts
+
+在`/var/lib/rancher/k3s/server/manifests`中找到的任何 Kubernetes 清单将以类似`kubectl apply`的方式自动部署到 K3s。以这种方式部署的 manifests 是作为 AddOn 自定义资源来管理的，
+
+可以通过运行`kubectl get addon -A`来查看。你会发现打包组件的 AddOns，如 CoreDNS、Local-Storage、Traefik 等。AddOns 是由部署控制器自动创建的，并根据它们在 manifests 目录下的文件名命名。
+
+也可以将 Helm Chart 作为 AddOns 部署。K3s 包括一个[Helm Controller](https://github.com/rancher/helm-controller/)，它使用 HelmChart Custom Resource Definition(CRD)管理 Helm Chart。
