@@ -298,6 +298,11 @@ cat >> /etc/fstab
 /data/swapfile	none	swap	sw	0	0
 #remove swapfile
 /sbin/swapoff /data/swapfile 
+
+# docker dont need swap
+cat /etc/fstab
+#/swap.img	none	swap	sw	0	0
+reboot & sudo swapon --show
 ```
 
 * capability 
