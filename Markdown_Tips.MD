@@ -119,17 +119,17 @@ Typora是一款支持实时预览的 Markdown 文本编辑器
 
 
 - 27、字体颜色(字体颜色、背景色、大小、字体种类)
+[Typora设置文字颜色/大小/字体属性_M010K的博客-CSDN博客](blog.csdn.net/qq_43444349/article/details/105715586)
 ```
 由于Typora或者说markdown中没有直接的语法支持文字的颜色，大小，字体等属性的设置，Typora支持内嵌html的语法，那么只要插入一条html代码即可（直接在Typora的markdown文件中使用即可）：
 ```
-[Typora设置文字颜色/大小/字体属性_M010K的博客-CSDN博客](blog.csdn.net/qq_43444349/article/details/105715586)
+
 
 - 28、自动保存
 
 - 29、插入引用（⌘ + ⌥ + Q）
 
 - 30、插入公式块（⌘ + ⌥ + B）
-
 [点点星河：Typora数学公式汇总（Markdown）](zhuanlan.zhihu.com/p/261750408?utm_source=wechat_session)
 
 - 31、定义脚注（文字脚注）
