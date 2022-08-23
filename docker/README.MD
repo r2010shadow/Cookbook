@@ -26,3 +26,17 @@ Docker Client、Docker Daemon、Docker Registry、Graph、Driver、libcontainer�
 COPY from=storage.bigfish.com/fish/static-ffmpeg:v1 /ffmpeg /usr/local/bin/
 从一个镜像中(storage.bigfish.com/fish/static-ffmpeg:v1)打包出的产物中，复制一个压缩包到另外一层镜像中
 ```
+
+---
+## 常用配置
+- 加速
+```
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://l10nt4hq.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
