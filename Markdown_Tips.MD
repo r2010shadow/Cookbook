@@ -1,4 +1,5 @@
 # Markdown for mac
+`快捷键中常用符号⌘（command）、⌥（option）、⇧（shift）、⇪（caps lock）、⌃（control）、↩（return）、⌅（enter）`
 
 - 1、标题（⌘ + 数字）
 一级标题：（⌘ + 1）
@@ -141,9 +142,12 @@ Typora设置文字颜色/大小/字体属性_M010K的博客-CSDN博客
 
 - 34、标题居中
 由于markdown不直接支持标题的对齐格式（默认为左对齐），但部分时候需要实现居中对齐以及右对齐等情况，但是在Typora中支持html语法，故可以使用html语句设置标题居中，h1表示一级标题，h6表示六级标题
-
+```
+<h1 align = "center">标题居中的方法</h1>
+```
 
 - 35、文本居中
+```
+<div align = "center">文本居中的方法</div>
+```
 
----
-一些特殊的符号，比如快捷键中常用符号⌘（command）、⌥（option）、⇧（shift）、⇪（caps lock）、⌃（control）、↩（return）、⌅（enter）
