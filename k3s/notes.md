@@ -21,7 +21,8 @@ curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh 
 
 Token  /var/lib/rancher/k3s/server/node-token  `mynodetoken` 
 
-uninstall /usr/local/bin/k3s-uninstall.sh 
+- uninstall 
+/usr/local/bin/k3s-uninstall.sh 
 
 
 
@@ -33,7 +34,8 @@ curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh 
 
 hosts  echo "myserverIP myserver" >> /etc/hosts 
 
-uninstall /usr/local/bin/k3s-agent-uninstall.sh
+- uninstall 
+/usr/local/bin/k3s-agent-uninstall.sh
 
 
 
