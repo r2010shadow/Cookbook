@@ -212,6 +212,9 @@ cat /etc/profile | grep "^HISTSIZE"
 
 # history without number
 history | cut -c 28-
+
+# mac history
+~/.zsh_history
 ```
 
 * Files
