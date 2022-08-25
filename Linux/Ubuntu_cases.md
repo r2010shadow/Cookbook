@@ -18,3 +18,14 @@ sudo apt install watchdog
 sudo systemctl enable watchdog.service
 sudo systemctl start watchdog.service
 ```
+
+`Syntax error: "(" unexpected (expecting "fi")`
+- 脚本执行报错
+- - 1. 修改配置
+```
+ls -l /bin/sh
+lrwxrwxrwx 1 root root 4 Aug  6  2020 /bin/sh -> dash
+# Ubuntu安装时默认使用dash
+sudo dpkg-reconfigure dash
+# 选 no，不使用dash
+```
