@@ -110,3 +110,56 @@ ITIL 4 的目的是为组织提供现代服务经济中信息技术管理的全�
 [ITIL4中文知识库](http://www.itil4hub.cn/bin/view/Main/) [中国质量认证中心ISO20000](https://www.cqc.com.cn/www/chinese/txrz/itfw/)
 
 [ServiceDesk Plus](https://www.manageengine.cn/products/service-desk/)
+
+---
+# ISO27001
+- 0.1 General
+```
+This International Standard has been prepared to provide a model for establishing, implementing, operating, monitoring, reviewing, maintaining and improving an Information Security Management System (ISMS).
+从第一句话就可以看出该标准所针对的目标和目标的不同维度来进行规范。该标准是从建立，实施，操作，监控，审计，维护和提高几个维度来规范化信息安全管理体系。信息安全管理体系-------
+*The design and implementation of an organization’s ISMS is influenced by their needs and objectives, security requirements, the processes employed and the size and structure of the organization. These and their supporting systems are expected to change over time. *
+这两句话我觉得是整个标准中很重要的一处，尤其是对企业或者需求信息安全管理体系的一方来说，理解这两句话尤为重要。一个企业的信息安全管理体系的设计与实施应该与他们的企业的性质，安全需求，企业的规模等等息息相关。不同性质、不同规模的企业有不同的安全需求。因为企业的性质、企业的规模以及企业信息所涉及的利益直接决定了与企业相对的攻击者的性质，决定了企业所可能存在的威胁面、受攻击面。针对不同的攻击面，不同类型的攻击者，企业所有设计、实施的信息安全管理体系也必然是不相同的。其次，企业的性质和攻击者的状态等等，从时间维度来说是一个变量，所以企业所面临的信息安全风险和企业的信息安全管理体系是随着时间不断变化的，这也是攻防双方状态转变导致的相互促进。
+所以，安全永远只是一个相对的概念，不会是个绝对的概念。所以行业所追求的最佳实践应该是在了解企业自身的性质、利益以及所面临的威胁的状况下做到的相对安全。举例来说，一个提供在线影音的企业和一个提供在线金融交易的企业，他们的企业性质不同，所面临的攻击者和攻击面也不同，导致他们所设计以及实施的信息安全管理体系也是不同的。相对于攻击者来说，不会有国际APT组织，拿着0day去攻击一个不知名的小企业。所以构建并维护一个合适的信息安全管理体系的基础是了解企业自身，并随着对企业的更多的了解来动态调整该信息安全管理体系。
+```
+
+- 0.2 Process approach
+```
+Any activity using resources and managed in order to enable the transformation of inputs into outputs can be considered to be a process.
+The application of a system of processes within an organization, together with the identification and interactions of these processes, and their management, can be referred to as a “process approach”.
+这里定义了任何利用资源进行管理并能够将输入转化为输出的活动都可以视为一个过程。定义组织内过程系统的应用，以及这些过程的标识和交互以及它们的管理，可以称为过程方法。
+
+understanding an organization’s information security requirements and the need to establish policy and objectives for information security;
+implementing and operating controls to manage an organization's information security risks in the context of the organization’s overall business risks;
+monitoring and reviewing the performance and effectiveness of the ISMS; and
+continual improvement based on objective measurement.
+该标准所提出的信息安全管理体系的过程方法强调我们注重以上几点。第一点在前面说过，第二点其实也一样，我们所考虑的风险应该是在企业的所有的业务风险范围内，掌控边界，不但减少工作量，也提高了效率，不做无用功。第三点和第四点是对信息安全管理体系的检测，保证在企业性质等变化时信息安全管理体系能动态作出调整，保持有效。
+```
+
+## PDCA模型
+```
+接着，标准提出、使用了一个很重要的模型---“Plan-Do-Check-Act”（PDCA）模型。四个过程的输出分别作为其下一个过程的输入，形成闭环，不断调整。
+```
+
+- Plan
+```
+：建立与风险管理和改善信息安全有关的信息安全管理体系的策略、目标、过程和程序，并根据组织的总体政策和目标提供相应的计划。PLAN阶段，以风险评估和改善信息安全为重点，并根据企业的具体情况，提出信息安全管理体系的设计计划。
+在这个阶段是需要通过风险评估以及各种方法从更多的角度了解企业，不仅是企业当前的状态，以及对其之后发展的预估。只有对企业的了解足够充分才能设计一个更加全面、合适的信息安全体系。
+```
+- Do
+```
+：对计划的信息安全管理体系的策略、目标、过程和程序进行落地，实施。在落地过程中，因为信息差，实际和设计时的预想是存在一定的偏差的。这里所说的策略、目标、过程和程序映射到实际场景中可以是统一的权限管理策略，统一的认证、漏洞管理计划、SOC的建设等。
+```
+- Check
+```
+：这里的CHECK是针对ISMS的。通过对实际或者测试场景，对ISMS的策略的有效性等进行检测，并将检测结果定时上报给管理。CHECK是动态调整，不断提升ISMS效率的最关键的一步，CHECK的有效性也是对整个ISMS实时有效性的保证。
+```
+- Act
+```
+：针对对ISMS的审计结果以及其他的建议，采取对ISMS策略的纠正以及预防，提高ISMS的有效性。
+```
+
+[原文](https://www.jianshu.com/p/1205f7b39acb)
+
+
+---
+
