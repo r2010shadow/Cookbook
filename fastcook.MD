@@ -610,7 +610,7 @@ typora
 
 * Sys Tools
 ```
-Xshell
+Xshell  #缺少dll处理，https://www.microsoft.com/zh-CN/download/details.aspx?id=30679
 MobaX
 putty
 winScp
