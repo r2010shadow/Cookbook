@@ -30,15 +30,17 @@ sudo dpkg-reconfigure dash
 # 选 no，不使用dash
 ```
 
-卸载无用内核
+- 卸载无用内核
+```
 dpkg --get-selections |grep linux-image
 linux-image-5.8.0-25-generic                    install
 linux-image-generic-hwe-20.04                   install
 
 apt remove linux-image-generic-hwe-20.04
 apt autoremove
-
-禁止自动更新
+```
+- 禁止自动更新
+```
 1 apt-mark hold linux-image-5.8.0-25-generic or apt-mark hold linux-image-generic linux-headers-generic 
 2 vi /etc/apt/apt.conf.d/10periodic
 APT::Periodic::Update-Package-Lists "0";
@@ -50,8 +52,9 @@ APT::Periodic::Update-Package-Lists "0";
 APT::Periodic::Download-Upgradeable-Packages "0";
 APT::Periodic::AutocleanInterval "0";
 APT::Periodic::Unattended-Upgrade "0";
-
-卸载桌面
+```
+- 卸载桌面
+```
 apt remove gnome-shell gnome
 apt autoremove
 apt purge gnome
@@ -62,3 +65,4 @@ apt remove ubuntu-desktop
 
 apt remove libreoffice-common
 apt remove thunderbird totem  rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot  gnome-mines cheese transmission-common gnome-orca gnome-sudoku
+```
