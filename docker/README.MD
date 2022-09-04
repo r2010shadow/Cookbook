@@ -43,6 +43,7 @@ sudo systemctl restart docker
 
 ---
 ## registry
+```
 docker pull registry:2
 docker run -d -p 5000:5000 registry:2
 curl -i http://localhost:5000/v2/
@@ -54,3 +55,4 @@ docker push localhost:5000/busy
 - show list
 curl http://localhost:5000/v2/_catalog
 curl http://localhost:5000/v2/busy/manifests/latest
+```
