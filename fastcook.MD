@@ -209,6 +209,7 @@ cat /proc/uptime| awk -F. '{run_days=$1 / 86400;run_hour=($1 % 86400)/3600;run_m
 
 # history size
 cat /etc/profile | grep "^HISTSIZE"
+echo $HISTSIZE
 
 # history without number
 history | cut -c 28-
