@@ -199,6 +199,17 @@ ip -s link show [ethX]     # Rx Tx
 watch ifconfig
 watch cat /proc/net/dev
 ```
+* ss
+```
+ss -s 列出当前socket详细信息
+ss -l 显示本地打开的所有端口
+ss -pl 显示每个进程具体打开的socket
+ss -t -a 显示所有tcp socket
+ss -u -a 显示所有的UDP Socekt
+ss -o state established '( dport = :smtp or sport = :smtp )' 显示所有已建立的SMTP连接
+ss -o state established '( dport = :http or sport = :http )' 显示所有已建立的HTTP连接
+ss -x src /tmp/.X11-unix/* 找出所有连接X服务器的进程
+```
 
 * awk
 ```
