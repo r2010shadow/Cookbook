@@ -199,6 +199,23 @@ ip -s link show [ethX]     # Rx Tx
 watch ifconfig
 watch cat /proc/net/dev
 ```
+* iostat
+```
+显示一条统计记录,包括所有的CPU和设备.
+
+# iostat -d 2
+每隔2秒,显示一次设备统计信息.
+
+# iostat -d 2 6
+每隔2秒,显示一次设备统计信息.总共输出6次.
+
+# iostat -x hda hdb 2 6
+每隔2秒显示一次hda,hdb两个设备的扩展统计信息,共输出6次.
+
+# iostat -p sda 2 6
+每隔2秒显示一次sda及上面所有分区的统计信息,共输出6次.
+```
+
 * ss
 ```
 ss -s 列出当前socket详细信息
