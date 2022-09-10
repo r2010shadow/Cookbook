@@ -1,6 +1,7 @@
 # ntp.conf
 
 - 1.时区 2.ntpdate 3.service
+
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
 ntpdate time.windows.com && hwclock -w
 rpm -qa | grep ntp
@@ -18,6 +19,7 @@ yum install ntp -y
 
 
 ## ntpd、ntpdate的区别
+```
 使用之前得弄清楚一个问题，ntpd与ntpdate在更新时间时有什么区别。ntpd不仅仅是时间同步服务器，他还可以做客户端与标准时间服务器进行同步时间，而且是平滑同步，并非ntpdate立即同步，在生产环境中慎用ntpdate，也正如此两者不可同时运行。
 时钟的跃变，对于某些程序会导致很严重的问题。许多应用程序依赖连续的时钟——毕竟，这是一项常见的假定，即，取得的时间是线性的，一些操作，例如数据库事务，通常会地依赖这样的事实：时间不会往回跳跃。不幸的是，ntpdate调整时间的方式就是我们所说的”跃变“：在获得一个时间之后，ntpdate使用settimeofday(2)设置系统时间，这有几个非常明显的问题：
 第一，这样做不安全。ntpdate的设置依赖于ntp服务器的安全性，攻击者可以利用一些软件设计上的缺陷，拿下ntp服务器并令与其同步的服务器执行某些消耗性的任务。由于ntpdate采用的方式是跳变，跟随它的服务器无法知道是否发生了异常（时间不一样的时候，唯一的办法是以服务器为准）。
@@ -25,7 +27,7 @@ yum install ntp -y
 第三，这样做不够优雅。由于是跳变，而不是使时间变快或变慢，依赖时序的程序会出错（例如，如果ntpdate发现你的时间快了，则可能会经历两个相同的时刻，对某些应用而言，这是致命的）。
 因而，唯一一个可以令时间发生跳变的点，是计算机刚刚启动，但还没有启动很多服务的那个时候。其余的时候，理想的做法是使用ntpd来校准时钟，而不是调整计算机时钟上的时间。
 NTPD 在和时间服务器的同步过程中，会把 BIOS 计时器的振荡频率偏差——或者说 Local Clock 的自然漂移(drift)——记录下来。这样即使网络有问题，本机仍然能维持一个相当精确的走时。
- 
+``` 
 - ntp的移植
 1)   ./configure --prefix=YOUR_INSTALL_DIRECTORY--host=arm-linux
 2)   make
@@ -110,15 +112,17 @@ keys /etc/ntp/keys
 ```
  
 - ntpd服务的设置
+```
 ntpd服务的相关设置文件如下：
 1)    /etc/ntp.conf：这个是NTP daemon的主要设文件，也是 NTP 唯一的设定文件。
 2)    /usr /share/zoneinfo/:在这个目录下的文件其实是规定了各主要时区的时间设定文件，例如北京地区的时区设定文件在/usr/share/zoneinfo/Asia/Beijing 就是了。这个目录里面的文件与底下要谈的两个文件(clock 与localtime)是有关系的。
 3)    /etc/sysconfig/clock：这个文件其实也不包含在NTP 的 daemon 当中，因为这个是 linux 的主要时区设定文件。每次开机后，Linux 会自动的读取这个文件来设定自己系统所默认要显示的时间。
 4)    /etc /localtime：这个文件就是“本地端的时间配置文件”。刚刚那个clock 文件里面规定了使用的时间设置文件(ZONE) 为/usr/share/zoneinfo/Asia/Beijing ，所以说，这就是本地端的时间了，此时， Linux系统就会将Beijing那个文件另存为一份 /etc/localtime文件，所以未来我们的时间显示就会以Beijing那个时间设定文件为准。
 5)    /etc/timezone：系统时区文件
-  
+```  
  
 - ntp服务的启动与观察
+```
 在启动NTP服务前，先对提供服务的这台主机手动的校正一次时间咯。（因为启动服务器，端口会被服务端占用，就不能手动同步时间了）
 [root@linux ~] # ntpdate cn.pool.ntp.org
 25 Apr 14:33:51 ntpdate[8310]: step time server80.85.129.2 offset 6.655976 sec
@@ -130,18 +134,18 @@ udp       0      0192.168.228.153:123        0.0.0.0:*
 udp       0      0127.0.0.1:123              0.0.0.0:*
 udp       0      00.0.0.0:123                 0.0.0.0:*
 udp       0      0:::123                      :::*
- 
+``` 
  
 - ntptrace
 [root@linux ~] # ntptrace –n 127.0.0.1
 127.0.0.1:stratum 11, offset 0.000000，synch distance0.950951
 222.73.214.125：stratum 2，offset –0.000787，synch distance0.108575
 209.81.9.7:stratum 1，offset 0.000028，synch distance0.00436，refid ‘GPS’
-#这个指令可以列出目前NTP服务器（第一层）与上层NTP服务器（第二层）彼此之间的
-#关系
+#这个指令可以列出目前NTP服务器（第一层）与上层NTP服务器（第二层）彼此之间的关系
  
  
 - ntpq
+```
 [root@linux ~] # ntpq –p
 指令“ntpq -p”可以列出目前我们的NTP与相关的上层NTP的状态，以上的几个字段的意义如下：
 remote：即NTP主机的IP或主机名称。注意最左边的符号，如果由“+”则代表目前正在作用钟的上层NTP，如果是“*”则表示也有连上线，不过是作为次要联机的NTP主机。
@@ -153,7 +157,7 @@ reach：已经向上层NTP服务器要求更新的次数
 delay：网络传输过程钟延迟的时间
 offset：时间补偿的结果
 jitter：Linux系统时间与BIOS硬件时间的差异时间
- 
+``` 
  
 - 系统时间与硬件时间同步
 ntp服务，默认只会同步系统时间。如果想要让ntp同时同步硬件时间，可以设置/etc/sysconfig/ntpd文件，
