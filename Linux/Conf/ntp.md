@@ -1,7 +1,7 @@
 # ntp.conf
 
 - 1.时区 2.ntpdate 3.service
-
+```
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
 ntpdate time.windows.com && hwclock -w
 rpm -qa | grep ntp
@@ -16,7 +16,7 @@ NTP
 yum install ntp -y
  ntpdate time.nist.gov 
 */10 * * * * ntpdate time.nist.gov
-
+```
 
 ## ntpd、ntpdate的区别
 ```
