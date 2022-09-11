@@ -671,6 +671,15 @@ awk '{$1="";print $0}' file
 6、打印文本第二行第一列                  ：sed -n "2, 1p" filename | awk 'print $1'
 ```
 
+* scp
+```
+从 本地 复制到 远程
+scp local_file remote_ip:remote_file
+scp local_file remote_username@remote_ip:remote_file
+从 远程 复制到 本地
+scp remote_username@remote_ip:remote_file local_file 
+```
+
 * shell others
 ```
 shell里面的赋值方法有两种，格式为
