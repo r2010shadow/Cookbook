@@ -201,6 +201,27 @@ watch cat /proc/net/dev
 ```
 * iostat
 ```
+# iostat
+Linux 2.6.9-8.11.EVAL (ts3-150.ts.cn.tlan)      08/08/2007
+
+avg-cpu:  %user   %nice    %sys %iowait   %idle
+             12.01    0.00        2.15    2.30       83.54
+
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+hda               7.13       200.12        34.73     640119     111076
+vg-cpu段:
+%user: 在用户级别运行所使用的CPU的百分比.
+%nice: nice操作所使用的CPU的百分比.
+%sys: 在系统级别(kernel)运行所使用CPU的百分比.
+%iowait: CPU等待硬件I/O时,所占用CPU百分比.
+%idle: CPU空闲时间的百分比.
+Device段:
+tps: 每秒钟发送到的I/O请求数.
+Blk_read /s: 每秒读取的block数.
+Blk_wrtn/s: 每秒写入的block数.
+Blk_read:   读入的block总数.
+Blk_wrtn:  写入的block总数.
+---
 显示一条统计记录,包括所有的CPU和设备.
 
 # iostat -d 2
