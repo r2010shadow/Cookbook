@@ -147,3 +147,121 @@ Quoted Values: good 2017
 Quoted Values: good 2017
 
 Total Number of Parameters : 2
+
+---
+
+## Creating Functions
+
+
+
+### Example
+
+Following example shows the use of function −
+
+```
+#!/bin/sh
+
+Hello () {
+   echo "Hello World"
+}
+
+# Invoke your function
+Hello
+```
+
+
+
+## Pass Parameters to a Function
+
+You can define a function that will accept parameters while calling the function. These parameters would be represented by **$1**, **$2** and so on.
+
+Following is an example where we pass two parameters *Zara* and *Ali* and then we capture and print these parameters in the function.
+
+```
+#!/bin/sh
+
+# Define your function here
+Hello () {
+   echo "Hello World $1 $2"
+}
+
+# Invoke your function
+Hello Zara Ali
+```
+
+Upon execution, you will receive the following result −
+
+```
+$./test.sh
+Hello World Zara Ali
+```
+
+##  
+
+## Returning Values from Functions
+
+### Example
+
+Following function returns a value 1 −
+
+```
+#!/bin/sh
+
+# Define your function here
+Hello () {
+   echo "Hello World $1 $2"
+   return 10
+}
+
+# Invoke your function
+Hello Zara Ali
+
+# Capture value returnd by last command
+ret=$?
+
+echo "Return value is $ret"
+```
+
+
+
+Upon execution, you will receive the following result −
+
+```
+$./test.sh
+Hello World Zara Ali
+Return value is 10
+```
+
+##  
+
+## Nested Functions
+
+One of the more interesting features of functions is that they can call  themselves and also other functions. A function that calls itself is  known as a***recursive function\***.
+
+Following example demonstrates nesting of two functions −
+
+```
+#!/bin/sh
+
+# Calling one function from another
+number_one () {
+   echo "This is the first function speaking..."
+   number_two
+}
+
+number_two () {
+   echo "This is now the second function speaking..."
+}
+
+# Calling function one.
+number_one
+```
+
+Upon execution, you will receive the following result −
+
+```
+This is the first function speaking...
+This is now the second function speaking...
+```
+
+##  
