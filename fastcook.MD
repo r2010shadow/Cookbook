@@ -496,6 +496,11 @@ for pid in "ps axu | grep nginx| grep -v grep | awk '{print $2}'"
 do
 cat /proc/${pid}/limits | grep 'Max open files'
 done
+
+
+#for mac 
+launchctl limit
+sudo launchctl limit maxfiles 8192 10240
 ```
 * system reboot
 ```
