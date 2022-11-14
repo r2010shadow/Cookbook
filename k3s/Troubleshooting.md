@@ -39,11 +39,12 @@ kubectl  get ns xxxxx -o json >xxxxxns.json
 kubectl proxy --port=8081
 
 curl -k -H "Content-Type: application/json" -X PUT --data-binary @xxxxxns.json http://127.0.0.1:8081/api/v1/namespaces/xxxxx/finalize
-
+```
 作者：smileprincexie
 链接：https://www.jianshu.com/p/c8621772f776
 来源：简书
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
 ---
   
   
