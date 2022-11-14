@@ -24,6 +24,11 @@ Token  /var/lib/rancher/k3s/server/node-token  `mynodetoken`
 - uninstall 
 `/usr/local/bin/k3s-uninstall.sh `
 
+- 选择版本
+```
+修改k3s-install.sh脚本，添加版本号变量
+INSTALL_K3S_VERSION='v1.24.8-rc1+k3s1'
+```
 
 
 - Client
