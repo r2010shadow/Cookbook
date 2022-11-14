@@ -31,11 +31,11 @@ curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh 
  /usr/local/bin/k3s-uninstall.sh
 
 - helm
-
-shell> wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
-shell> tar -xf helm-v3.2.4-linux-amd64.tar.gz
-shell> mv linux-amd64/helm /usr/bin/
-
+```
+wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
+tar -xf helm-v3.2.4-linux-amd64.tar.gz
+mv linux-amd64/helm /usr/bin/
+```
 - k3s.yaml
 
 echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> /etc/profile && source /etc/profile
