@@ -55,9 +55,22 @@ MySQL 默认 TCP 端口号：
 ```
 vim /etc/my.cnf
 
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
+datadir=/mnt/data/mysql
+socket=/mnt/data/mysql/mysql.sock
 
 ln -s /mnt/data/mysql/mysql.sock /var/lib/mysql/mysql.sock
 systemctl start mysqld.service
+```
+- Change password
+
+```
+vim /etc/my.cnf
+在[mysqld]后添加skip-grant-tables（登录时跳过权限检查）
+
+systemctl restart mysqld.service
+
+mysql
+use mysql
+set password for ‘root’@‘localhost’=password(‘XCVAXC’);
+flush privileges;
 ```
