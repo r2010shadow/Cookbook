@@ -51,3 +51,13 @@ MySQL 默认 TCP 端口号：
 3、33062 用于使用 MySQL Classic 协议的管理连接（服务器 admin_port 选项）
 ```
 
+- data 数据目录更换
+```
+vim /etc/my.cnf
+
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+
+ln -s /mnt/data/mysql/mysql.sock /var/lib/mysql/mysql.sock
+systemctl start mysqld.service
+```
