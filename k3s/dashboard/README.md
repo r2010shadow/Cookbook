@@ -23,6 +23,14 @@ spec:
       targetPort: 8443
       nodePort: 31001  # new
 ```
+- token永不过期，修改recommended.yaml
+```
+          args:
+            - --auto-generate-certificates
+            - --namespace=kubernetes-dashboard
+            - --token-ttl=0
+
+```
 
 
 ## admin-user/role
