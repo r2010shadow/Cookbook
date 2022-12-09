@@ -204,4 +204,10 @@ UDP 模式的核心就是通过 TUN 设备 flannel0 实现。TUN设备是工作�
     kubeadm join XXXXX
 ```
 
-
+- kubectl命令行补全
+```
+yum install bash-completion -y
+source /usr/share/bash-completion/bash_completion
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+```
